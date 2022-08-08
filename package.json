@@ -1,0 +1,52 @@
+{
+    "name": "mse",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev --parallel",
+        "db": "turbo run db",
+        "gql": "cd packages/graphql-schema && pnpm build && cd ../../db/dgraph-local && pnpm update-schema",
+        "storybook": "turbo run storybook",
+        "build-storybook": "turbo run build-storybook",
+        "worker": "turbo run worker",
+        "lint": "turbo run lint",
+        "types": "turbo run types",
+        "format": "turbo run format",
+        "fix": "turbo run fix",
+        "type-check": "tsc --pretty --noEmit",
+        "pre-commit": "turbo run format lint",
+        "pre-push": "turbo run lint",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.13",
+        "@types/node": "^17.0.41",
+        "@types/prettier": "2.6.3",
+        "@types/react": "^17.0.45",
+        "@types/jest": "^28.1.1",
+        "@typescript-eslint/eslint-plugin": "^5.27.1",
+        "husky": "^7.0.4",
+        "jest": "^28.1.1",
+        "prettier": "^2.6.2",
+        "prettier-standard": "^16.4.1",
+        "turbo": "1.2.2",
+        "typescript": "^4.7.3"
+    },
+    "engines": {
+        "npm": ">=7.0.0",
+        "node": ">=16.0.0"
+    },
+    "packageManager": "pnpm@6.32.10",
+    "dependencies": {
+        "fs-extra": "^10.1.0",
+        "next": "12.1.6",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "webpack": "^5.73.0"
+    }
+}

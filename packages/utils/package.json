@@ -1,0 +1,37 @@
+{
+  "name": "@mse/utils",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "exports": {
+    "./*": [
+      "./src/*"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^28.1.1",
+    "@babel/core": "^7.17.9",
+    "typescript": "^4.6.3",
+    "esbuild": "^0.14.27",
+    "esbuild-jest": "^0.5.0",
+    "esbuild-node-externals": "^1.4.1",
+    "jest-runner-tsc": "^1.6.0",
+    "@types/jest": "^27.4.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/prettier-config": "workspace:*",
+    "@mse/eslint-config": "workspace:*"
+  },
+  "dependencies": {},
+  "resolutions": {
+    "**/@emotion/styled": "^11.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "TIMING=1 eslint components",
+    "fix": "TIMING=1 eslint components --fix",
+    "format": "prettier --write ."
+  }
+}
