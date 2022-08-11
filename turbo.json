@@ -1,35 +1,36 @@
 {
-    "baseBranch": "origin/main",
-    "pipeline": {
-        "build": {
-            "outputs": ["dist/**", ".next/**", "public/dist/**"],
-            "dependsOn": ["^build"]
-        },
-        "lint": {
-            "dependsOn": ["^build"],
-            "outputs": []
-        },
-        "format": {
-            "cache": false
-        },
-        "fix": {
-            "cache": false
-        },
-        "types": {
-            "outputs": ["types/**"]
-        },
-        "dev": {
-            "cache": false
-        },
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "build": {
+      "outputs": ["dist/**", ".next/**", "public/dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "test": { "dependsOn": ["^build", "^test"], "cache": false },
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "format": {
+      "cache": false
+    },
+    "fix": {
+      "cache": false
+    },
+    "types": {
+      "outputs": ["types/**"]
+    },
+    "dev": {
+      "cache": false
+    },
 
-        "storybook": {
-            "cache": false
-        },
-        "build-storybook": {
-            "outputs": ["storybook-static/**"]
-        },
-        "clean": {
-            "cache": false
-        }
+    "storybook": {
+      "cache": false
+    },
+    "build-storybook": {
+      "outputs": ["storybook-static/**"]
+    },
+    "clean": {
+      "cache": false
     }
+  }
 }

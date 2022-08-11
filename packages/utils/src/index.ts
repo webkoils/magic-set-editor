@@ -1,1 +1,1 @@
-export * from "./mse-transformer"
+export * from './template-converter';

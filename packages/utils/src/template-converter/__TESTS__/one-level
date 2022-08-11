@@ -1,0 +1,7 @@
+mse version: 2.0.0
+game: magic
+short name: M15 style
+full name: After M15
+icon: card-sample.png
+installer group: magic/m15 style/normal cards
+position hint: 001

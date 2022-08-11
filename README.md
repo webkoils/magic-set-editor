@@ -11,8 +11,7 @@ This monorepo uses [pnpm](https://pnpm.io/) as a package manager. It includes th
 #### Apps
 
 - `next-app`: Boilerplate [Next.js](https://nextjs.org) app
-- `backend-services`: [Pulumi](https://pulumi.com) orchestrated microservices
-- `api`: (WIP) graphql api
+- `packages`: Reusable packages
 
 #### Packages
 
