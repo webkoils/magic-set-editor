@@ -11,13 +11,12 @@
     "./templates/**/*"
   ],
   "devDependencies": {
-    "@mse/prettier-config": "workspace:*",
     "fs-extra": "^10.1.0"
   },
   "dependencies": {},
   "scripts": {
-    "manifest": "node ./manifest-generator",
+    "build": "node ./manifest-generator",
     "link": "ln -s ./templates ./dist/",
-    "prepare": "pnpm manifest"
+    "prepare": "pnpm build"
   }
 }

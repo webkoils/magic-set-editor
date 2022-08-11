@@ -23,7 +23,6 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "@testing-library/react": "^12",
     "@mse/tsconfig": "workspace:*",
-    "@mse/prettier-config": "workspace:*",
     "@mse/eslint-config": "workspace:*"
   },
   "dependencies": {
