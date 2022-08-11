@@ -2,6 +2,15 @@
 
 Based on Tokyo Monorepo
 
+## DISCLAIMER:
+
+This a totally free, open-source project. 
+
+Magic Set Editor is intended for creating custom cards only, and should not be used to attempt the creation or distribution of counterfeits of real items produced by Wizards of the Coast, Konami, or other companies. Nor should any custom cards generated be passed off as if they are real in any setting.
+
+Magic the Gathering is a trademark of Wizards of the Coast, Inc., a subsidiary of Hasbro, Inc.
+All other trademarks are owned by whoever owns them.
+
 ## What's inside?
 
 This monorepo uses [pnpm](https://pnpm.io/) as a package manager. It includes the following packages/apps:
