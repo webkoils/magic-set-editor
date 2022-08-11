@@ -1,5 +1,7 @@
 # Magic Set Editor Monorepo
 
+[Roadmap](https://github.com/webkoils/magic-set-editor/wiki).
+
 Based on Tokyo Monorepo
 
 ## DISCLAIMER:
