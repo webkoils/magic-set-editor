@@ -16,10 +16,10 @@ This monorepo uses [pnpm](https://pnpm.io/) as a package manager. It includes th
 #### Packages
 
 - `ui`: a stub React component library shared by any frontend app
-- `dev-config`: `eslint`,`tsconfig`,`prettier` configurations used throughout the monorepo configurations
+- `eslint-config`,`tsconfig` configurations used throughout the monorepo configurations
 - `config`: shared configs used in other packages or apps
 - `lib`: nodejs library of shared code modules
-- `utils`: plain javascript library of shared helpers
+- `template-converter`: converts og magic set editor templates to json
 
 #### The goal is for each package/app to be 100% [TypeScript](https://www.typescriptlang.org/) so anytime we can convert js to ts, please do so.
 
@@ -52,20 +52,6 @@ Run Storybook
 
 ```
 pnpm storybook
-```
-
-#### Fullstack
-
-1. Start Db instances (optional for now)
-
-```
-pnpm up
-```
-
-2. Run NextJS projects
-
-```
-pnpm dev
 ```
 
 ### Build

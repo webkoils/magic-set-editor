@@ -1,16 +1,5 @@
-# React UI component and style library
+# `assets`
 
-### Frameworks
+This contains the fonts and images used in templates
 
-[material-ui](https://mui.com)
-[storybook](https://storybook.js.org/docs/react/get-started/introduction)
-
-### Want to see what's in here
-
-`pnpm storybook`
-
-### Subpackages
-
-`/components` - react components that display data
-`/styles` - shared styles and theming
-
+_We might need to move these to external packages since there might be a lot with a lot of image assets_

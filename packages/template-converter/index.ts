@@ -40,7 +40,6 @@ export const convertTemplateFile = async (
       outputDir,
       format(JSON.stringify(templateObj), { parser: 'json-stringify' })
     );
-    console.log(outputDir);
   }
   return templateObj;
 };
