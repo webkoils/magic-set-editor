@@ -1,4 +1,4 @@
-# Scener Monorepo
+# Magic Set Editor Monorepo
 
 Based on Tokyo Monorepo
 
