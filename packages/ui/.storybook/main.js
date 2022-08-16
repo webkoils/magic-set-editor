@@ -7,11 +7,7 @@ module.exports = {
   stories: ['../**/*.story.mdx', '../**/*.story.@(js|jsx|ts|tsx)'],
   staticDirs: ['../node_modules/@mse/assets'],
 
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@react-theming/storybook-addon',
-  ],
+  addons: ['@storybook/addon-essentials'],
   features: {
     emotionAlias: false,
     modernInlineRendering: true,
