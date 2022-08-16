@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches: ['main']
-    paths: ['packages/**'] # Trigger the action only when files change in the folders defined here
+    # paths: ['packages/**'] # Trigger the action only when files change in the folders defined here
 jobs:
   build-and-deploy:
     name: Build and Deploy
@@ -14,7 +14,7 @@ jobs:
     #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout 🛎️
