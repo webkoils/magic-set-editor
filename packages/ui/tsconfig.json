@@ -2,10 +2,5 @@
   "extends": "@mse/tsconfig/react-library.json",
   "include": [".", "src/typings/mtg.ts"],
   "exclude": ["dist", "build", "node_modules", "*.composition.*"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@scener/ui/*": ["./*"]
-    }
-  }
+  "compilerOptions": { "baseUrl": "." }
 }

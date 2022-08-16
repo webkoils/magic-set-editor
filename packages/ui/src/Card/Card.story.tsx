@@ -15,7 +15,7 @@ const sampleCards: mtg.Card[] = [
   {
     id: '1',
     name: 'Doomed Traveler',
-    manaCost: '{{manaw}}',
+    manaCost: '{{mana_w}}',
     num: 1,
     color: [mtg.Color.WHITE],
     types: ['Creature'],

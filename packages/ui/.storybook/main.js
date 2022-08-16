@@ -5,9 +5,9 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   stories: ['../**/*.story.mdx', '../**/*.story.@(js|jsx|ts|tsx)'],
-  staticDirs: ['../node_modules/@mse/assets'],
+  staticDirs: ['../node_modules/@mse/assets/dist'],
 
-  addons: ['@storybook/addon-essentials'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-postcss'],
   features: {
     emotionAlias: false,
     modernInlineRendering: true,

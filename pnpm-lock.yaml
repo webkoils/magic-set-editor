@@ -147,6 +147,7 @@ importers:
       '@mse/tsconfig': workspace:*
       '@storybook/addon-actions': ^6.5.1
       '@storybook/addon-essentials': ^6.5.10
+      '@storybook/addon-postcss': 2.0.0
       '@storybook/react': ^6.5.10
       '@testing-library/react': ^12
       '@types/react': '17'
@@ -162,7 +163,7 @@ importers:
     dependencies:
       '@emotion/react': 11.10.0_qnbnh2yznwiq2simw5cyvgcttu
       '@emotion/styled': 11.10.0_kaum6omyw2sgvxoel2cbcrvljm
-      '@mse/assets': link:storybook-static
+      '@mse/assets': link:../assets
       babel-loader: 8.2.5_te6ollfzjcco6mbxjl755ucqke
       next: 12.2.4_bw5me6qlxrwkidqrhljke6qy5u
       postcss: 8.4.14
@@ -174,6 +175,7 @@ importers:
       '@mse/tsconfig': link:../tsconfig
       '@storybook/addon-actions': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.10_sq56uvvx23l4x2c7hrmjrk6qxa
+      '@storybook/addon-postcss': 2.0.0_webpack@5.73.0
       '@storybook/react': 6.5.10_omzsvesfnls2jmcarz3bnmmxwe
       '@testing-library/react': 12.1.5_sfoxds7t5ydpegc3knd667wn6m
       '@types/react': 17.0.47
@@ -181,12 +183,6 @@ importers:
       autoprefixer: 10.4.7_postcss@8.4.14
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.4
-
-  packages/ui/storybook-static:
-    specifiers:
-      fs-extra: ^10.1.0
-    devDependencies:
-      fs-extra: 10.1.0
 
 packages:
 
@@ -3036,6 +3032,19 @@ packages:
       react-dom: 17.0.2_react@17.0.2
       regenerator-runtime: 0.13.9
       ts-dedent: 2.2.0
+    dev: true
+
+  /@storybook/addon-postcss/2.0.0_webpack@5.73.0:
+    resolution: {integrity: sha512-Nt82A7e9zJH4+A+VzLKKswUfru+T6FJTakj4dccP0i8DSn7a0CkzRPrLuZBq8tg4voV6gD74bcDf3gViCVBGtA==}
+    engines: {node: '>=10', yarn: ^1.17.0}
+    dependencies:
+      '@storybook/node-logger': 6.5.10
+      css-loader: 3.6.0_webpack@5.73.0
+      postcss: 7.0.39
+      postcss-loader: 4.3.0_qimwombrj57txqjvmz6cxiwufe
+      style-loader: 1.3.0_webpack@5.73.0
+    transitivePeerDependencies:
+      - webpack
     dev: true
 
   /@storybook/addon-toolbars/6.5.10_sfoxds7t5ydpegc3knd667wn6m:
@@ -6501,6 +6510,28 @@ packages:
       schema-utils: 2.7.1
       semver: 6.3.0
       webpack: 4.46.0
+    dev: true
+
+  /css-loader/3.6.0_webpack@5.73.0:
+    resolution: {integrity: sha512-M5lSukoWi1If8dhQAUCvj4H8vUt3vOnwbQBH9DdTm/s4Ym2B/3dPMtYZeJmq7Q3S3Pa+I94DcZ7pc9bP14cWIQ==}
+    engines: {node: '>= 8.9.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      camelcase: 5.3.1
+      cssesc: 3.0.0
+      icss-utils: 4.1.1
+      loader-utils: 1.4.0
+      normalize-path: 3.0.0
+      postcss: 7.0.39
+      postcss-modules-extract-imports: 2.0.0
+      postcss-modules-local-by-default: 3.0.3
+      postcss-modules-scope: 2.2.0
+      postcss-modules-values: 3.0.0
+      postcss-value-parser: 4.2.0
+      schema-utils: 2.7.1
+      semver: 6.3.0
+      webpack: 5.73.0
     dev: true
 
   /css-select/4.3.0:
@@ -12076,6 +12107,22 @@ packages:
       webpack: 4.46.0
     dev: true
 
+  /postcss-loader/4.3.0_qimwombrj57txqjvmz6cxiwufe:
+    resolution: {integrity: sha512-M/dSoIiNDOo8Rk0mUqoj4kpGq91gcxCfb9PoyZVdZ76/AuhxylHDYZblNE8o+EQ9AMSASeMFEKxZf5aU6wlx1Q==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      postcss: ^7.0.0 || ^8.0.1
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      cosmiconfig: 7.0.1
+      klona: 2.0.5
+      loader-utils: 2.0.2
+      postcss: 7.0.39
+      schema-utils: 3.1.1
+      semver: 7.3.7
+      webpack: 5.73.0
+    dev: true
+
   /postcss-media-query-parser/0.2.3:
     resolution: {integrity: sha1-J7Ocb02U+Bsac7j3Y1HGCeXO8kQ=}
     dev: true
@@ -13803,6 +13850,17 @@ packages:
       loader-utils: 2.0.2
       schema-utils: 2.7.1
       webpack: 4.46.0
+    dev: true
+
+  /style-loader/1.3.0_webpack@5.73.0:
+    resolution: {integrity: sha512-V7TCORko8rs9rIqkSrlMfkqA63DfoGBBJmK1kKGCcSi+BWb4cqz0SRsnp4l6rU5iwOEd0/2ePv68SV22VXon4Q==}
+    engines: {node: '>= 8.9.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: 2.0.2
+      schema-utils: 2.7.1
+      webpack: 5.73.0
     dev: true
 
   /style-to-object/0.3.0:

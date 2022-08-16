@@ -13,6 +13,7 @@
     "@babel/core": "^7.17.9",
     "@storybook/addon-actions": "^6.5.1",
     "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-postcss": "2.0.0",
     "@storybook/react": "^6.5.10",
     "@types/react": "17",
     "@types/react-dom": "17",
@@ -41,7 +42,6 @@
     "build-storybook": "build-storybook --quiet",
     "lint": "TIMING=1 eslint components",
     "fix": "TIMING=1 eslint components --fix",
-    "format": "prettier --write .",
-    "link-assets": "ln -s ./node_modules/@mse/"
+    "format": "prettier --write ."
   }
 }

@@ -1,8 +1,9 @@
+const { emptyDirSync } = require('fs-extra');
 const fs = require('fs-extra');
 const path = require('path');
 const createManifests = () => {
   const manifests = {};
-
+  emptyDirSync(path.join(__dirname, 'dist'));
   const templateFolders = fs.readdirSync(path.join(__dirname, 'templates'));
   templateFolders.forEach((templateFolder) => {
     if (
@@ -15,21 +16,21 @@ const createManifests = () => {
     fs.readdirSync(path.join(__dirname, 'templates', templateFolder))
       .filter((fname) => fname.match(/.+?\.(jpg|png)$/i))
       .forEach((fname) => {
-        /*    fs.symlinkSync(
+        fs.ensureSymlinkSync(
           path.join(__dirname, 'templates', templateFolder, fname),
 
           path.join(__dirname, 'dist', templateFolder, fname),
           'file'
-        );*/
+        );
         manifestAssets[
-          fname.replace(/\.(jpg|png)$/i, '').replace(/[^0-9a-z]/gi, '')
-        ] = `/templates/${templateFolder}/${fname}`;
+          fname.replace(/\.(jpg|png)$/i, '').replace(/[^0-9a-z_]/gi, '')
+        ] = `${templateFolder}/${fname}`;
       });
     fs.outputFileSync(
       path.join(__dirname, 'dist', templateFolder, 'index.ts'),
-      `export const template${templateFolder
+      `export const ${templateFolder
         .replace(/[^0-9a-z]/gi, '_')
-        .toUpperCase()} = ` +
+        .toUpperCase()}_ASSETS = ` +
         JSON.stringify(manifestAssets) +
         ';'
     );

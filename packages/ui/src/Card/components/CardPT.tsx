@@ -1,4 +1,4 @@
-import { templateM15 } from '@scener/ui/../assets/dist';
+import { M15_ASSETS as templateAssets } from '@mse/ui/../assets/dist';
 import React from 'react';
 import { mtg } from '../../typings/mtg';
 
@@ -7,22 +7,22 @@ const ptBackgroundImage = (card: mtg.Card) => {
   let isLand = card.types.find((t) => t.toLowerCase() === 'land');
   switch (allColors) {
     case mtg.Color.WHITE: {
-      return !isLand ? templateM15.wpt : templateM15.wlpt;
+      return !isLand ? templateAssets.wpt : templateAssets.wlpt;
     }
     case mtg.Color.BLUE: {
-      return !isLand ? templateM15.upt : templateM15.ulpt;
+      return !isLand ? templateAssets.upt : templateAssets.ulpt;
     }
     case mtg.Color.BLACK: {
-      return !isLand ? templateM15.bpt : templateM15.blpt;
+      return !isLand ? templateAssets.bpt : templateAssets.blpt;
     }
     case mtg.Color.RED: {
-      return !isLand ? templateM15.rpt : templateM15.rlpt;
+      return !isLand ? templateAssets.rpt : templateAssets.rlpt;
     }
     case mtg.Color.GREEN: {
-      return !isLand ? templateM15.gpt : templateM15.glpt;
+      return !isLand ? templateAssets.gpt : templateAssets.glpt;
     }
     default: {
-      return !isLand ? templateM15.cpt : templateM15.clpt;
+      return !isLand ? templateAssets.cpt : templateAssets.clpt;
     }
   }
 };

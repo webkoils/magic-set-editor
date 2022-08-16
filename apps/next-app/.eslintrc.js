@@ -1,1 +1,1 @@
-module.exports = require('@scener/eslint-config/react');
+module.exports = require('@mse/eslint-config/react');

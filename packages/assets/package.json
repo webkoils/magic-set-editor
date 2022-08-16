@@ -1,21 +1,18 @@
 {
   "name": "@mse/assets",
   "version": "0.0.0",
-  "main": "./dist/index.ts",
-  "types": "./dist/index.ts",
-  "exports": {
-    "/": "./dist/index.ts"
-  },
+  "main": "./index.ts",
+  "types": "./index.ts",
   "license": "MIT",
   "files": [
-    "./templates/**/*"
+    "./dist/**/*"
   ],
   "devDependencies": {
     "fs-extra": "^10.1.0"
   },
   "dependencies": {},
   "scripts": {
-    "build": "node ./manifest-generator",
+    "build": "node ./build",
     "link": "ln -s ./templates ./dist/",
     "prepare": "pnpm build"
   }

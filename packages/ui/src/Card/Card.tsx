@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardBackground } from './components';
+import { CardBackground } from './components/CardBackground';
 import { mtg } from '../typings/mtg';
 import { cardComponentStyles } from './components/cardComponentStyles';
 import { CardTopLine } from './components/CardTopLine';

@@ -1,12 +1,9 @@
-import {
-  templateMAGIC_MANA_LARGE_SYMBOL_FONT,
-  templateMAGIC_MANA_SMALL_SYMBOL_FONT,
-} from '@mse/assets/dist';
+import { MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS } from '@mse/assets/dist';
 import { useEffect, useMemo } from 'react';
 import { formatCardText } from '../utils/textTemplate';
 const fontForSize = /* size == 'large'
       ? templateMAGIC_MANA_LARGE_SYMBOL_FONT
-      :*/ templateMAGIC_MANA_SMALL_SYMBOL_FONT;
+      :*/ MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS;
 
 export const CardFormattedText = ({
   size = 'small',
@@ -16,7 +13,14 @@ export const CardFormattedText = ({
   text: string;
 }) => {
   const formattedText = useMemo(() => formatCardText(text), [text]);
-  useEffect(() => console.log(formattedText), [formattedText]);
+  useEffect(() => {
+    console.log(formattedText);
+    formattedText.forEach((symbol, i) => {
+      if (symbol.type !== 'string') {
+        console.log(fontForSize[symbol.value]);
+      }
+    });
+  }, [formattedText]);
   return (
     <>
       {formattedText.map((symbol, i) => {

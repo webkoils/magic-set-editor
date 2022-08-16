@@ -1,9 +1,9 @@
-import { templateMAGIC_MANA_SMALL_SYMBOL_FONT } from '@mse/assets/dist';
+import { MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS } from '@mse/assets';
 
 export namespace mtg {
   export type CardTextSymbol = {
     type: 'symbol';
-    value: keyof typeof templateMAGIC_MANA_SMALL_SYMBOL_FONT;
+    value: keyof typeof MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS;
   };
   export type CardTextString = { type: 'string'; value: string };
   export type CardSymbolGroup = (CardTextString | CardTextSymbol)[];

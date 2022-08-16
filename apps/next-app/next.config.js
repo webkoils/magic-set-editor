@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')(['@scener/ui']);
+const withTM = require('next-transpile-modules')(['@mse/ui']);
 
 module.exports = withTM({
   reactStrictMode: true,
