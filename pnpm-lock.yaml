@@ -162,7 +162,7 @@ importers:
     dependencies:
       '@emotion/react': 11.10.0_qnbnh2yznwiq2simw5cyvgcttu
       '@emotion/styled': 11.10.0_kaum6omyw2sgvxoel2cbcrvljm
-      '@mse/assets': link:../assets
+      '@mse/assets': link:storybook-static
       babel-loader: 8.2.5_te6ollfzjcco6mbxjl755ucqke
       next: 12.2.4_bw5me6qlxrwkidqrhljke6qy5u
       postcss: 8.4.14
@@ -181,6 +181,12 @@ importers:
       autoprefixer: 10.4.7_postcss@8.4.14
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.4
+
+  packages/ui/storybook-static:
+    specifiers:
+      fs-extra: ^10.1.0
+    devDependencies:
+      fs-extra: 10.1.0
 
 packages:
 
