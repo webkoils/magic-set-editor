@@ -8,10 +8,15 @@ export const formatCardText = (text: string): mtg.CardSymbolGroup => {
 
     if (match !== null && typeof match.index !== 'undefined') {
       let nextIndexStart = match[0].length + match.index;
-      let symbol = match[1] as mtg.CardTextSymbol['value'];
+      let symbols = (match[1] || '').split(' ');
+
       let str: string | undefined = match[2];
-      if (symbol) {
-        symbolGroups.push({ type: 'symbol', value: symbol });
+      if (symbols.length) {
+        let groupsToPush = symbols.map((symbol) => ({
+          type: 'symbol' as const,
+          value: symbol as mtg.CardTextSymbol['value'],
+        }));
+        symbolGroups.push(...groupsToPush);
       }
       if (str) {
         symbolGroups.push({ type: 'string', value: str });

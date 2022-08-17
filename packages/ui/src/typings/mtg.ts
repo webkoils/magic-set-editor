@@ -1,9 +1,13 @@
-import { MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS } from '@mse/assets';
+import {
+  MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS,
+  MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS,
+} from '@mse/assets';
 
 export namespace mtg {
   export type CardTextSymbol = {
     type: 'symbol';
-    value: keyof typeof MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS;
+    value: keyof typeof MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS &
+      keyof typeof MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS;
   };
   export type CardTextString = { type: 'string'; value: string };
   export type CardSymbolGroup = (CardTextString | CardTextSymbol)[];
@@ -16,18 +20,19 @@ export namespace mtg {
     COLORLESS = 'c',
   }
   export enum CardComponentType {
-    CARD,
-    BACKGROUND,
-    TOPLINE,
-    NAME,
-    COST,
-    TYPE,
-    PT,
-    TEXTBOX,
-    SETSYMBOL,
-    RULESTEXT,
-    FLAVORTEXT,
-    ARTWORK,
+    CARD = 'card',
+    BACKGROUND = 'background',
+    TOPLINE = 'topline',
+    NAME = 'name',
+    COST = 'cost',
+    TYPE = 'type',
+    PT = 'pt',
+    TEXTBOX = 'textbox',
+    SETSYMBOL = 'setSymbol',
+    RULESTEXT = 'rulestext',
+    FLAVORTEXT = 'flavortext',
+    ARTWORK = 'artwork',
+    TEXT_DIVIDER = 'textDivider',
   }
 
   export const COLOR_SORT: Record<Color, number> = {
@@ -56,10 +61,10 @@ export namespace mtg {
     manaCost: string;
     power?: number | string;
     toughness?: number | string;
+    artworkSrc?: string;
   }
 
   export interface CardComponentProps {
     card: Card;
-    style?: React.CSSProperties;
   }
 }

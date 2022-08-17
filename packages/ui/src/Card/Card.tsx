@@ -1,49 +1,50 @@
 import React from 'react';
-import { CardBackground } from './components/CardBackground';
+import { Background } from './components/Background';
 import { mtg } from '../typings/mtg';
-import { cardComponentStyles } from './components/cardComponentStyles';
-import { CardTopLine } from './components/CardTopLine';
-import { CardType } from './components/CardType';
-import { CardTextBox } from './components/CardTextBox';
-import { CardArtwork } from './components/CardArtwork';
-import { CardPT } from './components/CardPT';
+import { cardComponentStyles, theme } from './components/cardComponentStyles';
+import { TopLine } from './components/TopLine';
+import { TypeLine } from './components/TypeLine';
+import { TextBox } from './components/TextBox';
+import { Artwork } from './components/Artwork';
+import { PT } from './components/PT';
+import { ThemeProvider } from '@emotion/react';
+import { useContext } from 'react';
+import { FC } from 'react';
 
 export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: 0,
-        paddingTop: (523 / 375) * 100 + '%',
-      }}
-    >
-      <div style={cardComponentStyles[mtg.CardComponentType.CARD]}>
-        <CardBackground
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.BACKGROUND]}
-        />
-        <CardTopLine
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.TOPLINE]}
-        />
-        <CardType
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.TYPE]}
-        />
-        <CardTextBox
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.TEXTBOX]}
-        />
-        <CardArtwork
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.ARTWORK]}
-        />
-        <CardPT
-          card={card}
-          style={cardComponentStyles[mtg.CardComponentType.PT]}
-        />
+    <ThemeProvider theme={theme}>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          minHeight: 0,
+          paddingTop: (523 / 375) * 100 + '%',
+        }}
+      >
+        <CardProvider card={card}>
+          <div css={cardComponentStyles[mtg.CardComponentType.CARD]}>
+            <Background card={card} />
+            <TopLine card={card} />
+            <TypeLine card={card} />
+            <TextBox card={card} />
+            <Artwork card={card} />
+            <PT card={card} />
+          </div>
+        </CardProvider>
       </div>
-    </div>
+    </ThemeProvider>
   );
+};
+
+export const CardContext = React.createContext<mtg.Card | undefined>(undefined);
+export const useCard = () => {
+  const card = useContext(CardContext);
+  if (typeof card === 'undefined') throw new Error('Card context not set');
+  return card;
+};
+export const CardProvider: FC<React.PropsWithChildren<{
+  card: mtg.Card | undefined;
+}>> = ({ card, children }) => {
+  return <CardContext.Provider value={card}>{children}</CardContext.Provider>;
 };

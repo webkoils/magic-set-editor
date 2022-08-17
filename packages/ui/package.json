@@ -35,7 +35,7 @@
     "@mse/assets": "workspace:*"
   },
   "resolutions": {
-    "**/@emotion/styled": "^11.0.0"
+    "**/@emotion/styled": "^11.10.0"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
