@@ -1,18 +1,16 @@
 import '@emotion/react';
 
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 
 export const cardComponentStyles: Record<
   mtg.CardComponentType,
   Partial<React.CSSProperties>
 > = {
   [mtg.CardComponentType.CARD]: {
-    height: '100%',
+    position: 'relative',
     width: '100%',
-    left: 0,
-    top: 0,
-    zIndex: 0,
-    position: 'absolute',
+    minHeight: 0,
+    paddingTop: (523 / 375) * 100 + '%',
   },
   [mtg.CardComponentType.BACKGROUND]: {
     height: '100%',
@@ -41,7 +39,7 @@ export const cardComponentStyles: Record<
   },
 
   [mtg.CardComponentType.NAME]: {
-    fontSize: 16,
+    fontSize: '1em',
     height: '100%',
     flex: '0 1 100%',
   },
@@ -50,7 +48,7 @@ export const cardComponentStyles: Record<
     height: '100%',
     flex: '0 0 auto',
     display: 'flex',
-    fontSize: '1rem',
+    fontSize: '1em',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -67,7 +65,7 @@ export const cardComponentStyles: Record<
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
     fontFamily: 'beleren',
-    fontSize: 13 / 16 + 'rem',
+    fontSize: 13 / 16 + 'em',
   },
   [mtg.CardComponentType.SETSYMBOL]: {},
 
@@ -82,18 +80,20 @@ export const cardComponentStyles: Record<
     backgroundSize: 'contain',
     zIndex: 3,
     fontFamily: 'beleren',
-    fontSize: '1rem',
+    fontSize: '1em',
     lineHeight: 1.5,
   },
   [mtg.CardComponentType.RULESTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
+    marginBottom: '1.5%',
   },
   [mtg.CardComponentType.FLAVORTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
     fontStyle: 'italic',
     fontWeight: 400,
+    marginBottom: '1.5%',
   },
   [mtg.CardComponentType.TEXTBOX]: {
     width: 'auto',
@@ -110,7 +110,7 @@ export const cardComponentStyles: Record<
     flexFlow: 'column nowrap',
     padding: '.5%',
 
-    fontSize: 14 / 16 + 'rem',
+    fontSize: 14 / 16 + 'em',
     lineHeight: 1.2,
   },
   [mtg.CardComponentType.TEXT_DIVIDER]: {
@@ -135,11 +135,12 @@ export const cardComponentStyles: Record<
     backgroundSize: 'contain',
   },
 };
+
 declare module '@emotion/react' {
   export interface Theme {
     components: typeof cardComponentStyles;
   }
 }
-export const theme = {
+export const template = {
   components: cardComponentStyles,
 };

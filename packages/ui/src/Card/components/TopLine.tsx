@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 import { FormattedText } from './FormattedText';
 
 const TopLineContainer = styled('div')(({ theme }) => ({
@@ -20,7 +20,9 @@ export const TopLine: React.FC<mtg.CardComponentProps> = ({ card }) => {
       <Name>{card.name}</Name>
 
       <Cost>
-        <FormattedText text={card.manaCost} size='large' />
+        {card.manaCost ? (
+          <FormattedText text={card.manaCost} size='large' />
+        ) : null}
       </Cost>
     </TopLineContainer>
   );

@@ -1,7 +1,8 @@
-import { Card } from './Card';
-import * as mse from '@mse/types';
+import { Card, Color } from '@mse/types';
+import { CardGrid } from './CardGrid';
+import '@mse/assets/fonts/beleren/index.css';
 
-const sampleCards: mse.Card[] = [
+const sampleCards: Card[] = [
   {
     id: '1',
     name: 'Doomed Traveler',
@@ -23,25 +24,12 @@ const sampleCards: mse.Card[] = [
   {
     id: '2',
     name: 'Explore',
-    manaCost: '{{1 mana_gw}}',
+    manaCost: '{{1 mana_g}}',
     num: 2,
     types: ['Sorcery'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
     rulesText: ['You may play an additional land this turn.', 'Draw a card.'],
     flavorText: "An explorer lorem ipsum's it up baby.",
-    template: 'm15',
-  },
-  {
-    id: '3',
-    name: 'Selesnya Sanctuary',
-    num: 3,
-    types: ['Land'],
-    artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
-    rulesText: [
-      'Selesnya Sancutary enters the battlefield tapped',
-      "When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.",
-      '{{mana_t}}: Add {{mana_w mana_g}}',
-    ],
     template: 'm15',
   },
 ];
@@ -51,16 +39,14 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Card',
-  component: Card,
+  title: 'CardGrid',
+  component: CardGrid,
   argTypes: {
-    card: { control: { type: 'object' }, defaultValue: sampleCards[2] },
+    cards: { control: { type: 'object' }, defaultValue: sampleCards },
   },
 };
 
-export const CardStory = ({ card }: { card: mse.Card }) => (
-  <div style={{ width: 375, height: 'auto' }}>
-    <Card card={card} />
-  </div>
+export const CardStory = ({ cards }: { cards: Card[] }) => (
+  <CardGrid cards={cards} />
 );
-CardStory.storyName = 'Card';
+CardStory.storyName = 'CardGrid';

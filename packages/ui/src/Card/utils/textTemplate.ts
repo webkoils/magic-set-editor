@@ -1,4 +1,4 @@
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 
 export const formatCardText = (text: string): mtg.CardSymbolGroup => {
   const symbolGroups: mtg.CardSymbolGroup = [];

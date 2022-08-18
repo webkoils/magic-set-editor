@@ -1,39 +1,55 @@
 import React from 'react';
-import { Background } from './components/Background';
-import { mtg } from '../typings/mtg';
-import { cardComponentStyles, theme } from './components/cardComponentStyles';
-import { TopLine } from './components/TopLine';
-import { TypeLine } from './components/TypeLine';
-import { TextBox } from './components/TextBox';
-import { Artwork } from './components/Artwork';
-import { PT } from './components/PT';
-import { ThemeProvider } from '@emotion/react';
+import * as mtg from '@mse/types';
+
+import {
+  TypeLine,
+  TopLine,
+  TextBox,
+  Artwork,
+  PT,
+  Background,
+} from './components';
 import { useContext } from 'react';
 import { FC } from 'react';
+import styled from '@emotion/styled';
+import { CardTemplateProvider } from '../CardTemplate';
 
-export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
+const CardSizer = styled('div')({
+  height: '100%',
+  width: '100%',
+  left: 0,
+  top: 0,
+  zIndex: 0,
+  position: 'absolute',
+});
+const CardContainer = styled('div', {
+  shouldForwardProp(propName) {
+    return propName != 'scale';
+  },
+})<{ scale?: number }>(({ theme, scale = 1 }) => ({
+  ...theme.components[mtg.CardComponentType.CARD],
+  fontSize: scale + 'rem',
+}));
+
+export const Card: React.FC<mtg.CardComponentProps & { scale?: number }> = ({
+  card,
+  scale = 1,
+}) => {
   return (
-    <ThemeProvider theme={theme}>
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          minHeight: 0,
-          paddingTop: (523 / 375) * 100 + '%',
-        }}
-      >
-        <CardProvider card={card}>
-          <div css={cardComponentStyles[mtg.CardComponentType.CARD]}>
+    <CardProvider card={card}>
+      <CardTemplateProvider template={card.template}>
+        <CardContainer scale={scale}>
+          <CardSizer>
             <Background card={card} />
             <TopLine card={card} />
             <TypeLine card={card} />
             <TextBox card={card} />
             <Artwork card={card} />
             <PT card={card} />
-          </div>
-        </CardProvider>
-      </div>
-    </ThemeProvider>
+          </CardSizer>
+        </CardContainer>
+      </CardTemplateProvider>{' '}
+    </CardProvider>
   );
 };
 

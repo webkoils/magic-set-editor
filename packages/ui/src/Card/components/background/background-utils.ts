@@ -1,10 +1,7 @@
-import React from 'react';
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 import { M15_ASSETS as templateAssets } from '@mse/assets';
-import styled from '@emotion/styled';
-import { cardComponentStyles } from './cardComponentStyles';
 
-const gradientForColors = (colors: mtg.Color[]) => {
+export const gradientForColors = (colors: mtg.Color[]) => {
   const gradientcolors = colors.map((color) => {
     switch (color) {
       case mtg.Color.WHITE: {
@@ -27,7 +24,10 @@ const gradientForColors = (colors: mtg.Color[]) => {
   return `linear-gradient(90deg, ${gradientcolors.join(',')})`;
 };
 
-const backgroundImageForColor = (color: mtg.Color, isLand: boolean) => {
+export const backgroundImageForColor = (
+  color: mtg.Color | 'multi',
+  isLand: boolean
+) => {
   switch (color) {
     case mtg.Color.COLORLESS: {
       return `url(${!isLand ? templateAssets.ccard : templateAssets.clcard})`;
@@ -47,21 +47,8 @@ const backgroundImageForColor = (color: mtg.Color, isLand: boolean) => {
     case mtg.Color.GREEN: {
       return `url(${!isLand ? templateAssets.gcard : templateAssets.glcard})`;
     }
+    case 'multi': {
+      return `url(${!isLand ? templateAssets.mcard : templateAssets.mlcard})`;
+    }
   }
 };
-
-const backgroundForProps = (card: mtg.Card) => {
-  let isLand = Boolean(card.types.find((t) => t.toLowerCase() === 'land'));
-  if (card.color.length === 1) {
-    const color = card.color[0];
-    return backgroundImageForColor(color, isLand) + ' ';
-  } else if (card.color.length >= 2) {
-    return `url(${!isLand ? templateAssets.mcard : templateAssets.mlcard})`;
-  }
-};
-
-export const Background = styled('div')<mtg.CardComponentProps>(({ card }) => ({
-  background: backgroundForProps(card),
-  backgroundSize: 'cover',
-  ...cardComponentStyles[mtg.CardComponentType.BACKGROUND],
-}));

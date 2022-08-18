@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 import { M15_ASSETS as templateAssets } from '@mse/ui/../assets/dist';
 import React from 'react';
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
+import { getCardIdentity, sortColors } from '@mse/utils';
 
 const ptBackgroundImage = (card: mtg.Card) => {
-  let allColors = mtg.sortColors(card.color).join('');
+  let identity = getCardIdentity(card);
+  let allColors = sortColors(identity.colors).join('');
   let isLand = card.types.find((t) => t.toLowerCase() === 'land');
   switch (allColors) {
     case mtg.Color.WHITE: {

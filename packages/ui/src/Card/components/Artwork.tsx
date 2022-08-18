@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 export const Artwork = styled('div')<mtg.CardComponentProps>(
   ({ theme, card }) => ({
     backgroundImage: card.artworkSrc

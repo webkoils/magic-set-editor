@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { mtg } from '../../typings/mtg';
+import * as mtg from '@mse/types';
 import { FormattedText } from './FormattedText';
 
 const TextBoxContainer = styled('div')(({ theme }) => theme.components.textbox);
