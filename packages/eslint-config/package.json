@@ -2,11 +2,11 @@
   "name": "@mse/eslint-config",
   "version": "0.0.0",
   "main": "base.js",
-  "files": [
-    "./jest.js",
-    "./base.js",
-    "./storybook.js"
-  ],
+  "exports": {
+    "./jest": "./jest.js",
+    "./base": "./base.js",
+    "./storybook": "./storybook.js"
+  },
   "license": "MIT",
   "dependencies": {
     "@emotion/eslint-plugin": "^11.10.0",

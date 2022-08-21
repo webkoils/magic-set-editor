@@ -11,26 +11,9 @@ import {
 } from './components';
 import { useContext } from 'react';
 import { FC } from 'react';
-import styled from '@emotion/styled';
 import { CardTemplateProvider } from '../CardTemplate';
-const CardSizer = styled('div')({
-  height: '100%',
-  width: '100%',
-  left: 0,
-  top: 0,
-  zIndex: 0,
-  position: 'absolute',
-});
-const CardContainer = styled('div', {
-  shouldForwardProp(propName) {
-    return propName != 'width';
-  },
-})<{}>(({ theme }) => ({
-  // ...theme.components[mtg.CardComponentType.CARD],
-  height: '100%',
-  width: '100%',
-  fontSize: '1rem',
-}));
+import '@mse/assets/fonts/beleren/index.css';
+import '@mse/assets/fonts/mplantin/latin.css';
 
 export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
   return (
@@ -43,14 +26,14 @@ export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
           preserveAspectRatio='xMinYMin meet'
         >
           <foreignObject x={0} height={523} width={375} y={0}>
-            <CardContainer>
+            <div style={{ height: '100%', width: '100%', fontSize: '1rem' }}>
               <Background card={card} />
               <TopLine card={card} />
               <TypeLine card={card} />
               <TextBox card={card} />
-              <Artwork card={card} />
+              <Artwork src={card.artworkSrc} />
               <PT card={card} />
-            </CardContainer>
+            </div>
           </foreignObject>
         </svg>
       </CardTemplateProvider>

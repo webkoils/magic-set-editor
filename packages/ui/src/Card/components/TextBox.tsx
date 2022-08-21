@@ -1,29 +1,25 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import * as mtg from '@mse/types';
 import { FormattedText } from './FormattedText';
+import { useTheme } from '@emotion/react';
 
-const TextBoxContainer = styled('div')(({ theme }) => theme.components.textbox);
-const RulesText = styled('span')(({ theme }) => theme.components.rulestext);
-const FlavorText = styled('span')(({ theme }) => theme.components.flavortext);
-const TextDivider = styled('div')(({ theme }) => theme.components.textDivider);
-
-export const TextBox: React.FC<mtg.CardComponentProps> = ({ style, card }) => {
+export const TextBox: React.FC<mtg.CardComponentProps> = ({ card }) => {
+  const theme = useTheme();
   return (
-    <TextBoxContainer>
+    <div css={theme.components.textbox}>
       {card.rulesText.map((text) => (
-        <RulesText key={text}>
+        <span key={text} css={theme.components.rulestext}>
           <FormattedText text={text} size='small' />
-        </RulesText>
+        </span>
       ))}
       {card.flavorText && (
         <>
-          <TextDivider />
-          <FlavorText>
+          <div css={theme.components.textDivider} />
+          <span css={theme.components.flavortext}>
             <FormattedText text={card.flavorText} size='small' />
-          </FlavorText>
+          </span>
         </>
       )}
-    </TextBoxContainer>
+    </div>
   );
 };

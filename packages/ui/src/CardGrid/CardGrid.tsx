@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { Card } from '../Card';
 import * as mtg from '@mse/types';
-import { useElementSize } from '../hooks/useElementSize';
 
 export const CardGrid: FC<{ cards: mtg.Card[]; columns?: number }> = ({
   cards,

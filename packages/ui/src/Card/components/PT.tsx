@@ -3,6 +3,7 @@ import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
 import React from 'react';
 import * as mtg from '@mse/types';
 import { getCardIdentity, sortColors } from '@mse/utils';
+import { useTheme } from '@emotion/react';
 
 const ptBackgroundImage = (card: mtg.Card) => {
   let identity = getCardIdentity(card);
@@ -57,7 +58,6 @@ pt box:
 const PTContainer = styled('div')<mtg.CardComponentProps>(
   ({ theme, card }) => ({
     ...theme.components.pt,
-    backgroundImage: `url(${ptBackgroundImage(card)})`,
   })
 );
 
@@ -70,13 +70,18 @@ const PTText = styled('div')(() => ({
   width: 100 * (60 / 81) + '%',
   height: 100 * (28 / 42) + '%',
 }));
-export const PT: React.FC<mtg.CardComponentProps> = ({ card, style }) => {
+
+export const PT: React.FC<mtg.CardComponentProps> = ({ card }) => {
+  const theme = useTheme();
   return typeof card.power !== 'undefined' &&
     typeof card.toughness !== 'undefined' ? (
-    <PTContainer card={card}>
-      <PTText>
+    <div
+      css={theme.components.pt}
+      style={{ backgroundImage: `url(${ptBackgroundImage(card)})` }}
+    >
+      <div>
         {card.power}/{card.toughness}
-      </PTText>
-    </PTContainer>
+      </div>
+    </div>
   ) : null;
 };

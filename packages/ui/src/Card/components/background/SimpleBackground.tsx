@@ -1,16 +1,17 @@
 import { Color } from '@mse/types';
-import styled from '@emotion/styled';
 import { backgroundImageForColor } from './background-utils';
+import { useTheme } from '@emotion/react';
+import React from 'react';
 
-export const SimpleBackground = styled('div', {
-  shouldForwardProp: (propName) =>
-    propName !== 'style' && propName !== 'isLand',
-})<{
+export const SimpleBackground: React.FC<{
   color: Color | 'multi';
   isLand: boolean;
-}>(({ color, theme, isLand, style }) => ({
-  background: backgroundImageForColor(color, isLand),
-  backgroundSize: 'cover',
-  ...theme.components.background,
-  ...style,
-}));
+}> = ({ color, isLand }) => {
+  const theme = useTheme();
+  return (
+    <div
+      css={theme.components.background}
+      style={{ backgroundImage: backgroundImageForColor(color, isLand) }}
+    />
+  );
+};

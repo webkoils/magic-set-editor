@@ -1,29 +1,19 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import * as mtg from '@mse/types';
 import { FormattedText } from './FormattedText';
+import { useTheme } from '@emotion/react';
 
-const TopLineContainer = styled('div')(({ theme }) => ({
-  ...theme.components[mtg.CardComponentType.TOPLINE],
-}));
-
-const Name = styled('div')(({ theme }) => ({
-  ...theme.components[mtg.CardComponentType.NAME],
-}));
-
-const Cost = styled('div')(({ theme }) => ({
-  ...theme.components[mtg.CardComponentType.COST],
-}));
 export const TopLine: React.FC<mtg.CardComponentProps> = ({ card }) => {
+  const theme = useTheme();
   return (
-    <TopLineContainer>
-      <Name>{card.name}</Name>
+    <div css={theme.components.topline}>
+      <div css={theme.components.name}>{card.name}</div>
 
-      <Cost>
+      <div css={theme.components.cost}>
         {card.manaCost ? (
           <FormattedText text={card.manaCost} size='large' />
         ) : null}
-      </Cost>
-    </TopLineContainer>
+      </div>
+    </div>
   );
 };

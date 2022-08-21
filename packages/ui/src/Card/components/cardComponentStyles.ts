@@ -1,17 +1,18 @@
 import '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
 import * as mtg from '@mse/types';
 
 export const cardComponentStyles: Record<
   mtg.CardComponentType,
-  Partial<React.CSSProperties>
+  SerializedStyles
 > = {
-  [mtg.CardComponentType.CARD]: {
+  [mtg.CardComponentType.CARD]: css({
     position: 'relative',
     width: 375,
     height: 523,
-  },
-  [mtg.CardComponentType.BACKGROUND]: {
+  }),
+  [mtg.CardComponentType.BACKGROUND]: css({
     height: '100%',
     width: '100%',
     left: 0,
@@ -20,8 +21,9 @@ export const cardComponentStyles: Record<
     position: 'absolute',
     borderRadius: 18,
     overflow: 'hidden',
-  },
-  [mtg.CardComponentType.TOPLINE]: {
+    backgroundSize: 'cover',
+  }),
+  [mtg.CardComponentType.TOPLINE]: css({
     width: 'auto',
     position: 'absolute',
     top: 30,
@@ -35,14 +37,14 @@ export const cardComponentStyles: Record<
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     fontFamily: 'beleren',
-  },
+  }),
 
-  [mtg.CardComponentType.NAME]: {
+  [mtg.CardComponentType.NAME]: css({
     fontSize: 16 / 16 + 'em',
     height: '100%',
     flex: '0 1 100%',
-  },
-  [mtg.CardComponentType.COST]: {
+  }),
+  [mtg.CardComponentType.COST]: css({
     minWidth: 5,
     height: '100%',
     flex: '0 0 auto',
@@ -50,8 +52,8 @@ export const cardComponentStyles: Record<
     fontSize: 15 / 16 + 'em',
     alignItems: 'center',
     justifyContent: 'flex-end',
-  },
-  [mtg.CardComponentType.TYPE]: {
+  }),
+  [mtg.CardComponentType.TYPE]: css({
     width: 310,
     position: 'absolute',
     top: 296,
@@ -65,10 +67,10 @@ export const cardComponentStyles: Record<
     justifyContent: 'flex-start',
     fontFamily: 'beleren',
     fontSize: 13 / 16 + 'em',
-  },
-  [mtg.CardComponentType.SETSYMBOL]: {},
+  }),
+  [mtg.CardComponentType.SETSYMBOL]: css({}),
 
-  [mtg.CardComponentType.PT]: {
+  [mtg.CardComponentType.PT]: css({
     position: 'absolute',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -81,20 +83,29 @@ export const cardComponentStyles: Record<
     fontFamily: 'beleren',
     fontSize: '1em',
     lineHeight: 1.5,
-  },
-  [mtg.CardComponentType.RULESTEXT]: {
+    '& > div': {
+      fontSize: '1em',
+      textAlign: 'center',
+      position: 'relative',
+      left: 100 * (13 / 81) + '%',
+      top: 100 * (3 / 42) + '%',
+      width: 100 * (60 / 81) + '%',
+      height: 100 * (28 / 42) + '%',
+    },
+  }),
+  [mtg.CardComponentType.RULESTEXT]: css({
     display: 'block',
     fontFamily: 'mplantin',
     marginBottom: '1.5%',
-  },
-  [mtg.CardComponentType.FLAVORTEXT]: {
+  }),
+  [mtg.CardComponentType.FLAVORTEXT]: css({
     display: 'block',
     fontFamily: 'mplantin',
     fontStyle: 'italic',
     fontWeight: 400,
     marginBottom: '1.5%',
-  },
-  [mtg.CardComponentType.TEXTBOX]: {
+  }),
+  [mtg.CardComponentType.TEXTBOX]: css({
     width: 314,
     position: 'absolute',
     top: 327,
@@ -111,8 +122,8 @@ export const cardComponentStyles: Record<
 
     fontSize: 14 / 16 + 'em',
     lineHeight: 1.2,
-  },
-  [mtg.CardComponentType.TEXT_DIVIDER]: {
+  }),
+  [mtg.CardComponentType.TEXT_DIVIDER]: css({
     display: 'block',
     width: '80%',
     margin: '3% auto',
@@ -120,8 +131,8 @@ export const cardComponentStyles: Record<
     flex: '0 0 1px',
     background:
       'linear-gradient(90deg, transparent 0%,black 20%, black 50% ,black 80%, transparent 100% );',
-  },
-  [mtg.CardComponentType.ARTWORK]: {
+  }),
+  [mtg.CardComponentType.ARTWORK]: css({
     width: 316,
     position: 'absolute',
     top: 60,
@@ -132,7 +143,7 @@ export const cardComponentStyles: Record<
     zIndex: 3,
     objectFit: 'contain',
     backgroundSize: 'cover',
-  },
+  }),
 };
 
 declare module '@emotion/react' {

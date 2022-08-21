@@ -1,10 +1,16 @@
-import styled from '@emotion/styled';
-import * as mtg from '@mse/types';
-export const Artwork = styled('div')<mtg.CardComponentProps>(
-  ({ theme, card }) => ({
-    backgroundImage: card.artworkSrc
-      ? `url(${card.artworkSrc}) `
-      : 'linear-gradient(45deg, #000,#FFF)',
-    ...theme.components[mtg.CardComponentType.ARTWORK],
-  })
-);
+import { useTheme } from '@emotion/react';
+import React from 'react';
+
+export const Artwork: React.FC<{ src?: string }> = ({ src }) => {
+  const theme = useTheme();
+  return (
+    <div
+      css={theme.components.artwork}
+      style={{
+        backgroundImage: src
+          ? `url(${src})`
+          : 'linear-gradient(45deg, #000,#FFF)',
+      }}
+    />
+  );
+};
