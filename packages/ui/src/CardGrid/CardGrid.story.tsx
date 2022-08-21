@@ -42,11 +42,21 @@ export default {
   title: 'CardGrid',
   component: CardGrid,
   argTypes: {
-    cards: { control: { type: 'object' }, defaultValue: sampleCards },
+    cards: {
+      control: { type: 'object' },
+      defaultValue: sampleCards
+        .concat(sampleCards)
+        .concat(sampleCards.concat(sampleCards)),
+    },
+    columns: { defaultValue: 3 },
   },
 };
 
-export const CardStory = ({ cards }: { cards: Card[] }) => (
-  <CardGrid cards={cards} />
-);
+export const CardStory = ({
+  cards,
+  columns,
+}: {
+  cards: Card[];
+  columns: number;
+}) => <CardGrid cards={cards} columns={columns} />;
 CardStory.storyName = 'CardGrid';

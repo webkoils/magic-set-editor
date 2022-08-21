@@ -6,7 +6,7 @@ module.exports = {
     'next/core-web-vitals',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', '@emotion'],
+  plugins: ['@typescript-eslint', '@emotion', 'next'],
   parser: '@typescript-eslint/parser',
   settings: {
     next: {
@@ -30,5 +30,6 @@ module.exports = {
         allow: ['warn', 'error'],
       },
     ],
+    // 'react/jsx-curly-brace-presence': [true, 'always'],
   },
 };

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { M15_ASSETS as templateAssets } from '@mse/ui/../assets/dist';
+import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
 import React from 'react';
 import * as mtg from '@mse/types';
 import { getCardIdentity, sortColors } from '@mse/utils';

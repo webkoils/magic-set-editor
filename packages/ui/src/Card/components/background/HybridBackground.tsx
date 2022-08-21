@@ -1,6 +1,6 @@
 import { Color } from '@mse/types';
 import React from 'react';
-import { SimpleBackground } from './SimpleBackground';
+import { SimpleBackground, SimpleBackgroundSvg } from './SimpleBackground';
 import './hybrid-mask.svg';
 import './hybrid-mask-reverse.svg';
 

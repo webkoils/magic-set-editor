@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import * as mtg from '@mse/types';
 
 import {
@@ -13,7 +13,6 @@ import { useContext } from 'react';
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { CardTemplateProvider } from '../CardTemplate';
-
 const CardSizer = styled('div')({
   height: '100%',
   width: '100%',
@@ -24,31 +23,37 @@ const CardSizer = styled('div')({
 });
 const CardContainer = styled('div', {
   shouldForwardProp(propName) {
-    return propName != 'scale';
+    return propName != 'width';
   },
-})<{ scale?: number }>(({ theme, scale = 1 }) => ({
-  ...theme.components[mtg.CardComponentType.CARD],
-  fontSize: scale + 'rem',
+})<{}>(({ theme }) => ({
+  // ...theme.components[mtg.CardComponentType.CARD],
+  height: '100%',
+  width: '100%',
+  fontSize: '1rem',
 }));
 
-export const Card: React.FC<mtg.CardComponentProps & { scale?: number }> = ({
-  card,
-  scale = 1,
-}) => {
+export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
   return (
     <CardProvider card={card}>
       <CardTemplateProvider template={card.template}>
-        <CardContainer scale={scale}>
-          <CardSizer>
-            <Background card={card} />
-            <TopLine card={card} />
-            <TypeLine card={card} />
-            <TextBox card={card} />
-            <Artwork card={card} />
-            <PT card={card} />
-          </CardSizer>
-        </CardContainer>
-      </CardTemplateProvider>{' '}
+        <svg
+          height='100%'
+          width={'100%'}
+          viewBox={'0 0 375 523'}
+          preserveAspectRatio='xMinYMin meet'
+        >
+          <foreignObject x={0} height={523} width={375} y={0}>
+            <CardContainer>
+              <Background card={card} />
+              <TopLine card={card} />
+              <TypeLine card={card} />
+              <TextBox card={card} />
+              <Artwork card={card} />
+              <PT card={card} />
+            </CardContainer>
+          </foreignObject>
+        </svg>
+      </CardTemplateProvider>
     </CardProvider>
   );
 };

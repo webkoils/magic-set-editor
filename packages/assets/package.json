@@ -5,7 +5,9 @@
   "types": "./index.ts",
   "license": "MIT",
   "exports": {
-    "/fonts/*": "./fonts/*"
+    ".": "./index.ts",
+    "./fonts/*": "./fonts/*",
+    "./dist": "./dist/index.ts"
   },
   "files": [
     "./dist/**/*"

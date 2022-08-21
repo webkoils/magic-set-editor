@@ -19,12 +19,15 @@ export const isCardHybrid = (card: Card) => {
   if (card.identity) {
     return card.identity.isHybrid;
   }
-  if (!isCardLand(card) && card.manaCost) {
-    return Boolean(card.manaCost.match(/mana_[wubrg][wubrg]/gi));
-  } else {
-    let { identityColors } = getCardColors(card);
+  let { identityColors } = getCardColors(card);
 
-    return identityColors.length > 1;
+  if (!isCardLand(card) && card.manaCost) {
+    return (
+      identityColors.length === 2 &&
+      Boolean(card.manaCost.match(/mana_[wubrg][wubrg]/gi))
+    );
+  } else {
+    return identityColors.length === 2;
   }
 };
 

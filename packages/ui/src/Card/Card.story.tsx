@@ -54,12 +54,12 @@ export default {
   title: 'Card',
   component: Card,
   argTypes: {
-    card: { control: { type: 'object' }, defaultValue: sampleCards[2] },
+    card: { control: { type: 'object' }, defaultValue: sampleCards[0] },
   },
 };
 
 export const CardStory = ({ card }: { card: mse.Card }) => (
-  <div style={{ width: 375, height: 'auto' }}>
+  <div style={{ width: 375, height: 523 }}>
     <Card card={card} />
   </div>
 );

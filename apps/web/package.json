@@ -1,0 +1,36 @@
+{
+  "name": "@mse/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm link-assets && next dev -p 4000",
+    "build_disabled": "pnpm link-assets && next build",
+    "start": "pnpm link-assets && next start",
+    "lint": "TIMING=1 next lint",
+    "format": "prettier --write .",
+    "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true"
+  },
+  "dependencies": {
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
+    "@mse/ui": "workspace:*",
+    "@mse/utils": "workspace:*",
+    "@mui/icons-material": "5.8.4",
+    "@mse/assets": "workspace:*",
+    "@mui/material": "5.10.1",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@mse/eslint-config": "workspace:*",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/types": "workspace:*",
+    "eslint": "8.13.0",
+    "next-transpile-modules": "9.0.0",
+    "typescript": "^4.7.4"
+  },
+  "resolutions": {
+    "react": "18.0.17"
+  }
+}

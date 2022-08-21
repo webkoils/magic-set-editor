@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import { backgroundImageForColor } from './background-utils';
 
 export const SimpleBackground = styled('div', {
-  shouldForwardProp: (propName) => propName !== 'style',
+  shouldForwardProp: (propName) =>
+    propName !== 'style' && propName !== 'isLand',
 })<{
   color: Color | 'multi';
   isLand: boolean;
