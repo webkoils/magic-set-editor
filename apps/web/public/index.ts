@@ -1,1 +1,3 @@
-/Users/janderson/GitRepos/magic-set-editor/apps/web/node_modules/@mse/assets/dist/index.ts
+export * from "./m15"
+export * from "./magic-mana-large-symbol-font"
+export * from "./magic-mana-small-symbol-font"

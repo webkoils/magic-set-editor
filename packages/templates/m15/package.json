@@ -1,9 +1,0 @@
-{
-  "name": "@mse/template-m15",
-  "devDependencies": {
-    "@mse/types": "workspace:*",
-    "@mse/eslint-config": "workspace:*",
-    "@mse/tsconfig": "workspace:*"
-  },
-  "dependencies": {}
-}

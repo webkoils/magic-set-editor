@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm link-assets && next dev -p 4000",
-    "build:web": "pnpm link-assets && next build",
-    "start": "pnpm link-assets && next start",
+    "dev": "pnpm copy-assets && next dev -p 4000",
+    "build:web": "pnpm copy-assets && next build",
+    "start": "pnpm copy-assets && next start",
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
+    "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
     "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true"
   },
   "dependencies": {

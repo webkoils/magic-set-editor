@@ -233,15 +233,13 @@ importers:
       ts-node: 10.9.1_z5yog5l5yqinvqran22gqy2vdi
       typescript: 4.7.4
 
-  packages/templates/m15:
+  packages/template-generator:
     specifiers:
-      '@mse/eslint-config': workspace:*
-      '@mse/tsconfig': workspace:*
-      '@mse/types': workspace:*
-    devDependencies:
-      '@mse/eslint-config': link:../../eslint-config
-      '@mse/tsconfig': link:../../tsconfig
-      '@mse/types': link:../../types
+      '@mse/template-converter': workspace:*
+      fs-extra: 10.1.0
+    dependencies:
+      '@mse/template-converter': link:../template-converter
+      fs-extra: 10.1.0
 
   packages/tsconfig:
     specifiers: {}

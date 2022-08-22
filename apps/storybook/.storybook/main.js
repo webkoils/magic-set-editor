@@ -32,7 +32,18 @@ module.exports = {
       '@emotion/core': toPath('node_modules/@emotion/react'),
       'emotion-theming': toPath('node_modules/@emotion/react'),
     };
-
+    config.module.rules.push({
+      test: /\.(png|svg|jpg)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          query: {
+            name: '[name].[ext]',
+          },
+        },
+      ],
+      include: path.resolve(__dirname, '../'),
+    });
     return config;
   },
 };

@@ -1,11 +1,12 @@
 {
-  "extends": "@mse/tsconfig/react-library.json",
-  "include": ["."],
+  "extends": "@mse/tsconfig/base.json",
+  "include": ["./index.ts"],
   "exclude": ["dist", "build", "node_modules", "*.composition.*"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@mse/utils/*": ["./*"]
-    }
+      "@mse/template-converter/*": ["./*"]
+    },
+    "outDir": "./dist"
   }
 }

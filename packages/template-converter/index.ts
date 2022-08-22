@@ -10,7 +10,8 @@ export interface TemplateLine {
 const keysToSkip = ['script'];
 export const convertTemplateFile = async (
   filePath: string,
-  outputDir?: string
+  outputDir?: string,
+  outputFormat: 'json' | 'ts' | 'js' = 'json'
 ) => {
   const templateFileData = await readFile(filePath);
   let templateFileString = templateFileData
@@ -36,10 +37,15 @@ export const convertTemplateFile = async (
   const templateLevels = buildNestedTemplateLevel(lines);
   const templateObj = nestedTemplateToObject(templateLevels);
   if (outputDir) {
-    outputFileSync(
-      outputDir,
-      format(JSON.stringify(templateObj), { parser: 'json-stringify' })
-    );
+    let outText = JSON.stringify(templateObj);
+    if (outputFormat !== 'json') {
+      outText = format(`export default ${outText};`, { parser: 'babel' });
+    } else {
+      outText = format(JSON.stringify(templateObj), {
+        parser: 'json-stringify',
+      });
+    }
+    outputFileSync(outputDir, outText);
   }
   return templateObj;
 };

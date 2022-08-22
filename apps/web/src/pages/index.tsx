@@ -11,7 +11,7 @@ export default function HomePage() {
       <Grid container spacing={5}>
         <Grid item xs={12}>
           <Typography variant={'h1'} align='center'>
-            Magic Editor Online
+            Magic Set Editor Online
           </Typography>
         </Grid>
         <Grid container item spacing={2}>

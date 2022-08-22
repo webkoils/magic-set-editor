@@ -1,0 +1,10 @@
+{
+  "name": "@mse/template-generator",
+  "dependencies": {
+    "fs-extra": "10.1.0",
+    "@mse/template-converter": "workspace:*"
+  },
+  "scripts": {
+    "build:generic": "node ./scripts/build-generic"
+  }
+}

@@ -6,7 +6,7 @@ module.exports = {
     'next/core-web-vitals',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', '@emotion', 'next'],
+  plugins: ['@typescript-eslint', '@emotion'],
   parser: '@typescript-eslint/parser',
   settings: {
     next: {

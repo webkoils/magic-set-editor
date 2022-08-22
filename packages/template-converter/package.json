@@ -1,14 +1,9 @@
 {
   "name": "@mse/template-converter",
   "version": "0.0.0",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
-  "exports": {
-    "./*": [
-      "./src/*"
-    ]
-  },
   "devDependencies": {
     "jest": "^28.1.1",
     "@babel/core": "^7.17.9",
@@ -28,6 +23,7 @@
     "**/@emotion/styled": "^11.0.0"
   },
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "lint": "TIMING=1 eslint components",
     "fix": "TIMING=1 eslint components --fix",
