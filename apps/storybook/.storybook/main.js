@@ -32,7 +32,7 @@ module.exports = {
       '@emotion/core': toPath('node_modules/@emotion/react'),
       'emotion-theming': toPath('node_modules/@emotion/react'),
     };
-    config.module.rules.push({
+    /*  config.module.rules.push({
       test: /\.(png|svg|jpg)$/,
       use: [
         {
@@ -43,7 +43,7 @@ module.exports = {
         },
       ],
       include: path.resolve(__dirname, '../'),
-    });
+    });*/
     return config;
   },
 };
