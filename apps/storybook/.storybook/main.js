@@ -1,11 +1,10 @@
 // .storybook/main.js
-const { outputFileSync } = require('fs-extra');
 const path = require('path');
 const toPath = (filePath) => path.join(process.cwd(), filePath);
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  stories: ['../**/*.story.mdx', '../**/*.story.@(js|jsx|ts|tsx)'],
+  stories: ['../stories/*.story.@(js|jsx|ts|tsx)'],
   staticDirs: [
     '../node_modules/@mse/assets/dist',
     '../node_modules/@mse/assets/fonts',
@@ -20,24 +19,7 @@ module.exports = {
     modernInlineRendering: true,
   },
   framework: '@storybook/react',
-  babel: async (options) => {
-    //outputFileSync(process.cwd() + '/babel.json', JSON.stringify(options));
 
-    return {
-      ...options,
-
-      presets: [
-        ...options.presets,
-        [
-          '@babel/react',
-          { runtime: 'automatic', importSource: '@emotion/react' },
-        ],
-      ],
-      plugins: [...options.plugins, '@emotion/babel-plugin'],
-
-      // any extra options you want to set
-    };
-  },
   webpackFinal: async (config) => {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),

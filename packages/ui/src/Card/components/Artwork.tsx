@@ -1,11 +1,10 @@
-import { useTheme } from '@emotion/react';
 import React from 'react';
+import { templateClasses } from '../cardComponentStyles';
 
 export const Artwork: React.FC<{ src?: string }> = ({ src }) => {
-  const theme = useTheme();
   return (
     <div
-      css={theme.components.artwork}
+      className={templateClasses.artwork}
       style={{
         backgroundImage: src
           ? `url(${src})`

@@ -1,17 +1,21 @@
 import { Color } from '@mse/types';
 import { backgroundImageForColor } from './background-utils';
-import { useTheme } from '@emotion/react';
 import React from 'react';
-
+import { templateClasses } from '../../cardComponentStyles';
 export const SimpleBackground: React.FC<{
   color: Color | 'multi';
   isLand: boolean;
-}> = ({ color, isLand }) => {
-  const theme = useTheme();
+  style?: React.CSSProperties;
+}> = ({ color, isLand, style }) => {
+  console.log(style);
   return (
     <div
-      css={theme.components.background}
-      style={{ backgroundImage: backgroundImageForColor(color, isLand) }}
+      className={templateClasses.background}
+      style={{
+        padding: 0,
+        background: backgroundImageForColor(color, isLand),
+        ...style,
+      }}
     />
   );
 };

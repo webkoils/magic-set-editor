@@ -1,18 +1,29 @@
-import '@emotion/react';
-import { css, SerializedStyles } from '@emotion/react';
-
+import createEmotion from '@emotion/css/create-instance';
+export const {
+  flush,
+  hydrate,
+  cx,
+  merge,
+  getRegisteredStyles,
+  injectGlobal,
+  keyframes,
+  css,
+  sheet,
+  cache,
+  //@ts-ignore
+} = createEmotion({
+  // The key option is required when there will be multiple instances in a single app
+  key: 'mse',
+});
 import * as mtg from '@mse/types';
 
-export const cardComponentStyles: Record<
-  mtg.CardComponentType,
-  SerializedStyles
-> = {
-  [mtg.CardComponentType.CARD]: css({
+export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
+  [mtg.CardComponentType.CARD]: {
     position: 'relative',
     width: 375,
     height: 523,
-  }),
-  [mtg.CardComponentType.BACKGROUND]: css({
+  },
+  [mtg.CardComponentType.BACKGROUND]: {
     height: '100%',
     width: '100%',
     left: 0,
@@ -22,8 +33,8 @@ export const cardComponentStyles: Record<
     borderRadius: 18,
     overflow: 'hidden',
     backgroundSize: 'cover',
-  }),
-  [mtg.CardComponentType.TOPLINE]: css({
+  },
+  [mtg.CardComponentType.TOPLINE]: {
     width: 'auto',
     position: 'absolute',
     top: 30,
@@ -37,14 +48,14 @@ export const cardComponentStyles: Record<
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     fontFamily: 'beleren',
-  }),
+  },
 
-  [mtg.CardComponentType.NAME]: css({
+  [mtg.CardComponentType.NAME]: {
     fontSize: 16 / 16 + 'em',
     height: '100%',
     flex: '0 1 100%',
-  }),
-  [mtg.CardComponentType.COST]: css({
+  },
+  [mtg.CardComponentType.COST]: {
     minWidth: 5,
     height: '100%',
     flex: '0 0 auto',
@@ -52,8 +63,8 @@ export const cardComponentStyles: Record<
     fontSize: 15 / 16 + 'em',
     alignItems: 'center',
     justifyContent: 'flex-end',
-  }),
-  [mtg.CardComponentType.TYPE]: css({
+  },
+  [mtg.CardComponentType.TYPE]: {
     width: 310,
     position: 'absolute',
     top: 296,
@@ -67,10 +78,10 @@ export const cardComponentStyles: Record<
     justifyContent: 'flex-start',
     fontFamily: 'beleren',
     fontSize: 13 / 16 + 'em',
-  }),
-  [mtg.CardComponentType.SETSYMBOL]: css({}),
+  },
+  [mtg.CardComponentType.SETSYMBOL]: {},
 
-  [mtg.CardComponentType.PT]: css({
+  [mtg.CardComponentType.PT]: {
     position: 'absolute',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -92,20 +103,20 @@ export const cardComponentStyles: Record<
       width: 100 * (60 / 81) + '%',
       height: 100 * (28 / 42) + '%',
     },
-  }),
-  [mtg.CardComponentType.RULESTEXT]: css({
+  },
+  [mtg.CardComponentType.RULESTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
     marginBottom: '1.5%',
-  }),
-  [mtg.CardComponentType.FLAVORTEXT]: css({
+  },
+  [mtg.CardComponentType.FLAVORTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
     fontStyle: 'italic',
     fontWeight: 400,
     marginBottom: '1.5%',
-  }),
-  [mtg.CardComponentType.TEXTBOX]: css({
+  },
+  [mtg.CardComponentType.TEXTBOX]: {
     width: 314,
     position: 'absolute',
     top: 327,
@@ -122,8 +133,8 @@ export const cardComponentStyles: Record<
 
     fontSize: 14 / 16 + 'em',
     lineHeight: 1.2,
-  }),
-  [mtg.CardComponentType.TEXT_DIVIDER]: css({
+  },
+  [mtg.CardComponentType.TEXT_DIVIDER]: {
     display: 'block',
     width: '80%',
     margin: '3% auto',
@@ -131,8 +142,8 @@ export const cardComponentStyles: Record<
     flex: '0 0 1px',
     background:
       'linear-gradient(90deg, transparent 0%,black 20%, black 50% ,black 80%, transparent 100% );',
-  }),
-  [mtg.CardComponentType.ARTWORK]: css({
+  },
+  [mtg.CardComponentType.ARTWORK]: {
     width: 316,
     position: 'absolute',
     top: 60,
@@ -143,14 +154,27 @@ export const cardComponentStyles: Record<
     zIndex: 3,
     objectFit: 'contain',
     backgroundSize: 'cover',
-  }),
-};
+  },
+} as const;
 
-declare module '@emotion/react' {
-  export interface Theme {
-    components: typeof cardComponentStyles;
-  }
-}
+const templateClassEntries = Object.keys(cardComponentStyles).map((k) => {
+  return [k.toLowerCase() as mtg.CardComponentType, 'MseCard' + k];
+});
+
+export const templateClasses: Record<
+  Lowercase<mtg.CardComponentType>,
+  string
+> = Object.fromEntries(templateClassEntries);
+
+export const templateClassParent = css(
+  Object.fromEntries(
+    Object.entries(cardComponentStyles).map(([k, v]) => {
+      return ['& .MseCard' + k, v];
+    })
+  )
+);
+
 export const template = {
+  mainClass: templateClassParent,
   components: cardComponentStyles,
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { useTheme } from '@emotion/react';
+import { templateClasses } from '../cardComponentStyles';
 
 export const TypeLine: React.FC<mtg.CardComponentProps> = ({ card }) => {
-  const theme = useTheme();
   return (
-    <div css={theme.components.type}>
+    <div className={templateClasses.type}>
       {card.supertype} {card.types.join(' ')}{' '}
       {card.subtypes && card.subtypes.length > 0 && ' – '}{' '}
       {card.subtypes?.join(' ')}

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm link-assets && next dev -p 4000",
-    "build_disabled": "pnpm link-assets && next build",
+    "build:web": "pnpm link-assets && next build",
     "start": "pnpm link-assets && next start",
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
@@ -18,6 +18,7 @@
     "@mui/icons-material": "5.8.4",
     "@mse/assets": "workspace:*",
     "@mui/material": "5.10.1",
+    "@mse/sample-cards": "workspace:*",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"

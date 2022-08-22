@@ -10,7 +10,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
-    "gql": "cd packages/graphql-schema && pnpm build && cd ../../db/dgraph-local && pnpm update-schema",
+    "build:web": "turbo run build:web",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
     "worker": "turbo run worker",

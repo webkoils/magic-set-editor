@@ -1,9 +1,6 @@
 import { Color } from '@mse/types';
 import React from 'react';
 import { SimpleBackground } from './SimpleBackground';
-import './hybrid-mask.svg';
-import './hybrid-mask-reverse.svg';
-
 export const HybridBackground: React.FC<{
   isLand: boolean;
   colors: Color[];
@@ -22,8 +19,12 @@ export const HybridBackground: React.FC<{
               maskType: 'luminance',
               maskImage:
                 i == 0
-                  ? `url(/hybrid-mask.svg)`
-                  : `url(/hybrid-mask-reverse.svg)`,
+                  ? `url(m15/hybrid-mask.svg)`
+                  : `url(m15/hybrid-mask-reverse.svg)`,
+              WebkitMaskImage:
+                i == 0
+                  ? `url(m15/hybrid-mask.svg)`
+                  : `url(m15/hybrid-mask-reverse.svg)`,
             }}
           />
         );

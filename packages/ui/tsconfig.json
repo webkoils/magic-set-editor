@@ -1,6 +1,14 @@
 {
   "extends": "@mse/tsconfig/react-library.json",
   "include": ["."],
-  "exclude": ["dist", "build", "node_modules", "*.composition.*"],
-  "compilerOptions": { "baseUrl": "./src", "jsxImportSource": "@emotion/react" }
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
 }

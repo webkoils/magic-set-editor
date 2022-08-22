@@ -5,4 +5,4 @@ export * from './TextBox';
 export * from './TopLine';
 export * from './TypeLine';
 export * from './background';
-export * from './cardComponentStyles';
+export * from '../cardComponentStyles';

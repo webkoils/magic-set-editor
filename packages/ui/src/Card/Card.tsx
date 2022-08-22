@@ -10,15 +10,13 @@ import {
   Background,
 } from './components';
 import { useContext } from 'react';
-import { FC } from 'react';
-import { CardTemplateProvider } from '../CardTemplate';
-import '@mse/assets/fonts/beleren/index.css';
-import '@mse/assets/fonts/mplantin/latin.css';
 
+import { FC } from 'react';
+import { CardTemplateProvider } from '../CardTemplate/CardTemplateProvider';
 export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
   return (
     <CardProvider card={card}>
-      <CardTemplateProvider template={card.template}>
+      <CardTemplateProvider template='m15'>
         <svg
           height='100%'
           width={'100%'}

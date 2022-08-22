@@ -14,7 +14,7 @@ const createManifests = () => {
       return;
     const manifestAssets = {};
     fs.readdirSync(path.join(__dirname, 'templates', templateFolder))
-      .filter((fname) => fname.match(/.+?\.(jpg|png)$/i))
+      .filter((fname) => fname.match(/.+?\.(jpg|png|svg)$/i))
       .forEach((fname) => {
         fs.ensureSymlinkSync(
           path.join(__dirname, 'templates', templateFolder, fname),
@@ -23,7 +23,7 @@ const createManifests = () => {
           'file'
         );
         manifestAssets[
-          fname.replace(/\.(jpg|png)$/i, '').replace(/[^0-9a-z_]/gi, '')
+          fname.replace(/\.(jpg|png|svg)$/i, '').replace(/[^0-9a-z_]/gi, '')
         ] = `${templateFolder}/${fname}`;
       });
     fs.outputFileSync(

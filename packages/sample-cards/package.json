@@ -1,0 +1,11 @@
+{
+  "name": "@mse/sample-cards",
+  "devDependencies": {
+    "@mse/types": "workspace:*",
+    "typescript": "4.7.4",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/eslint-config": "workspace:*"
+  },
+  "main": "./index.ts",
+  "types": "./index.ts"
+}

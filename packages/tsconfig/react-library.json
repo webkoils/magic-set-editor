@@ -13,10 +13,11 @@
     "esModuleInterop": true,
     "module": "esnext",
     "incremental": true,
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve"
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.spec.*", "*.test.*"]
 }

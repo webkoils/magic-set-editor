@@ -19,19 +19,19 @@ export enum Color {
   COLORLESS = 'c',
 }
 export enum CardComponentType {
-  CARD = 'card',
-  BACKGROUND = 'background',
-  TOPLINE = 'topline',
-  NAME = 'name',
-  COST = 'cost',
-  TYPE = 'type',
-  PT = 'pt',
-  TEXTBOX = 'textbox',
-  SETSYMBOL = 'setSymbol',
-  RULESTEXT = 'rulestext',
-  FLAVORTEXT = 'flavortext',
-  ARTWORK = 'artwork',
-  TEXT_DIVIDER = 'textDivider',
+  CARD = 'Card',
+  BACKGROUND = 'Background',
+  TOPLINE = 'Topline',
+  NAME = 'Name',
+  COST = 'Cost',
+  TYPE = 'Type',
+  PT = 'Pt',
+  TEXTBOX = 'Textbox',
+  SETSYMBOL = 'SetSymbol',
+  RULESTEXT = 'Rulestext',
+  FLAVORTEXT = 'Flavortext',
+  ARTWORK = 'Artwork',
+  TEXT_DIVIDER = 'TextDivider',
 }
 
 export interface CardIdentity {

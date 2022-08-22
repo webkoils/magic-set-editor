@@ -6,6 +6,7 @@ import { getCardIdentity } from '@mse/utils';
 export const Background: React.FC<mse.CardComponentProps> = ({ card }) => {
   const identity = useMemo(() => {
     let id = getCardIdentity(card);
+    console.log(id);
     return id;
   }, [card]);
 

@@ -24,7 +24,7 @@ export const FormattedText = ({
   useEffect(() => {
     formattedText.forEach((symbol, i) => {
       if (symbol.type !== 'string') {
-        console.log(fontForSize[symbol.value]);
+        //  console.log(fontForSize[symbol.value]);
       }
     });
   }, [formattedText]);

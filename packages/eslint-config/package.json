@@ -5,7 +5,8 @@
   "exports": {
     "./jest": "./jest.js",
     "./base": "./base.js",
-    "./storybook": "./storybook.js"
+    "./storybook": "./storybook.js",
+    "./react": "./react.js"
   },
   "license": "MIT",
   "dependencies": {

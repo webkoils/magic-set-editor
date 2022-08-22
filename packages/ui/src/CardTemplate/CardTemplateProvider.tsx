@@ -1,8 +1,8 @@
-import { ThemeProvider } from '@emotion/react';
+import { css } from '@emotion/css';
 import { FC, PropsWithChildren } from 'react';
-import { template as m15Template } from '../Card/components/cardComponentStyles';
+import { template as m15Template } from '../Card/cardComponentStyles';
 export const CardTemplateProvider: FC<PropsWithChildren<{
   template: string;
 }>> = ({ template, children }) => {
-  return <ThemeProvider theme={m15Template}>{children}</ThemeProvider>;
+  return <div className={m15Template.mainClass}>{children}</div>;
 };
