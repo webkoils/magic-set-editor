@@ -1,10 +1,12 @@
 const withTM = require('next-transpile-modules')([
-  '@mse/ui',
-  '@mse/utils',
+  '@mse/ui.card',
+  '@mse/ui.core',
+
+  '@mse/utils.card',
   '@mse/types',
   '@mse/sample-cards',
   '@mse/assets',
-  //'@mse/templates',
+  // '@mse/templates',
 ]);
 
 module.exports = withTM({

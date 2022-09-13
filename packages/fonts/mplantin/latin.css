@@ -1,0 +1,28 @@
+/* mplantin-latin-400-italic*/
+@font-face {
+  font-family: 'mplantin';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./files/mplantin-latin-400-italic.woff2') format('woff2'),
+    url('./files/mplantin-latin-400-italic.woff') format('woff');
+}
+/* mplantin-latin-400-normal*/
+@font-face {
+  font-family: 'mplantin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./files/mplantin-latin-400-normal.woff2') format('woff2'),
+    url('./files/mplantin-latin-400-normal.woff') format('woff');
+}
+
+/* mplantin-latin-700-normal*/
+@font-face {
+  font-family: 'mplantin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('./files/mplantin-latin-700-normal.woff2') format('woff2'),
+    url('./files/mplantin-latin-700-normal.woff') format('woff');
+}

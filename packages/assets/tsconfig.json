@@ -3,9 +3,6 @@
   "include": [".", "./src/typings/mtg.d.ts"],
   "exclude": ["dist", "build", "node_modules", "*.composition.*"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@mse/ui/*": ["./*"]
-    }
+    "baseUrl": "."
   }
 }

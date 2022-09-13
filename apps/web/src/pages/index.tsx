@@ -1,6 +1,6 @@
 import { Alert, Container, Grid, Typography, useTheme } from '@mui/material';
 import { useEffect } from 'react';
-import { CardGrid } from '@mse/ui';
+import { CardGrid } from '@mse/ui.card';
 import sampleCards from '@mse/sample-cards';
 export default function HomePage() {
   const theme = useTheme();

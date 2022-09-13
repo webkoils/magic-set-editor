@@ -4,7 +4,7 @@ const sampleCards: Card[] = [
   {
     id: '1',
     name: 'Doomed Traveler',
-    manaCost: '{{mana_w}}',
+    manaCost: '{{symbols.mana_w}}',
     num: 1,
     types: ['Creature'],
     subtypes: ['Human', 'Soldier'],
@@ -13,7 +13,7 @@ const sampleCards: Card[] = [
       'https://cdn.inprnt.com/thumbs/ab/90/ab90888365216c96f97cb7cb455c827a.jpg?response-cache-control=max-age=2628000',
     toughness: 1,
     rulesText: [
-      'When Doomed Traveler dies, create a 1/1 white Spirit creature token with flying.',
+      'When {{card.name}} dies, create a 1/1 white Spirit creature token with flying.',
     ],
     flavorText:
       'He vowed he would never rest until he reached his destination. He doesn’t know how right he was.',
@@ -22,7 +22,7 @@ const sampleCards: Card[] = [
   {
     id: '2',
     name: 'Explore',
-    manaCost: '{{1 mana_gw}}',
+    manaCost: '{{symbols.1 symbols.mana_gw}}',
     num: 2,
     types: ['Sorcery'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
@@ -37,9 +37,9 @@ const sampleCards: Card[] = [
     types: ['Land'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
     rulesText: [
-      'Selesnya Sancutary enters the battlefield tapped',
-      "When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.",
-      '{{mana_t}}: Add {{mana_w mana_g}}',
+      '{{card.name}} enters the battlefield tapped',
+      "When {{card.name}} enters the battlefield, return a land you control to its owner's hand.",
+      '{{symbols.mana_t}}: Add {{symbols.mana_w symbols.mana_g}}',
     ],
     template: 'm15',
   },

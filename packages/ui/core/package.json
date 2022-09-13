@@ -1,0 +1,39 @@
+{
+  "name": "@mse/ui.core",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./src/*"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mui/icons-material": "5.10.3",
+    "@emotion/react": "11.10.4",
+    "@emotion/styled": "11.10.4",
+    "@mui/material": "5.10.3",
+    "@mui/styles": "^5.10.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@mse/utils.card": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "typescript": "*",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "@testing-library/react": "^13",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/types": "workspace:*",
+    "@mse/eslint-config": "workspace:*"
+  },
+  "resolutions": {
+    "**/@emotion/css": "^11.10.4"
+  },
+  "scripts": {
+    "lint": "TIMING=1 eslint ./src/**/*.tsx?",
+    "fix": "TIMING=1 eslint ./components/** --fix",
+    "format": "prettier --write ."
+  }
+}

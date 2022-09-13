@@ -1,0 +1,13 @@
+{
+  "name": "@mse/utils.card",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "*",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/eslint-config": "workspace:*",
+    "@mse/types": "workspace:*"
+  }
+}

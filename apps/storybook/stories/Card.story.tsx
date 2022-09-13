@@ -1,4 +1,4 @@
-import { Card } from '@mse/ui';
+import { Card } from '@mse/ui.card';
 import * as mse from '@mse/types';
 
 import sampleCards from '@mse/sample-cards';

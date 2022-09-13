@@ -30,9 +30,10 @@
     "react-dom": "17",
     "babel-loader": "^8.2.4",
     "postcss": "^8.4.12",
-    "@mse/ui": "workspace:*",
+    "@mse/ui.card": "workspace:*",
+    "@mse/ui.core": "workspace:*",
     "@mse/assets": "workspace:*",
-    "@mse/utils": "workspace:*",
+    "@mse/utils.card": "workspace:*",
     "@mse/sample-cards": "workspace:*"
   },
   "resolutions": {

@@ -1,14 +1,8 @@
-import {
-  MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS,
-  MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS,
-} from '@mse/assets';
-
 export type CardTextSymbol = {
   type: 'symbol';
-  value: keyof typeof MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS &
-    keyof typeof MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS;
+  value: string;
 };
-export type CardTextString = { type: 'string'; value: string };
+export type CardTextString = { type: 'text'; value: string };
 export type CardSymbolGroup = (CardTextString | CardTextSymbol)[];
 export enum Color {
   WHITE = 'w',
@@ -57,12 +51,12 @@ export interface Card {
   template: string;
   identity?: CardIdentity;
 }
-
+type CardPropertyKey = keyof Card;
 export interface CardComponentProps {
   card: Card;
 }
 export const isColor = (color: string): color is Color => {
-  return Object.values(Color).includes(color as Color);
+  return !!color && Object.values(Color).includes(color as Color);
 };
 
 export const COLOR_SORT_ORDER: Record<Color, number> = {
@@ -73,3 +67,10 @@ export const COLOR_SORT_ORDER: Record<Color, number> = {
   [Color.GREEN]: 5,
   [Color.COLORLESS]: 6,
 };
+
+export function isPropertyOfType<T extends Record<string, any>>(
+  object: T,
+  key: string
+): key is keyof Card {
+  return (object as T)[key];
+}

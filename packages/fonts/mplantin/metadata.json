@@ -1,0 +1,15 @@
+{
+  "fontId": "mplantin",
+  "fontName": "mplantin",
+  "subsets": ["latin"],
+  "weights": [400, 700],
+  "styles": ["italic", "normal"],
+  "defSubset": "latin",
+  "variable": false,
+  "lastModified": "2022-08-17",
+  "version": "1.0.0",
+  "category": "serif",
+  "source": "",
+  "license": "",
+  "type": "other"
+}
