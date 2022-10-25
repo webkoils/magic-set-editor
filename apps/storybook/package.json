@@ -34,7 +34,9 @@
     "@mse/ui.core": "workspace:*",
     "@mse/assets": "workspace:*",
     "@mse/utils.card": "workspace:*",
-    "@mse/sample-cards": "workspace:*"
+    "@mse/sample-cards": "workspace:*",
+    "@mse/symbols": "workspace:*",
+    "@mse/symbol-input": "workspace:*"
   },
   "resolutions": {
     "**/@emotion/styled": "^11.10.0"

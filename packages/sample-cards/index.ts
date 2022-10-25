@@ -1,10 +1,10 @@
-import { Card } from '@mse/types';
+import { MseCard } from '@mse/types';
 
-const sampleCards: Card[] = [
+const sampleCards: MseCard[] = [
   {
     id: '1',
     name: 'Doomed Traveler',
-    manaCost: '{{symbols.mana_w}}',
+    manaCost: '(W)',
     num: 1,
     types: ['Creature'],
     subtypes: ['Human', 'Soldier'],
@@ -12,9 +12,9 @@ const sampleCards: Card[] = [
     artworkSrc:
       'https://cdn.inprnt.com/thumbs/ab/90/ab90888365216c96f97cb7cb455c827a.jpg?response-cache-control=max-age=2628000',
     toughness: 1,
-    rulesText: [
-      'When {{card.name}} dies, create a 1/1 white Spirit creature token with flying.',
-    ],
+    rulesText:
+      'When CARDNAME dies, create a 1/1 white Spirit creature token with flying.',
+
     flavorText:
       'He vowed he would never rest until he reached his destination. He doesn’t know how right he was.',
     template: 'm15',
@@ -22,11 +22,11 @@ const sampleCards: Card[] = [
   {
     id: '2',
     name: 'Explore',
-    manaCost: '{{symbols.1 symbols.mana_gw}}',
+    manaCost: '1 (G/W)',
     num: 2,
     types: ['Sorcery'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
-    rulesText: ['You may play an additional land this turn.', 'Draw a card.'],
+    rulesText: 'You may play an additional land this turn.\nDraw a card.',
     flavorText: "An explorer lorem ipsum's it up baby.",
     template: 'm15',
   },
@@ -37,10 +37,10 @@ const sampleCards: Card[] = [
     types: ['Land'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
     rulesText: [
-      '{{card.name}} enters the battlefield tapped',
-      "When {{card.name}} enters the battlefield, return a land you control to its owner's hand.",
-      '{{symbols.mana_t}}: Add {{symbols.mana_w symbols.mana_g}}',
-    ],
+      'CARDNAME enters the battlefield tapped',
+      "When {card.name} enters the battlefield, return a land you control to its owner's hand.",
+      '(T): Add (W)(G)',
+    ].join('\n'),
     template: 'm15',
   },
 ];

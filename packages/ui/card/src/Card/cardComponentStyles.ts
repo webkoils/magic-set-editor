@@ -17,14 +17,14 @@ export const {
 });
 import * as mtg from '@mse/types';
 
-export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
-  [mtg.CardComponentType.CARD]: {
+export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
+  [mtg.MseCardComponentType.CARD]: {
     position: 'relative',
     width: 375,
     height: 523,
     color: 'black',
   },
-  [mtg.CardComponentType.BACKGROUND]: {
+  [mtg.MseCardComponentType.BACKGROUND]: {
     height: '100%',
     width: '100%',
     left: 0,
@@ -35,7 +35,7 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
     overflow: 'hidden',
     backgroundSize: 'cover',
   },
-  [mtg.CardComponentType.TOPLINE]: {
+  [mtg.MseCardComponentType.TOPLINE]: {
     width: 'auto',
     position: 'absolute',
     top: 30,
@@ -46,26 +46,28 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
     zIndex: 2,
     display: 'flex',
     flexFlow: 'row nowrap',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     justifyContent: 'space-between',
     fontFamily: 'beleren',
   },
 
-  [mtg.CardComponentType.NAME]: {
+  [mtg.MseCardComponentType.NAME]: {
     fontSize: 16 / 16 + 'em',
     height: '100%',
     flex: '0 1 100%',
   },
-  [mtg.CardComponentType.COST]: {
+  [mtg.MseCardComponentType.COST]: {
     minWidth: 5,
     height: '100%',
     flex: '0 0 auto',
     display: 'flex',
-    fontSize: 15 / 16 + 'em',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    flexFlow: 'row nowrap',
+
+    fontSize: 16 / 16 + 'em',
+    //alignItems: 'center',
+    // justifyContent: 'flex-end',
   },
-  [mtg.CardComponentType.TYPE]: {
+  [mtg.MseCardComponentType.TYPE]: {
     width: 310,
     position: 'absolute',
     top: 296,
@@ -80,9 +82,9 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
     fontFamily: 'beleren',
     fontSize: 13 / 16 + 'em',
   },
-  [mtg.CardComponentType.SETSYMBOL]: {},
+  [mtg.MseCardComponentType.SETSYMBOL]: {},
 
-  [mtg.CardComponentType.PT]: {
+  [mtg.MseCardComponentType.PT]: {
     position: 'absolute',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -105,19 +107,19 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
       height: 100 * (28 / 42) + '%',
     },
   },
-  [mtg.CardComponentType.RULESTEXT]: {
+  [mtg.MseCardComponentType.RULESTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
     marginBottom: '1.5%',
   },
-  [mtg.CardComponentType.FLAVORTEXT]: {
+  [mtg.MseCardComponentType.FLAVORTEXT]: {
     display: 'block',
     fontFamily: 'mplantin',
     fontStyle: 'italic',
     fontWeight: 400,
     marginBottom: '1.5%',
   },
-  [mtg.CardComponentType.TEXTBOX]: {
+  [mtg.MseCardComponentType.TEXTBOX]: {
     width: 310,
     position: 'absolute',
     top: 327,
@@ -135,7 +137,7 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
     fontSize: 14 / 16 + 'em',
     lineHeight: 1.2,
   },
-  [mtg.CardComponentType.TEXT_DIVIDER]: {
+  [mtg.MseCardComponentType.TEXT_DIVIDER]: {
     display: 'block',
     width: '80%',
     margin: '3% auto',
@@ -144,7 +146,7 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
     background:
       'linear-gradient(90deg, transparent 0%,black 20%, black 50% ,black 80%, transparent 100% );',
   },
-  [mtg.CardComponentType.ARTWORK]: {
+  [mtg.MseCardComponentType.ARTWORK]: {
     width: 316,
     position: 'absolute',
     top: 60,
@@ -159,11 +161,11 @@ export const cardComponentStyles: Record<mtg.CardComponentType, any> = {
 } as const;
 
 const templateClassEntries = Object.keys(cardComponentStyles).map((k) => {
-  return [k.toLowerCase() as mtg.CardComponentType, 'MseCard' + k];
+  return [k.toLowerCase() as mtg.MseCardComponentType, 'MseCard' + k];
 });
 
 export const templateClasses: Record<
-  Lowercase<mtg.CardComponentType>,
+  Lowercase<mtg.MseCardComponentType>,
   string
 > = Object.fromEntries(templateClassEntries);
 

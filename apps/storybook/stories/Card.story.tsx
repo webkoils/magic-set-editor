@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const CardStory = ({ card }: { card: mse.Card }) => (
+export const CardStory = ({ card }: { card: mse.MseCard }) => (
   <div style={{ width: 375, height: 523 }}>
     <Card card={card} />
   </div>

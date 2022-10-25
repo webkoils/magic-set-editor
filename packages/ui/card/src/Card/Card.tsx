@@ -12,7 +12,7 @@ import {
 
 import { CardProvider } from '../CardProvider';
 import { CardTemplateProvider } from '../CardTemplate/CardTemplateProvider';
-export const Card: React.FC<mtg.CardComponentProps> = ({ card }) => {
+export const Card: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
   return (
     <CardProvider card={card}>
       <CardTemplateProvider template={card.template}>

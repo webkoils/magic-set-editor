@@ -1,7 +1,7 @@
-import { CardComponentType } from 'types';
+import { MseCardComponentType } from 'types';
 
 export type CardTemplate = {
   name: string;
-  styles: Record<CardComponentType, Partial<React.CSSProperties>>;
+  styles: Record<MseCardComponentType, Partial<React.CSSProperties>>;
   assets: Record<string, string>;
 };

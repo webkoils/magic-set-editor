@@ -1,21 +1,20 @@
 import {
-  Color,
-  Card,
-  CardIdentity,
+  MseColor,
+  MseCard,
+  MseCardIdentity,
   isColor,
-  COLOR_SORT_ORDER,
+  MSE_COLOR_SORT_ORDER,
 } from '@mse/types';
-
-export const sortColors = (colors: Color[]) => {
+export const sortColors = (colors: MseColor[]) => {
   return colors
     .slice()
-    .sort((a, b) => COLOR_SORT_ORDER[b] - COLOR_SORT_ORDER[a]);
+    .sort((a, b) => MSE_COLOR_SORT_ORDER[b] - MSE_COLOR_SORT_ORDER[a]);
 };
-export const isCardLand = (card: Card) => {
+export const isCardLand = (card: MseCard) => {
   return Boolean(card.types.find((t) => t.toLowerCase() === 'land'));
 };
 
-export const isCardHybrid = (card: Card) => {
+export const isCardHybrid = (card: MseCard) => {
   if (card.identity) {
     return card.identity.isHybrid;
   }
@@ -24,14 +23,14 @@ export const isCardHybrid = (card: Card) => {
   if (!isCardLand(card) && card.manaCost) {
     return (
       identityColors.length === 2 &&
-      Boolean(card.manaCost.match(/symbols\.mana_[wubrg][wubrg]/gi))
+      Boolean(card.manaCost.match(/([WUBRG][WUBRG])/g))
     );
   } else {
     return identityColors.length === 2;
   }
 };
 
-const symbolRegex = /\{\{(.+?)\}\}/gi;
+const symbolRegex = /\((.+?)\)/gi;
 
 export const findSymbolsInText = (text: string) => {
   let symbolMatches: RegExpExecArray | null = null;
@@ -40,9 +39,7 @@ export const findSymbolsInText = (text: string) => {
     symbolMatches = symbolRegex.exec(text);
     if (symbolMatches) {
       if (symbolMatches[1]) {
-        foundSymbols.push(
-          ...symbolMatches[1].split(' ').map((sym) => sym.split('.'))
-        );
+        foundSymbols.push(symbolMatches[1]);
       }
     }
   } while (symbolMatches);
@@ -50,57 +47,56 @@ export const findSymbolsInText = (text: string) => {
 };
 
 export const findColorsInText = (text: string) => {
-  let colors: Record<Color, boolean> = {
-    [Color.WHITE]: false,
-    [Color.BLUE]: false,
-    [Color.BLACK]: false,
-    [Color.GREEN]: false,
-    [Color.RED]: false,
-    [Color.COLORLESS]: false,
+  let colors: Record<MseColor, boolean> = {
+    [MseColor.WHITE]: false,
+    [MseColor.BLUE]: false,
+    [MseColor.BLACK]: false,
+    [MseColor.GREEN]: false,
+    [MseColor.RED]: false,
+    [MseColor.COLORLESS]: false,
   };
   let matches = findSymbolsInText(text);
-  matches.forEach(([parent, key]) => {
-    if (parent == 'symbols' && key.match(/mana_/gi)) {
-      const val = key.replace('mana_', '').split('');
-      val.forEach((c) => {
-        if (isColor(c)) {
-          colors[c] = true;
-        }
-      });
-    }
+  matches.forEach((key) => {
+    const val = key.replace('mana_', '').toLowerCase().split('');
+    val.forEach((c) => {
+      console.log(c);
+      if (isColor(c)) {
+        colors[c] = true;
+      }
+    });
   });
 
   return colors;
 };
 export const getCardColors = (
-  card: Card
-): { identityColors: Color[]; colors: Color[] } => {
-  let colors: Record<Color, boolean> = findColorsInText(card.manaCost || '');
+  card: MseCard
+): { identityColors: MseColor[]; colors: MseColor[] } => {
+  let colors: Record<MseColor, boolean> = findColorsInText(card.manaCost || '');
 
-  let textColors = findColorsInText(card.rulesText.join(' '));
-  let identityColors: Record<Color, boolean> = {
-    [Color.WHITE]: false,
-    [Color.BLUE]: false,
-    [Color.BLACK]: false,
-    [Color.GREEN]: false,
-    [Color.RED]: false,
-    [Color.COLORLESS]: false,
+  let textColors = findColorsInText(card.rulesText);
+  let identityColors: Record<MseColor, boolean> = {
+    [MseColor.WHITE]: false,
+    [MseColor.BLUE]: false,
+    [MseColor.BLACK]: false,
+    [MseColor.GREEN]: false,
+    [MseColor.RED]: false,
+    [MseColor.COLORLESS]: false,
   };
   for (let color in identityColors) {
-    identityColors[color as Color] =
-      textColors[color as Color] || colors[color as Color];
+    identityColors[color as MseColor] =
+      textColors[color as MseColor] || colors[color as MseColor];
   }
   return {
     identityColors: Object.keys(identityColors).filter(
-      (c) => identityColors[c as Color] === true
-    ) as Color[],
+      (c) => identityColors[c as MseColor] === true
+    ) as MseColor[],
     colors: Object.keys(colors).filter(
-      (c) => identityColors[c as Color] === true
-    ) as Color[],
+      (c) => identityColors[c as MseColor] === true
+    ) as MseColor[],
   };
 };
 
-export const getCardIdentity = (card: Card): CardIdentity => {
+export const getCardIdentity = (card: MseCard): MseCardIdentity => {
   if (card.identity) {
     return card.identity;
   }

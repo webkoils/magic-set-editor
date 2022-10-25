@@ -1,11 +1,28 @@
-import { Card } from '@mse/types';
-import { createContext, useContext, FC, PropsWithChildren } from 'react';
-export const CardContext = createContext<Card | undefined>(undefined);
+import { MseCard } from '@mse/types';
+import {
+  createContext,
+  useContext,
+  FC,
+  PropsWithChildren,
+  useRef,
+  useEffect,
+  useState,
+} from 'react';
+import { useCardState } from './cardState';
+
+export const CardContext = createContext<
+  ReturnType<typeof useCardState> | undefined
+>(undefined);
 
 export const CardProvider: FC<PropsWithChildren<{
-  card: Card;
-}>> = ({ card, children }) => {
-  return <CardContext.Provider value={card}>{children}</CardContext.Provider>;
+  card: MseCard;
+  editable?: boolean;
+}>> = ({ card, editable, children }) => {
+  const cardState = useCardState(card, editable);
+
+  return (
+    <CardContext.Provider value={cardState}>{children}</CardContext.Provider>
+  );
 };
 
 export const useCardContext = () => {

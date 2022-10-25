@@ -1,0 +1,11 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": ["src/**/*", "static.tsx"],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ]
+}

@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@types/diff": "^5.0.2",
     "typescript": "^4.7.4",
     "autoprefixer": "^10.4.4",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
@@ -26,7 +27,12 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "@mse/assets": "workspace:*",
-    "@mse/utils.card": "workspace:*"
+    "@mse/utils.card": "workspace:*",
+    "@mse/symbols": "workspace:*",
+    "@mse/symbol-input": "workspace:*",
+    "diff": "^5.1.0",
+    "react-contenteditable": "3.3.6",
+    "classnames": "^2.3.2"
   },
   "resolutions": {
     "**/@emotion/css": "^11.10.0"

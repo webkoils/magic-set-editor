@@ -4,27 +4,27 @@ import * as mtg from '@mse/types';
 import { getCardIdentity, sortColors } from '@mse/utils.card';
 import { templateClasses } from '../cardComponentStyles';
 
-const ptBackgroundImage = (card: mtg.Card) => {
+const ptBackgroundImage = (card: mtg.MseCard) => {
   let identity = getCardIdentity(card);
   let allColors = sortColors(identity.colors).join('');
   let isLand = card.types.find((t) => t.toLowerCase() === 'land');
   switch (allColors) {
-    case mtg.Color.WHITE: {
+    case mtg.MseColor.WHITE: {
       return !isLand ? templateAssets.wpt : templateAssets.wlpt;
     }
-    case mtg.Color.BLUE: {
+    case mtg.MseColor.BLUE: {
       return !isLand ? templateAssets.upt : templateAssets.ulpt;
     }
-    case mtg.Color.BLACK: {
+    case mtg.MseColor.BLACK: {
       return !isLand ? templateAssets.bpt : templateAssets.blpt;
     }
-    case mtg.Color.RED: {
+    case mtg.MseColor.RED: {
       return !isLand ? templateAssets.rpt : templateAssets.rlpt;
     }
-    case mtg.Color.GREEN: {
+    case mtg.MseColor.GREEN: {
       return !isLand ? templateAssets.gpt : templateAssets.glpt;
     }
-    case mtg.Color.COLORLESS: {
+    case mtg.MseColor.COLORLESS: {
       return !isLand ? templateAssets.cpt : templateAssets.clpt;
     }
     default: {
@@ -33,7 +33,7 @@ const ptBackgroundImage = (card: mtg.Card) => {
   }
 };
 
-export const PT: React.FC<mtg.CardComponentProps> = ({ card }) => {
+export const PT: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
   return typeof card.power !== 'undefined' &&
     typeof card.toughness !== 'undefined' ? (
     <div

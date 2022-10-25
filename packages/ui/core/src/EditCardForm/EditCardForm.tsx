@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Input } from 'theme-ui';
 import React, { useEffect, useState } from 'react';
 import { Card } from '@mse/types';
 export const EditCardForm: React.FC<{
@@ -12,11 +12,11 @@ export const EditCardForm: React.FC<{
 
   return (
     <>
-      <TextField value={formData.name} />
-      <TextField value={formData.types} />
+      <Input value={formData.name} />
+      <Input value={formData.types} />
 
-      <TextField value={formData.name} />
-      <TextField value={formData.name} />
+      <Input value={formData.name} />
+      <Input value={formData.name} />
     </>
   );
 };

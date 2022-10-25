@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from 'react';
 import { Card } from '../Card';
 import * as mtg from '@mse/types';
 
-export const CardGrid: FC<{ cards: mtg.Card[]; columns?: number }> = ({
+export const CardGrid: FC<{ cards: mtg.MseCard[]; columns?: number }> = ({
   cards,
   columns = 3,
 }) => {

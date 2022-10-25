@@ -1,9 +1,9 @@
-import { Color } from '@mse/types';
+import { MseColor } from '@mse/types';
 import React from 'react';
 import { SimpleBackground } from './SimpleBackground';
 export const HybridBackground: React.FC<{
   isLand: boolean;
-  colors: Color[];
+  colors: MseColor[];
 }> = ({ colors, isLand }) => {
   return (
     <>

@@ -2,7 +2,7 @@ import React from 'react';
 import * as mtg from '@mse/types';
 import { templateClasses } from '../cardComponentStyles';
 
-export const TypeLine: React.FC<mtg.CardComponentProps> = ({ card }) => {
+export const TypeLine: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
   return (
     <div className={templateClasses.type}>
       {card.supertype} {card.types.join(' ')}{' '}

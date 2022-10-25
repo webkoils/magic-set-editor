@@ -1,18 +1,14 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { FormattedText } from './FormattedText';
 import { templateClasses } from '../cardComponentStyles';
+import { CardField } from '../../CardField/CardField';
 
-export const TopLine: React.FC<mtg.CardComponentProps> = ({ card }) => {
+export const TopLine: React.FC<mtg.MseCardComponentProps> = () => {
   return (
     <div className={templateClasses.topline}>
-      <div className={templateClasses.name}>{card.name}</div>
+      <CardField id={'name'} className={templateClasses.name} />
 
-      <div className={templateClasses.cost}>
-        {card.manaCost ? (
-          <FormattedText text={card.manaCost} size='large' />
-        ) : null}
-      </div>
+      <CardField id={'manaCost'} className={templateClasses.cost} />
     </div>
   );
 };

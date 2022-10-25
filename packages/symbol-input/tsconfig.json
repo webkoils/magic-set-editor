@@ -1,0 +1,14 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ]
+}

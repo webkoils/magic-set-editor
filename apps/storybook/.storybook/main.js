@@ -8,6 +8,7 @@ module.exports = {
   staticDirs: [
     '../node_modules/@mse/assets/dist',
     '../node_modules/@mse/assets/fonts',
+    '../node_modules/@mse/symbols',
   ],
   core: {
     builder: 'webpack5',

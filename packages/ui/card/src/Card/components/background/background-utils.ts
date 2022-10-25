@@ -1,22 +1,22 @@
 import * as mtg from '@mse/types';
 import { M15_ASSETS as templateAssets } from '@mse/assets';
 
-export const gradientForColors = (colors: mtg.Color[]) => {
+export const gradientForColors = (colors: mtg.MseColor[]) => {
   const gradientcolors = colors.map((color) => {
     switch (color) {
-      case mtg.Color.WHITE: {
+      case mtg.MseColor.WHITE: {
         return 'rgba(255,255,255,.4)';
       }
-      case mtg.Color.BLUE: {
+      case mtg.MseColor.BLUE: {
         return 'rgba(0,0,255,.4)';
       }
-      case mtg.Color.BLACK: {
+      case mtg.MseColor.BLACK: {
         return 'rgba(0,0,0,.4)';
       }
-      case mtg.Color.RED: {
+      case mtg.MseColor.RED: {
         return 'rgba(255,0,0,.4)';
       }
-      case mtg.Color.GREEN: {
+      case mtg.MseColor.GREEN: {
         return 'rgba(0,255,0,.4)';
       }
     }
@@ -25,26 +25,26 @@ export const gradientForColors = (colors: mtg.Color[]) => {
 };
 
 export const backgroundImageForColor = (
-  color: mtg.Color | 'multi',
+  color: mtg.MseColor | 'multi',
   isLand: boolean
 ) => {
   switch (color) {
-    case mtg.Color.COLORLESS: {
+    case mtg.MseColor.COLORLESS: {
       return `url(${!isLand ? templateAssets.ccard : templateAssets.clcard})`;
     }
-    case mtg.Color.WHITE: {
+    case mtg.MseColor.WHITE: {
       return `url(${!isLand ? templateAssets.wcard : templateAssets.wlcard})`;
     }
-    case mtg.Color.BLUE: {
+    case mtg.MseColor.BLUE: {
       return `url(${!isLand ? templateAssets.ucard : templateAssets.ulcard})`;
     }
-    case mtg.Color.BLACK: {
+    case mtg.MseColor.BLACK: {
       return `url(${!isLand ? templateAssets.bcard : templateAssets.blcard})`;
     }
-    case mtg.Color.RED: {
+    case mtg.MseColor.RED: {
       return `url(${!isLand ? templateAssets.rcard : templateAssets.rlcard})`;
     }
-    case mtg.Color.GREEN: {
+    case mtg.MseColor.GREEN: {
       return `url(${!isLand ? templateAssets.gcard : templateAssets.glcard})`;
     }
     case 'multi': {

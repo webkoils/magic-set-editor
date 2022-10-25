@@ -3,8 +3,10 @@ import * as mse from '@mse/types';
 import { HybridBackground } from './HybridBackground';
 import { SimpleBackground } from './SimpleBackground';
 import { getCardIdentity } from '@mse/utils.card';
-import { Color } from '@mse/types';
-export const Background: React.FC<mse.CardComponentProps> = ({ card }) => {
+import { MseColor } from '@mse/types';
+import { useCardContext } from '../../../index';
+export const Background: React.FC<mse.MseCardComponentProps> = () => {
+  const { card } = useCardContext();
   const identity = useMemo(() => {
     let id = getCardIdentity(card);
     console.log(id);
@@ -24,7 +26,7 @@ export const Background: React.FC<mse.CardComponentProps> = ({ card }) => {
         isLand={identity.isLand}
         color={
           identity.identityColors.length === 0
-            ? Color.COLORLESS
+            ? MseColor.COLORLESS
             : identity.identityColors.length == 1
             ? identity.identityColors[0]
             : 'multi'

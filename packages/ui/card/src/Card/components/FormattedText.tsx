@@ -1,11 +1,8 @@
-import {
-  MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS,
-  MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS,
-} from '@mse/assets';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useCardContext } from '../../CardProvider/CardProvider';
-import { parseCardText } from '@mse/utils.card';
+import { parseCardTokens, createSymbolMap } from '@mse/utils.card';
 
+import { manaSymbolMapping } from '@mse/symbols';
 export const FormattedText = ({
   size = 'small',
   text,
@@ -13,31 +10,22 @@ export const FormattedText = ({
   size?: 'large' | 'small';
   text: string;
 }) => {
-  const card = useCardContext();
-  const fontForSize = useMemo(
-    () =>
-      size == 'large'
-        ? MAGIC_MANA_LARGE_SYMBOL_FONT_ASSETS
-        : MAGIC_MANA_SMALL_SYMBOL_FONT_ASSETS,
-    [size]
+  const { card } = useCardContext();
+  const shadow = useMemo(() => size == 'large', [size]);
+  const formattedText = useMemo(
+    () => parseCardTokens(text, card, manaSymbolMapping),
+    [text]
   );
-  const formattedText = useMemo(() => parseCardText(text, card, fontForSize), [
-    text,
-  ]);
 
   return (
     <>
-      {formattedText.map((symbol, i) => {
+      {formattedText.flat(1).map((symbol, i) => {
         if (symbol.type == 'text') {
           return symbol.value;
+        } else if (!symbol.match) {
+          return <symbol.value shadow={shadow} />;
         } else {
-          return (
-            <img
-              key={symbol.type + i}
-              style={{ display: 'inline-block', height: '1em', width: '1em' }}
-              src={symbol.value}
-            />
-          );
+          return <symbol.value shadow={shadow}>{symbol.match}</symbol.value>;
         }
       })}
     </>
