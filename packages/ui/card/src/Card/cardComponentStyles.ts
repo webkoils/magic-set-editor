@@ -147,6 +147,8 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     fontStyle: 'italic',
     fontWeight: 400,
     marginBottom: '1.5%',
+    minHeight: 1,
+    minWidth: '1em',
   },
   [mtg.MseCardComponentType.TEXTBOX]: {
     width: 310,

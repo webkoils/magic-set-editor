@@ -34,7 +34,7 @@ export const CardFieldWithoutSymbols: React.FC<
   const { card, update, editField, onFieldClick } = useCardContext();
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLDivElement | null>(null);
-  const value = useMemo(() => String(card[id]) || '', [card, id]);
+  const value = useMemo(() => (card[id] ? String(card[id]) : ''), [card, id]);
   const [localValue, setLocalValue] = useState(value);
   const renderedTokens = useMemo(() => {
     let tokens = parseTokens(String(localValue));
@@ -52,17 +52,14 @@ export const CardFieldWithoutSymbols: React.FC<
               lineTokens.push(
                 <span
                   key={
-                    textToken.replace(/ CARDNAME /g, ' ' + card.name + ' ') +
+                    textToken.replace(/\bCARDNAME\b/g, card.name) +
                     '_' +
                     i +
                     '_' +
                     li
                   }
                   dangerouslySetInnerHTML={{
-                    __html: textToken.replace(
-                      / CARDNAME /g,
-                      ' ' + card.name + ' '
-                    ),
+                    __html: textToken.replace(/\bCARDNAME\b/g, card.name),
                   }}
                 ></span>
               );
@@ -80,15 +77,16 @@ export const CardFieldWithoutSymbols: React.FC<
         lineTokens.push(
           <span
             key={
-              textToken.replace(/ CARDNAME /g, ' ' + card.name + ' ') +
+              textToken.replace(/\bCARDNAME\b/g, card.name) +
               '_' +
               'last' +
               '_' +
               li
             }
-          >
-            {textToken.replace(/ CARDNAME /g, ' ' + card.name + ' ')}
-          </span>
+            dangerouslySetInnerHTML={{
+              __html: textToken.replace(/\bCARDNAME\b/g, card.name),
+            }}
+          ></span>
         );
       return lineTokens.concat(
         li < tokens.length - 1 ? [<br key={'newLine' + li} />] : []
@@ -167,8 +165,9 @@ export const CardFieldWithoutSymbols: React.FC<
         onFocus={onFocus}
         onChange={onChange}
         onBlur={onBlur}
+        placeholder={id}
       ></ReactContentEditable>
     ),
-    [html, className, inputRef, onBlur, onChange, onFocus]
+    [html, className, inputRef, onBlur, onChange, onFocus, id]
   );
 };

@@ -22,7 +22,7 @@ const sampleCards: MseCard[] = [
   {
     id: '2',
     name: 'Explore',
-    manaCost: '1 (G/W)',
+    manaCost: '(1)(G/W)',
     num: 2,
     types: ['Sorcery'],
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
