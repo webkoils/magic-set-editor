@@ -1,32 +1,25 @@
 import { Card } from '@mse/ui.card';
 import * as mse from '@mse/types';
 
-import { Mana, staticSymbols } from '@mse/symbols';
-
+import { MtgSymbol, MtgSymbolProvider } from '@mse/symbols';
 export default {
   /* 👇 The title prop is optional.
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Mana',
-  component: Mana.C,
+  title: 'MtgSymbol',
+  component: MtgSymbol,
 };
 
-export const ManaUStory = () => (
+export const ManaStory = () => (
   <div style={{ fontSize: '100px' }}>
-    <Mana.T />
-    <Mana.PR shadow />
-    <Mana.C shadow />
-    <Mana.C shadow>1</Mana.C>
-    <Mana.Inf shadow />
-    <Mana.C shadow>12</Mana.C>
-    <Mana.C shadow>200</Mana.C>
-    <Mana.C shadow>X</Mana.C>
-    <Mana.U shadow />
-    <Mana.B shadow />
-    <Mana.R shadow />
-    <Mana.G shadow />
-    <Mana.W shadow />
+    <MtgSymbolProvider>
+      {' '}
+      <MtgSymbol height='100'>T</MtgSymbol>{' '}
+      <MtgSymbol height='100'>W</MtgSymbol>{' '}
+      <MtgSymbol height='100'>B/W/G</MtgSymbol>{' '}
+      <MtgSymbol height='100'>PG/PW</MtgSymbol>
+    </MtgSymbolProvider>
   </div>
 );
-ManaUStory.storyName = 'Mana';
+ManaStory.storyName = 'Mana';

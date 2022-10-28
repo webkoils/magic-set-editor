@@ -12,25 +12,24 @@ const blinkAnimation = keyframes`
 `;
 
 const inputClass = css({
-  outline: 0,
   background: 'transparent',
   fontFamily: 'inherit',
   position: 'relative',
   fontSize: 'inherit',
   color: 'inherit',
   overflow: 'visible',
-  minHeight: '1.2em',
+  minHeight: '1em',
   minWidth: '1ch',
   backgroundColor: 'inherit',
   userSelect: 'none',
   cursor: 'text',
-
-  border: '1px inset transparent',
+  whiteSpace: 'pre-wrap',
+  outline: 'transparent solid 1px',
 
   '& .MseTextInputCursor': {
     opacity: 0,
     width: '0px',
-    height: '1em',
+    height: '0px',
     display: 'inline-block',
     position: 'relative',
     overflow: 'visible',
@@ -41,8 +40,8 @@ const inputClass = css({
       position: 'absolute',
       left: '-.5px',
       right: '-.5px',
-      top: '0em',
-      bottom: '-.2em',
+      top: '-1em',
+      bottom: '-.3em',
       backgroundColor: 'black',
       animationName: blinkAnimation,
       animationDuration: '1s',
@@ -56,7 +55,7 @@ const inputClass = css({
     '& .MseTextInputCursor': {
       opacity: 1,
     },
-    border: '1px  rgba(0,0,0,.7) inset',
+    outline: 'black solid 1px',
   },
 });
 const inputClassFocused = inputClass + ' focused';

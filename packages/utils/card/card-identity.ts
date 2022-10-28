@@ -19,18 +19,22 @@ export const isCardHybrid = (card: MseCard) => {
     return card.identity.isHybrid;
   }
   let { identityColors } = getCardColors(card);
-  console.log(card.name, identityColors);
+  // console.log(
+  //   identityColors,
+  //   isCardLand(card),
+  //   card.manaCost?.match(/\(P?[WUBRG]\/P?[WUBRG]\)/)
+  // );
   if (!isCardLand(card) && card.manaCost) {
     return (
       identityColors.length === 2 &&
-      Boolean(card.manaCost.match(/([WUBRG][WUBRG])/g))
+      Boolean(card.manaCost?.match(/\(P?[WUBRG]\/P?[WUBRG]\)/))
     );
   } else {
     return identityColors.length === 2;
   }
 };
 
-const symbolRegex = /\((.+?)\)/gi;
+const symbolRegex = /\(([A-Z0-9\/]+?)\)/g;
 
 export const findSymbolsInText = (text: string) => {
   let symbolMatches: RegExpExecArray | null = null;
@@ -57,9 +61,8 @@ export const findColorsInText = (text: string) => {
   };
   let matches = findSymbolsInText(text);
   matches.forEach((key) => {
-    const val = key.replace('mana_', '').toLowerCase().split('');
+    const val = key.split('');
     val.forEach((c) => {
-      console.log(c);
       if (isColor(c)) {
         colors[c] = true;
       }
@@ -74,6 +77,7 @@ export const getCardColors = (
   let colors: Record<MseColor, boolean> = findColorsInText(card.manaCost || '');
 
   let textColors = findColorsInText(card.rulesText);
+  //console.log(colors);
   let identityColors: Record<MseColor, boolean> = {
     [MseColor.WHITE]: false,
     [MseColor.BLUE]: false,

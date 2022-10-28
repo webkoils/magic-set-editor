@@ -1,6 +1,5 @@
 import { InputState, SymbolInput } from '@mse/symbol-input';
-import { manaSymbolDelimeters, manaSymbolMapping } from '@mse/symbols';
-import { MseCard } from '@mse/types';
+import { manaSymbolDelimeters, manaSymbolMapping } from './symbol-mapping';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { useCardContext } from '../index';
 

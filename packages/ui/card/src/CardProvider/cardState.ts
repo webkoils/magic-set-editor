@@ -1,11 +1,17 @@
 import { MseCard } from '@mse/types';
 import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
 
+export interface CardStateHistoryItem {
+  card: MseCard;
+  timestamp: number;
+}
+
 export interface CardState {
   initialCard: MseCard;
   card: MseCard;
-  history: [MseCard[], MseCard[]];
+  history: [CardStateHistoryItem[], CardStateHistoryItem[]];
   editable: boolean;
+  editField: null | keyof MseCard;
 }
 
 export type CardStateAction =
@@ -13,6 +19,7 @@ export type CardStateAction =
       type: 'update';
       card: Partial<MseCard>;
     }
+  | { type: 'click'; field: null | keyof MseCard }
   | { type: 'reset' }
   | { type: 'undo' }
   | { type: 'redo' };
@@ -22,20 +29,32 @@ export const cardStateReducer: React.Reducer<CardState, CardStateAction> = (
   action
 ) => {
   switch (action.type) {
-    case 'reset': {
-      return { ...prevState, card: prevState.initialCard, history: [[], []] };
+    case 'click': {
+      if (prevState.editField === action.field) {
+        return { ...prevState, editField: null };
+      } else {
+        return { ...prevState, editField: action.field };
+      }
     }
-    case 'update': {
+    case 'reset': {
       return {
         ...prevState,
-        card: { ...prevState.card, ...action.card },
-        history: [
-          prevState.history[0].concat({
-            ...prevState.card,
-            ...action.card,
-          }),
-          [],
-        ],
+        card: prevState.initialCard,
+        history: [[{ card: prevState.initialCard, timestamp: 0 }], []],
+      };
+    }
+    case 'update': {
+      const newCard = { ...prevState.card, ...action.card };
+      let history = prevState.history.slice()[0];
+      let prevCard = history.pop();
+      console.log(prevCard);
+      if (!prevCard || Date.now() - prevCard.timestamp > 500) {
+        history.push({ card: newCard, timestamp: Date.now() });
+      }
+      return {
+        ...prevState,
+        card: newCard,
+        history: [history, []],
       };
     }
     case 'undo': {
@@ -44,7 +63,7 @@ export const cardStateReducer: React.Reducer<CardState, CardStateAction> = (
       let prevCard = history.pop();
 
       if (prevCard) {
-        future.push(prevState.card);
+        future.push(prevCard);
         return {
           ...prevState,
           card: prevCard,
@@ -59,10 +78,10 @@ export const cardStateReducer: React.Reducer<CardState, CardStateAction> = (
       let nextCard = future.pop();
 
       if (nextCard) {
-        history.push(prevState.card);
+        history.push(nextCard);
         return {
           ...prevState,
-          card: nextCard,
+          card: nextCard.card,
           history: [history, future],
         };
       }
@@ -79,12 +98,16 @@ export const useCardState = (card: MseCard, editable?: boolean) => {
   const [state, dispatch] = useReducer(cardStateReducer, {
     initialCard: card,
     card,
-    history: [[], []],
+    history: [[{ card, timestamp: 0 }], []],
     editable: !!editable,
+    editField: null,
   });
 
   const update = useCallback((updates: Partial<MseCard>) => {
     dispatch({ type: 'update', card: updates });
+  }, []);
+  const onFieldClick = useCallback((field: CardState['editField']) => {
+    dispatch({ type: 'click', field });
   }, []);
   const undo = useCallback(() => {
     dispatch({ type: 'undo' });
@@ -107,7 +130,8 @@ export const useCardState = (card: MseCard, editable?: boolean) => {
       reset,
       undo,
       redo,
+      onFieldClick,
     }),
-    [state, dispatch, update, reset, undo, redo]
+    [state, dispatch, update, reset, undo, redo, onFieldClick]
   );
 };

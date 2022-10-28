@@ -85,6 +85,17 @@ export const SymbolInput: React.FC<
     }
   }, []);
 
+  const onMouseDown = useCallback((event: React.MouseEvent) => {
+    console.log(document.elementFromPoint(event.clientX, event.clientY));
+  }, []);
+  const onMouseUp: React.MouseEventHandler = useCallback((event) => {
+    let el = document.elementFromPoint(event.pageX, event.pageY);
+    if (el) {
+      let [line, column] = (el.getAttribute('data-index') || '').split('-');
+      console.log(line, column);
+    }
+  }, []);
+
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, { capture: true });
 
@@ -97,41 +108,86 @@ export const SymbolInput: React.FC<
   }, [onKeyPress, onKeyDown]);
 
   const renderedTokens = useMemo(() => {
-    return state.tokensWithCursor.map((line, li) => {
-      return line
-        .map((t, i) => {
-          switch (t.type) {
-            case 'cursor': {
-              return (
-                <span
-                  key={t.raw + '_' + i + '_' + li}
-                  className={classes.cursor}
-                />
-              );
-            }
+    if (state.isFocused) {
+      return state.tokensWithCursor.map((line, li) => {
+        return line
+          .map((t, i) => {
+            switch (t.type) {
+              case 'cursor': {
+                return (
+                  <span
+                    {...{ ['data-index']: li + '-' + i }}
+                    key={t.raw + '_' + i + '_' + li}
+                    className={classes.cursor}
+                  />
+                );
+              }
 
+              case 'string': {
+                return (
+                  <span
+                    {...{ ['data-index']: li + '-' + i }}
+                    key={t.raw + '_' + i + '_' + li}
+                    dangerouslySetInnerHTML={{ __html: t.Component }}
+                  />
+                );
+              }
+              case 'symbol': {
+                return (
+                  <t.Component
+                    {...{ ['data-index']: li + '-' + i }}
+                    key={t.raw + '_' + i + '_' + li}
+                  >
+                    {t.value}
+                  </t.Component>
+                );
+              }
+            }
+          })
+          .concat(
+            li < state.tokensWithCursor.length - 1
+              ? [<br key={'newLine' + li} />]
+              : []
+          );
+      });
+    } else {
+      return state.tokens.map((line, li) => {
+        let lineTokens: any[] = [];
+        let textToken = '';
+        line.forEach((t, i) => {
+          switch (t.type) {
             case 'string': {
-              return !state.isFocused && t.Component !== '&nbsp;' ? (
-                t.Component
-              ) : (
-                <span
-                  key={t.raw + '_' + i + '_' + li}
-                  dangerouslySetInnerHTML={{ __html: t.Component }}
-                />
-              );
+              textToken += t.Component;
+              break;
             }
             case 'symbol': {
-              return (
+              textToken.length &&
+                lineTokens.push(
+                  <span
+                    key={textToken + '_' + i + '_' + li}
+                    dangerouslySetInnerHTML={{ __html: textToken }}
+                  ></span>
+                );
+              textToken = '';
+              lineTokens.push(
                 <t.Component key={t.raw + '_' + i + '_' + li}>
                   {t.value}
                 </t.Component>
               );
+              break;
             }
           }
-        })
-        .concat([<br key={'newLine' + li} />]);
-    });
-  }, [state?.tokensWithCursor, state.isFocused]);
+        });
+        textToken.length &&
+          lineTokens.push(
+            <span key={textToken + '_' + 'last' + '_' + li}>{textToken}</span>
+          );
+        return lineTokens.concat(
+          li < state.tokens.length - 1 ? [<br key={'newLine' + li} />] : []
+        );
+      });
+    }
+  }, [state?.tokensWithCursor, state?.tokens, state.isFocused]);
 
   return (
     <div
@@ -144,6 +200,8 @@ export const SymbolInput: React.FC<
 
         className
       )}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       tabIndex={0}
       onFocus={onFocus}
       onBlur={onBlur}

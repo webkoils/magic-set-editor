@@ -3,6 +3,8 @@ import React from 'react';
 import * as mtg from '@mse/types';
 import { getCardIdentity, sortColors } from '@mse/utils.card';
 import { templateClasses } from '../cardComponentStyles';
+import { useCardContext } from '../../index';
+import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
 
 const ptBackgroundImage = (card: mtg.MseCard) => {
   let identity = getCardIdentity(card);
@@ -33,7 +35,8 @@ const ptBackgroundImage = (card: mtg.MseCard) => {
   }
 };
 
-export const PT: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
+export const PT: React.FC<mtg.MseCardComponentProps> = () => {
+  const { card } = useCardContext();
   return typeof card.power !== 'undefined' &&
     typeof card.toughness !== 'undefined' ? (
     <div
@@ -41,7 +44,9 @@ export const PT: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
       style={{ backgroundImage: `url(${ptBackgroundImage(card)})` }}
     >
       <div>
-        {card.power}/{card.toughness}
+        <CardFieldWithoutSymbols id={'power'} />
+        <div className={'MseCardPTDivider'}>/</div>
+        <CardFieldWithoutSymbols id={'toughness'} />
       </div>
     </div>
   ) : null;

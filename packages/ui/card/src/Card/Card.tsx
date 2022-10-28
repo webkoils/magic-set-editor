@@ -12,7 +12,9 @@ import {
 
 import { CardProvider } from '../CardProvider';
 import { CardTemplateProvider } from '../CardTemplate/CardTemplateProvider';
-export const Card: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
+export const Card: React.FC<Required<mtg.MseCardComponentProps>> = ({
+  card,
+}) => {
   return (
     <CardProvider card={card}>
       <CardTemplateProvider template={card.template}>
@@ -32,12 +34,12 @@ export const Card: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
                 color: 'black',
               }}
             >
-              <Background card={card} />
-              <TopLine card={card} />
-              <TypeLine card={card} />
-              <TextBox card={card} />
+              <Background />
+              <TopLine />
+              <TypeLine />
+              <TextBox />
               <Artwork src={card.artworkSrc} />
-              <PT card={card} />
+              <PT />
             </div>
           </foreignObject>
         </svg>

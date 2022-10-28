@@ -4,18 +4,21 @@ import { FormattedText } from './FormattedText';
 import { templateClasses } from '../cardComponentStyles';
 import { CardTextInput } from '../../index';
 import { CardField } from '../../CardField/CardField';
-const symbolProps = { shadow: true };
-export const TextBox: React.FC<mtg.MseCardComponentProps> = ({ card }) => {
+import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
+import { useCardContext } from '../..';
+export const TextBox: React.FC<mtg.MseCardComponentProps> = () => {
+  const { card } = useCardContext();
+
   return (
     <div className={templateClasses.textbox}>
-      <CardField
+      <CardFieldWithoutSymbols
         multiline
         id={'rulesText'}
         className={templateClasses.rulestext}
       />
 
       {card.flavorText && <div className={templateClasses.textdivider} />}
-      <CardField
+      <CardFieldWithoutSymbols
         multiline
         id={'flavorText'}
         className={templateClasses.flavortext}

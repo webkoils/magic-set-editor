@@ -16,8 +16,10 @@ export default {
 };
 
 export const CardStory = ({ card }: { card: mse.MseCard }) => (
-  <div style={{ width: 375, height: 523 }}>
-    <Card card={card} />
+  <div style={{ display: 'flex', width: '100%', flexFlow: 'row nowrap' }}>
+    <div style={{ width: 375, height: 523 }}>
+      <Card card={card} />
+    </div>
   </div>
 );
 CardStory.storyName = 'Card';

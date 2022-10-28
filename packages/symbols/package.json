@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "index.ts",
   "types": "index.ts",
+  "files": [
+    "./svg/*"
+  ],
+  "scripts": {},
   "dependencies": {
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "@mse/assets": "workspace:*"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/react": "18.0.17",

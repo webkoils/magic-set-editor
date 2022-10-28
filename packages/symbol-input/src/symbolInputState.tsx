@@ -16,11 +16,11 @@ export type InputToken =
       type: 'cursor';
     };
 export type SymbolMapping = {
-  component: React.ComponentType<Record<string, any>>;
+  component: React.ComponentType<any>;
   code: string;
 }[];
 export type SymbolMatch = {
-  component: React.ComponentType<Record<string, any>>;
+  component: React.ComponentType<any>;
   code: string;
   match: RegExpMatchArray;
 };
@@ -124,7 +124,7 @@ export const parseTokens = (state: InputState) => {
                 key: li + '_' + st + '_' + si,
                 type: 'string',
                 Component:
-                  st === ' ' && si > 0 && line[si - 1] === ' ' ? '&nbsp;' : st,
+                  st === ' ' && si > 0 && line[si - 1] === ' ' ? ' ' : st,
               } as InputToken)
           )
         );
@@ -153,7 +153,7 @@ export const parseTokens = (state: InputState) => {
               key: li + '_' + st + '_' + si,
               type: 'string',
               Component:
-                st === ' ' && si > 0 && line[si - 1] === ' ' ? '&nbsp;' : st,
+                st === ' ' && si > 0 && line[si - 1] === ' ' ? ' ' : st,
             } as InputToken)
         )
       );
@@ -242,9 +242,7 @@ export const inputStateReducer: React.Reducer<InputState, InputStateAction> = (
           type: 'string',
           raw: action.key,
           Component:
-            action.key === ' ' && prevToken?.raw === ' '
-              ? '&nbsp;'
-              : action.key,
+            action.key === ' ' && prevToken?.raw === ' ' ? ' ' : action.key,
         },
         ...newState.tokens[newState.cursor[0]].slice(newState.cursor[1]),
       ];

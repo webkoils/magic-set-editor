@@ -8,12 +8,12 @@ export type MseCardTextSymbol = {
 export type MseCardTextString = { type: 'text'; value: string };
 export type MseCardSymbolGroup = (MseCardTextString | MseCardTextSymbol)[];
 export enum MseColor {
-  WHITE = 'w',
-  BLUE = 'u',
-  BLACK = 'b',
-  RED = 'r',
-  GREEN = 'g',
-  COLORLESS = 'c',
+  WHITE = 'W',
+  BLUE = 'U',
+  BLACK = 'B',
+  RED = 'R',
+  GREEN = 'G',
+  COLORLESS = 'C',
 }
 export enum MseCardComponentType {
   CARD = 'Card',
@@ -56,7 +56,7 @@ export interface MseCard {
 }
 export type MseCardPropertyKey = keyof MseCard;
 export interface MseCardComponentProps {
-  card: MseCard;
+  card?: MseCard;
 }
 export const isColor = (color: string): color is MseColor => {
   return !!color && Object.values(MseColor).includes(color as MseColor);

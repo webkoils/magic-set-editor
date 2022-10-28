@@ -49,6 +49,9 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     alignItems: 'center',
     justifyContent: 'space-between',
     fontFamily: 'beleren',
+    '& .MtgSymbol .MtgSymbolCircleBackground': {
+      filter: 'drop-shadow(-2px 4px 2px rgb(0 0 0))',
+    },
   },
 
   [mtg.MseCardComponentType.NAME]: {
@@ -58,13 +61,10 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
   },
   [mtg.MseCardComponentType.COST]: {
     minWidth: 5,
+    fontSize: 18 / 16 + 'em',
     height: '100%',
     flex: '0 0 auto',
-    display: 'flex',
-    flexFlow: 'row nowrap',
 
-    fontSize: 16 / 16 + 'em',
-    //alignItems: 'center',
     // justifyContent: 'flex-end',
   },
   [mtg.MseCardComponentType.TYPE]: {
@@ -90,9 +90,9 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     backgroundPosition: 'center center',
     left: 283,
     top: 466,
-    width: 81,
+    width: 69,
     height: 35,
-    backgroundSize: 'contain',
+    backgroundSize: '100% 100%',
     zIndex: 3,
     fontFamily: 'beleren',
     fontSize: '1em',
@@ -100,11 +100,40 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     '& > div': {
       fontSize: '1em',
       textAlign: 'center',
+      width: 60,
+      height: 28,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'absolute',
+      left: '54%',
+      top: '50%',
+      transform: 'translate(-50%,-50%)',
+    },
+    '& > div > div:not( .MseCardPTDivider)': {
+      fontSize: '1em',
       position: 'relative',
-      left: 100 * (13 / 81) + '%',
-      top: 100 * (3 / 42) + '%',
-      width: 100 * (60 / 81) + '%',
-      height: 100 * (28 / 42) + '%',
+      flex: '0 0 30%',
+      height: 100 + '%',
+      '&:nth-child(1)': {
+        marginRight: '.25em',
+        textAlign: 'right',
+      },
+      '&:nth-child(3)': {
+        marginLeft: '.25em',
+        textAlign: 'left',
+      },
+    },
+    [`& > div > .MseCardPTDivider`]: {
+      fontSize: '1em',
+      textAlign: 'center',
+      width: '1em',
+
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%,-50%)',
+      height: 100 + '%',
     },
   },
   [mtg.MseCardComponentType.RULESTEXT]: {
@@ -171,8 +200,12 @@ export const templateClasses: Record<
 
 export const templateClassParent = css({
   color: 'black',
+  '& .MtgSymbol': {
+    marginBottom: '-.15em',
+  },
   ...Object.fromEntries(
     Object.entries(cardComponentStyles).map(([k, v]) => {
+      console.log('MseCard' + k);
       return ['& .MseCard' + k, v];
     })
   ),
