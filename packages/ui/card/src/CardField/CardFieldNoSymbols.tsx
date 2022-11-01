@@ -5,6 +5,7 @@ import {
   parseTokens,
 } from './symbol-mapping';
 import React, {
+  KeyboardEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -19,6 +20,34 @@ import {
 import ReactContentEditable, {
   ContentEditableEvent,
 } from 'react-contenteditable';
+import classNames from 'classnames';
+import { useIsMounted } from '../hooks/useIsMounted';
+function streamToString(stream: NodeJS.ReadableStream) {
+  const chunks: Buffer[] = [];
+  return new Promise((resolve, reject) => {
+    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+    stream.on('error', (err) => reject(err));
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+  });
+}
+
+export const decodeEntities = (str: string) => {
+  if (str && typeof str === 'string') {
+    // strip script/html tags
+    let transformed = str.replace(/<br ?\/?>/gi, 'LINEBREAK');
+    console.log('string', str, 'transformed1', transformed);
+
+    transformed = transformed
+      .replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, '')
+      .replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>?/gim, '')
+      .replace(/LINEBREAK/g, '<br />');
+    console.log('transformed2', transformed);
+
+    return str;
+  }
+
+  return str;
+};
 export const CardFieldWithoutSymbols: React.FC<
   {
     id:
@@ -27,12 +56,16 @@ export const CardFieldWithoutSymbols: React.FC<
       | 'rulesText'
       | 'flavorText'
       | 'power'
-      | 'toughness';
+      | 'toughness'
+      | 'supertype'
+      | 'subtypes'
+      | 'types';
     multiline?: boolean;
   } & Omit<React.ComponentPropsWithoutRef<'textarea'>, 'id' | 'onChange'>
 > = ({ id, multiline, className }) => {
   const { card, update, editField, onFieldClick } = useCardContext();
   const [isFocused, setIsFocused] = useState(false);
+  const isMounted = useIsMounted();
   const inputRef = useRef<HTMLDivElement | null>(null);
   const value = useMemo(() => (card[id] ? String(card[id]) : ''), [card, id]);
   const [localValue, setLocalValue] = useState(value);
@@ -88,23 +121,30 @@ export const CardFieldWithoutSymbols: React.FC<
             }}
           ></span>
         );
-      return lineTokens.concat(
-        li < tokens.length - 1 ? [<br key={'newLine' + li} />] : []
+      return (
+        <span key={li} className='MseCardFieldLine'>
+          {lineTokens.concat(
+            multiline && li < tokens.length - 1
+              ? [<br key={'newLine' + li} />]
+              : []
+          )}
+        </span>
       );
     });
-  }, [localValue, card?.name]);
+  }, [localValue, card?.name, multiline]);
+  const nonEditingContent = useMemo(
+    () => <React.Fragment key='markup'>{renderedTokens.flat()}</React.Fragment>,
+    [renderedTokens]
+  );
+
   const [html, setHtml] = useState(
-    typeof window === 'undefined'
-      ? renderToStaticNodeStream(<>{renderedTokens.flat()}</>)
-          .read(1024)
-          .toString()
-      : renderToStaticMarkup(<>{renderedTokens.flat()}</>)
+    typeof window === 'undefined' ? '' : renderToStaticMarkup(nonEditingContent)
   );
 
   const onChange: React.FormEventHandler<HTMLDivElement> = useCallback(
     (event: ContentEditableEvent) => {
       console.log(event.target.value);
-      setLocalValue(inputRef.current?.innerHTML || '');
+      setLocalValue(decodeEntities(inputRef.current?.innerHTML || ''));
     },
     []
   );
@@ -116,23 +156,33 @@ export const CardFieldWithoutSymbols: React.FC<
     setIsFocused(false);
     if (inputRef.current) {
       update({
-        [id]: inputRef.current.innerHTML,
+        [id]: decodeEntities(
+          inputRef.current.innerHTML.replace(/<br>/gi, '\n')
+        ),
       });
     }
   }, [id]);
 
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (inputRef.current) {
+        if (event.key === 'Enter' && !multiline) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }
+    },
+    [multiline]
+  );
+
   useEffect(() => {
     if (isFocused) {
-      setHtml(value);
+      setHtml(value.replace(/\n/gi, '<br>'));
     }
   }, [isFocused, value]);
   useEffect(() => {
     if (!isFocused) {
-      setHtml(
-        renderToStaticMarkup(
-          <React.Fragment key='markup'>{renderedTokens.flat()}</React.Fragment>
-        )
-      );
+      setHtml(renderToStaticMarkup(nonEditingContent));
     }
   }, [isFocused, renderedTokens]);
 
@@ -140,34 +190,53 @@ export const CardFieldWithoutSymbols: React.FC<
     setLocalValue((lv) => (lv !== value ? value : lv));
   }, [value]);
 
-  const options: Partial<InputState> = useMemo(
-    () => ({
-      symbols: [
-        { code: 'CARDNAME', component: () => <>{card.name}</> },
-        ...manaSymbolMapping,
-      ],
-      delimeters: manaSymbolDelimeters,
-      maxLines: multiline ? 10 : 1,
-    }),
-    [multiline, card?.name]
-  );
   const htmlRef = useRef(html);
   useEffect(() => {
     htmlRef.current = html;
   }, [html]);
   return useMemo(
-    () => (
-      <ReactContentEditable
-        html={html}
-        suppressContentEditableWarning
-        innerRef={inputRef}
-        className={className}
-        onFocus={onFocus}
-        onChange={onChange}
-        onBlur={onBlur}
-        placeholder={id}
-      ></ReactContentEditable>
-    ),
-    [html, className, inputRef, onBlur, onChange, onFocus, id]
+    () =>
+      !isMounted ? (
+        <div
+          className={classNames(
+            'MseCardField',
+            'MseCardField-SSR',
+            { focused: isFocused },
+            { multiline: 'MseCardField-Multiline' },
+            className
+          )}
+        >
+          {nonEditingContent}
+        </div>
+      ) : (
+        <ReactContentEditable
+          html={html}
+          disabled={false}
+          innerRef={inputRef}
+          className={classNames(
+            'MseCardField',
+            { focused: isFocused },
+            { multiline: 'MseCardField-Multiline' },
+
+            className
+          )}
+          onFocus={onFocus}
+          onChange={onChange}
+          onBlur={onBlur}
+          placeholder={id}
+          onKeyDown={onKeyDown}
+        ></ReactContentEditable>
+      ),
+    [
+      html,
+      className,
+      inputRef,
+      onBlur,
+      onChange,
+      onFocus,
+      id,
+      isMounted,
+      isFocused,
+    ]
   );
 };

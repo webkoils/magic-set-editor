@@ -1,5 +1,5 @@
 import { CardTextInput } from '@mse/ui.card';
-import '@mse/assets/fonts/beleren/index.css';
+import '@mse/fonts.beleren/index.css';
 import { CardTemplateProvider } from '@mse/ui.card';
 import { CardProvider } from '@mse/ui.card';
 import sampleCards from '@mse/sample-cards';
@@ -22,7 +22,7 @@ export const CardTextInputStory = ({
   card,
 }: {
   initialValue?: string;
-  card: mse.Card;
+  card: mse.MseCard;
 }) => {
   return (
     <CardProvider card={card}>

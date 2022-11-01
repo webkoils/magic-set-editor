@@ -9,7 +9,6 @@ export const Background: React.FC<mse.MseCardComponentProps> = () => {
   const { card } = useCardContext();
   const identity = useMemo(() => {
     let id = getCardIdentity(card);
-    console.log(id);
     return id;
   }, [card]);
 

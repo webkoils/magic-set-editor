@@ -1,15 +1,15 @@
 import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
 import React from 'react';
 import * as mtg from '@mse/types';
-import { getCardIdentity, sortColors } from '@mse/utils.card';
-import { templateClasses } from '../cardComponentStyles';
+import { getCardIdentity, isCardLand, sortColors } from '@mse/utils.card';
+import { templateClasses } from '../../CardTemplate/CardTemplate';
 import { useCardContext } from '../../index';
 import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
 
 const ptBackgroundImage = (card: mtg.MseCard) => {
   let identity = getCardIdentity(card);
   let allColors = sortColors(identity.colors).join('');
-  let isLand = card.types.find((t) => t.toLowerCase() === 'land');
+  let isLand = isCardLand(card);
   switch (allColors) {
     case mtg.MseColor.WHITE: {
       return !isLand ? templateAssets.wpt : templateAssets.wlpt;
@@ -40,13 +40,19 @@ export const PT: React.FC<mtg.MseCardComponentProps> = () => {
   return typeof card.power !== 'undefined' &&
     typeof card.toughness !== 'undefined' ? (
     <div
-      className={templateClasses.pt}
+      className={templateClasses.powerToughness.root}
       style={{ backgroundImage: `url(${ptBackgroundImage(card)})` }}
     >
-      <div>
-        <CardFieldWithoutSymbols id={'power'} />
-        <div className={'MseCardPTDivider'}>/</div>
-        <CardFieldWithoutSymbols id={'toughness'} />
+      <div className={templateClasses.powerToughness.label}>
+        <CardFieldWithoutSymbols
+          id={'power'}
+          className={templateClasses.powerToughness.power}
+        />
+        <div className={templateClasses.powerToughness.divider}>/</div>
+        <CardFieldWithoutSymbols
+          id={'toughness'}
+          className={templateClasses.powerToughness.toughness}
+        />
       </div>
     </div>
   ) : null;

@@ -1,5 +1,5 @@
 import React from 'react';
-
+export * from './card-template';
 export type MseCardTextSymbol = {
   type: 'symbol';
   value: React.ComponentType<any>;
@@ -43,8 +43,8 @@ export interface MseCard {
   num: number;
   name: string;
   supertype?: string;
-  types: string[];
-  subtypes?: string[];
+  types: string;
+  subtypes?: string;
   rulesText: string;
   flavorText?: string;
   manaCost?: string;

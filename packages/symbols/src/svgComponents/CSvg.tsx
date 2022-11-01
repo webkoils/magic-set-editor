@@ -1,7 +1,12 @@
 import { memo } from 'react';
 
 const CSvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
-  <svg {...props} viewBox='0 0 100 100' preserveAspectRatio='xMinYMin meet'>
+  <svg
+    {...props}
+    viewBox='0 0 100 100'
+    preserveAspectRatio='xMinYMin meet'
+    className='MtgSymbol-C-Svg'
+  >
     <svg
       height={100}
       width={100}

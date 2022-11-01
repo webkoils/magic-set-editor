@@ -6,7 +6,6 @@
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
-    "./fonts/*": "./fonts/*",
     "./dist": "./dist/index.ts"
   },
   "files": [

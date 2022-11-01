@@ -1,7 +1,7 @@
 import React from 'react';
 import * as mtg from '@mse/types';
 import { FormattedText } from './FormattedText';
-import { templateClasses } from '../cardComponentStyles';
+import { templateClasses } from '../../CardTemplate/CardTemplate';
 import { CardTextInput } from '../../index';
 import { CardField } from '../../CardField/CardField';
 import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
@@ -10,18 +10,20 @@ export const TextBox: React.FC<mtg.MseCardComponentProps> = () => {
   const { card } = useCardContext();
 
   return (
-    <div className={templateClasses.textbox}>
+    <div className={templateClasses.textBox.root}>
       <CardFieldWithoutSymbols
         multiline
         id={'rulesText'}
-        className={templateClasses.rulestext}
+        className={templateClasses.textBox.rulesText}
       />
 
-      {card.flavorText && <div className={templateClasses.textdivider} />}
+      {card.flavorText && (
+        <div className={templateClasses.textBox.textBoxDivider} />
+      )}
       <CardFieldWithoutSymbols
         multiline
         id={'flavorText'}
-        className={templateClasses.flavortext}
+        className={templateClasses.textBox.flavorText}
       />
     </div>
   );

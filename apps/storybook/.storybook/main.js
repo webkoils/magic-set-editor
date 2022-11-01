@@ -7,7 +7,9 @@ module.exports = {
   stories: ['../stories/*.story.@(js|jsx|ts|tsx)'],
   staticDirs: [
     '../node_modules/@mse/assets/dist',
-    '../node_modules/@mse/assets/fonts',
+    '../node_modules/@mse/fonts.beleren',
+    '../node_modules/@mse/fonts.mplantin',
+
     '../node_modules/@mse/symbols',
   ],
   core: {
@@ -33,6 +35,7 @@ module.exports = {
       '@emotion/core': toPath('node_modules/@emotion/react'),
       'emotion-theming': toPath('node_modules/@emotion/react'),
     };
+
     /*  config.module.rules.push({
       test: /\.(png|svg|jpg)$/,
       use: [

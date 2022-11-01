@@ -1,5 +1,6 @@
-import createEmotion from '@emotion/css/create-instance';
-export const {
+//import createEmotion from '@emotion/css/create-instance';
+import { css } from '@emotion/react';
+/*export const {
   flush,
   hydrate,
   cx,
@@ -14,10 +15,14 @@ export const {
 } = createEmotion({
   // The key option is required when there will be multiple instances in a single app
   key: 'mse',
-});
+});*/
+
 import * as mtg from '@mse/types';
 
-export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
+export const cardComponentStyles: Record<
+  mtg.MseCardComponentType | string,
+  any
+> = {
   [mtg.MseCardComponentType.CARD]: {
     position: 'relative',
     width: 375,
@@ -71,16 +76,29 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     width: 310,
     position: 'absolute',
     top: 296,
-    paddingTop: '1%',
+    // paddingTop: '1%',
     left: 32,
     //right: ,
     height: 20,
     // background: 'rgba(0,255,0,.5)',
     zIndex: 2,
+    display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
-    fontFamily: 'beleren',
-    fontSize: 13 / 16 + 'em',
+    flexFlow: 'row nowrap',
+    '& > .MseTypeDivider': {
+      fontSize: 13 / 16 + 'em',
+      fontFamily: 'beleren',
+      marginLeft: '.5em',
+      marginRight: '.5em',
+    },
+    '& > .MseCardField': {
+      minWidth: '1em',
+      fontFamily: 'beleren',
+      fontSize: 13 / 16 + 'em',
+
+      //  background: 'green',
+    },
   },
   [mtg.MseCardComponentType.SETSYMBOL]: {},
 
@@ -137,16 +155,16 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     },
   },
   [mtg.MseCardComponentType.RULESTEXT]: {
-    display: 'block',
+    display: 'inline',
     fontFamily: 'mplantin',
-    marginBottom: '1.5%',
+    //marginBottom: '1.5%',
   },
   [mtg.MseCardComponentType.FLAVORTEXT]: {
-    display: 'block',
+    display: 'inline',
     fontFamily: 'mplantin',
     fontStyle: 'italic',
     fontWeight: 400,
-    marginBottom: '1.5%',
+    // marginBottom: '1.5%',
     minHeight: 1,
     minWidth: '1em',
   },
@@ -165,8 +183,12 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     flexFlow: 'column nowrap',
     padding: '0 4px 0 6px',
 
-    fontSize: 14 / 16 + 'em',
+    fontSize: 16 / 16 + 'em',
     lineHeight: 1.2,
+    '& .MseCardField': {
+      display: 'inline',
+      whiteSpace: 'pre-wrap',
+    },
   },
   [mtg.MseCardComponentType.TEXT_DIVIDER]: {
     display: 'block',
@@ -189,6 +211,11 @@ export const cardComponentStyles: Record<mtg.MseCardComponentType, any> = {
     objectFit: 'contain',
     backgroundSize: 'cover',
   },
+  Field: { display: 'inline' },
+  FieldLine: {
+    display: 'block',
+    marginBottom: '1.5%',
+  },
 } as const;
 
 const templateClassEntries = Object.keys(cardComponentStyles).map((k) => {
@@ -202,12 +229,14 @@ export const templateClasses: Record<
 
 export const templateClassParent = css({
   color: 'black',
+  lineHeight: 'normal',
+  letterSpacing: 0,
+  fontSize: 16,
   '& .MtgSymbol': {
     marginBottom: '-.15em',
   },
   ...Object.fromEntries(
     Object.entries(cardComponentStyles).map(([k, v]) => {
-      console.log('MseCard' + k);
       return ['& .MseCard' + k, v];
     })
   ),

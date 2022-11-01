@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4002",
+    "dev1": "next dev -p 4002",
     "build:web": "pnpm copy-assets && next build",
     "start": "next start",
     "lint": "TIMING=1 next lint",
@@ -22,7 +22,11 @@
     "@mui/material": "5.10.1",
     "@mui/styles": "^5.9.3",
     "@mse/sample-cards": "workspace:*",
-    "next": "12.2.3",
+    "@mse/symbols": "workspace:*",
+    "@mse/fonts.beleren": "workspace:*",
+    "@mse/fonts.mplantin": "workspace:*",
+    "@mse/templates.m15": "workspace:*",
+    "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

@@ -1,6 +1,6 @@
-import { Card, MseColor } from '@mse/types';
+import { MseCard, MseColor } from '@mse/types';
 import { CardGrid } from '@mse/ui.card';
-import '@mse/assets/fonts/beleren/index.css';
+import '@mse/fonts.beleren/index.css';
 import sampleCards from '@mse/sample-cards';
 
 export default {
@@ -23,7 +23,7 @@ export const CardStory = ({
   cards,
   columns,
 }: {
-  cards: Card[];
+  cards: MseCard[];
   columns: number;
 }) => <CardGrid cards={cards} columns={columns} />;
 CardStory.storyName = 'CardGrid';

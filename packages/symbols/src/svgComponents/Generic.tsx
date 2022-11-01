@@ -6,7 +6,12 @@ const GenericSvg: React.FC<
     'children'
   >
 > = memo(({ children, ...props }) => (
-  <svg viewBox='0 0 100 100' preserveAspectRatio='xMinYMin meet' {...props}>
+  <svg
+    viewBox='0 0 100 100'
+    preserveAspectRatio='xMinYMin meet'
+    {...props}
+    className='MtgSymbol-Generic-Svg'
+  >
     <svg
       height={100}
       width={100}

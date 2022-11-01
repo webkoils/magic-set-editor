@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --filter=@mse/editor",
+    "dev": "turbo run dev --filter=@mse/web",
     "test": "turbo run test",
     "build:web": "turbo run build:web",
     "storybook": "turbo run storybook",

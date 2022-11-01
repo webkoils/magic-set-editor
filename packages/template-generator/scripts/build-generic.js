@@ -38,6 +38,7 @@ const buildTemplate = async () => {
       )
     ),
   ];
+  console.log(templateFilenames);
   let imports = templateFilenames.map((fname) => {
     return `export {default as ${camelCase(
       fname.replace('.ts', '')

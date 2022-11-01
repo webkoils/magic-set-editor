@@ -11,7 +11,7 @@ export const sortColors = (colors: MseColor[]) => {
     .sort((a, b) => MSE_COLOR_SORT_ORDER[b] - MSE_COLOR_SORT_ORDER[a]);
 };
 export const isCardLand = (card: MseCard) => {
-  return Boolean(card.types.find((t) => t.toLowerCase() === 'land'));
+  return Boolean(card.types.toLowerCase().indexOf('land') >= 0);
 };
 
 export const isCardHybrid = (card: MseCard) => {
@@ -27,14 +27,14 @@ export const isCardHybrid = (card: MseCard) => {
   if (!isCardLand(card) && card.manaCost) {
     return (
       identityColors.length === 2 &&
-      Boolean(card.manaCost?.match(/\(P?[WUBRG]\/P?[WUBRG]\)/))
+      Boolean(card.manaCost?.match(/\{P?[WUBRG]\/P?[WUBRG]\}/))
     );
   } else {
     return identityColors.length === 2;
   }
 };
 
-const symbolRegex = /\(([A-Z0-9\/]+?)\)/g;
+const symbolRegex = /\{([A-Z0-9\/]+?)\}/g;
 
 export const findSymbolsInText = (text: string) => {
   let symbolMatches: RegExpExecArray | null = null;

@@ -1,8 +1,9 @@
-import { css } from '@emotion/css';
-import { FC, PropsWithChildren } from 'react';
-import { template as m15Template } from '../Card/cardComponentStyles';
+/** @jsxImportSource @emotion/react */
+
+import { FC, PropsWithChildren, useEffect } from 'react';
+import { templateClasses, templateCss } from '@mse/templates.m15';
 export const CardTemplateProvider: FC<PropsWithChildren<{
   template: string;
 }>> = ({ template, children }) => {
-  return <div className={m15Template.mainClass}>{children}</div>;
+  return <div className={templateClasses.root}>{children}</div>;
 };

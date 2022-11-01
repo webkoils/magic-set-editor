@@ -52,14 +52,14 @@ export const matchSymbol = (text: string, mapping: SymbolMapping) => {
 };
 
 export const parseTokens = (text: string) => {
-  let lines = text.replace(/<div>(.+?)<\/div>/gi, '$1').split(/<br\/?>|\n/);
+  let lines = text.replace(/<div>(.+?)<\/div>/gi, '$1').split(/<br ?\/?>|\n/);
   return lines.map((l, li) => {
     let line = l.slice();
     let tokens = [];
-    let match = line.match(/\(([A-Z0-9/]+?)\)/);
+    let match = line.match(/\{([A-Z0-9/]+?)\}/);
 
     while (line.length > 0 && match) {
-      console.log(/\(([A-Z0-9/]+?)\)/, match, li, line);
+      console.log(/\{([A-Z0-9/]+?)\}/, match, li, line);
 
       let symbolText = match[1];
 
@@ -88,7 +88,7 @@ export const parseTokens = (text: string) => {
         }
       }
       line = line.slice((match.index || 0) + match[0].length);
-      match = line.match(/\(([A-Z0-9/]+?)\)/);
+      match = line.match(/\{([A-Z0-9/]+?)\}/);
     }
     if (line.length) {
       tokens.push(

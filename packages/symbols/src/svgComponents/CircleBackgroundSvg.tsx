@@ -38,7 +38,9 @@ export const CircleBackgroundSvg: React.FC<
       cx={'50%'}
       cy={'50%'}
       r='50'
-      className='MtgSymbolCircleBackground'
+      className={
+        'MtgSymbolCircleBackground ' + 'MtgSymbolCircleBackground-' + color
+      }
       style={{
         overflow: 'visible',
         fill: getFillColor(color),

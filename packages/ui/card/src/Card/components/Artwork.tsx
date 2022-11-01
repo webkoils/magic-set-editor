@@ -1,13 +1,13 @@
 import React from 'react';
 import { useCardContext } from '../../index';
-import { templateClasses } from '../cardComponentStyles';
+import { templateClasses } from '../../CardTemplate/CardTemplate';
 
 export const Artwork: React.FC<{ src?: string }> = () => {
   const { card } = useCardContext();
 
   return (
     <div
-      className={templateClasses.artwork}
+      className={templateClasses.artwork.root}
       style={{
         backgroundImage: card.artworkSrc
           ? `url(${card.artworkSrc})`

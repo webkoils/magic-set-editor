@@ -1,7 +1,12 @@
 import React, { memo } from 'react';
 
 const TapSvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
-  <svg {...props} viewBox='0 0 100 100' preserveAspectRatio='xMinYMin meet'>
+  <svg
+    {...props}
+    viewBox='0 0 100 100'
+    preserveAspectRatio='xMinYMin meet'
+    className='MtgSymbol-Tap-Svg'
+  >
     <svg
       height={65}
       y={23}

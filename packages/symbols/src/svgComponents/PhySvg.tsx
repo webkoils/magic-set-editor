@@ -1,7 +1,12 @@
 import { memo } from 'react';
 
 const PhySvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
-  <svg {...props} viewBox='0 0 100 100' preserveAspectRatio='xMinYMin meet'>
+  <svg
+    {...props}
+    viewBox='0 0 100 100'
+    preserveAspectRatio='xMinYMin meet'
+    className='MtgSymbol-Phy-Svg'
+  >
     <svg
       height={100}
       width='100'

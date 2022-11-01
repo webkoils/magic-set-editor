@@ -6,6 +6,7 @@ const withTM = require('next-transpile-modules')([
   '@mse/types',
   '@mse/sample-cards',
   '@mse/assets',
+  '@mse/symbols',
   // '@mse/templates',
 ]);
 
