@@ -4,11 +4,14 @@ import {
   ThemeProvider,
 } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import React from 'react';
 
 const theme = responsiveFontSizes(
   createTheme({ palette: { mode: 'light' }, shape: { borderRadius: 20 } })
 );
-export const MseThemeProvider: React.FC = ({ children }) => {
+export const MseThemeProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
