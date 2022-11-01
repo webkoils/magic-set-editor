@@ -21,6 +21,8 @@
     "@mse/assets": "workspace:*",
     "@mui/material": "5.10.1",
     "@mse/symbols": "workspace:*",
+    "@mse/fonts.beleren": "workspace:*",
+    "@mse/fonts.mplantin": "workspace:*",
     "@mse/sample-cards": "workspace:*",
     "next": "13.0.0",
     "react": "18.2.0",

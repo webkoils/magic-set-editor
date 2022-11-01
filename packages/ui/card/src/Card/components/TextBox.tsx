@@ -1,9 +1,6 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { FormattedText } from './FormattedText';
 import { templateClasses } from '../../CardTemplate/CardTemplate';
-import { CardTextInput } from '../../index';
-import { CardField } from '../../CardField/CardField';
 import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
 import { useCardContext } from '../..';
 export const TextBox: React.FC<mtg.MseCardComponentProps> = () => {

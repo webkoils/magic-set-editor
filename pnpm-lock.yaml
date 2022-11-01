@@ -197,6 +197,8 @@ importers:
       '@emotion/styled': 11.10.4
       '@mse/assets': workspace:*
       '@mse/eslint-config': workspace:*
+      '@mse/fonts.beleren': workspace:*
+      '@mse/fonts.mplantin': workspace:*
       '@mse/sample-cards': workspace:*
       '@mse/symbols': workspace:*
       '@mse/tsconfig': workspace:*
@@ -216,6 +218,8 @@ importers:
       '@emotion/react': 11.10.4_ucuhn75irpsvlf3yq3xnib3jky
       '@emotion/styled': 11.10.4_w535q24fobqk4qid5wrv4dbx6u
       '@mse/assets': link:../../packages/assets
+      '@mse/fonts.beleren': link:../../packages/fonts/beleren
+      '@mse/fonts.mplantin': link:../../packages/fonts/mplantin
       '@mse/sample-cards': link:../../packages/sample-cards
       '@mse/symbols': link:../../packages/symbols
       '@mse/ui.card': link:../../packages/ui/card

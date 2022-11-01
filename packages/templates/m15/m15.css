@@ -3,7 +3,6 @@
   width: 375px;
   height: 523px;
   color: black;
-  font-size: 16px;
 }
 .MseM15 .MseBackground-Root {
   height: 100%;
@@ -19,10 +18,10 @@
 .MseM15 .MseTopLine-Root {
   width: auto;
   position: absolute;
-  top: 28px;
+  top: 30px;
   left: 32px;
   right: 26px;
-  height: 30px;
+  height: 23px;
   z-index: 2;
   display: flex;
   flex-flow: row nowrap;
@@ -31,8 +30,7 @@
   font-family: beleren;
 }
 .MseM15 .MseTopLine-Name {
-  margin-top: -0.25em;
-  font-size: 1.125em;
+  font-size: 1em;
   height: 100%;
   flex: 0 1 100%;
 }
@@ -43,14 +41,7 @@
   flex: 0 0 auto;
 }
 
-.MseM15 .MseCardFieldLine {
-  height: 100%;
-}
-
-.MseM15 .MseCardFieldLine.multiline {
-  height: auto;
-}
-.MseM15 .MseTopLine-Root .MtgSymbolCircleBackground {
+.MseM15 .MseTopLine-SymbolBackground {
   filter: drop-shadow(-2px 4px 2px rgb(0 0 0));
 }
 .MseM15 .MseTypeLine-Root {
@@ -58,10 +49,10 @@
   position: absolute;
   top: 296px;
   left: 32px;
-  height: 26px;
+  height: 20px;
   z-index: 2;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   flex-flow: row nowrap;
 }
@@ -71,13 +62,10 @@
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
-.MseM15 .MseTypeLine-Root .MseCardField {
+.MseM15 .MseTypeLine-Input {
   min-width: 1em;
   font-family: beleren;
   font-size: 0.8125em;
-}
-.MseM15 .MseTypeLine-Root .MseCardFieldLine {
-  height: 100%;
 }
 
 .MseM15 .MsePowerToughness-Root {
@@ -148,11 +136,6 @@
   font-size: 1em;
   line-height: 1.2;
 }
-
-.MseM15 .MseTextBox-Root .MtgSymbol {
-  margin-bottom: '-.15em';
-}
-
 .MseM15 .MseTextBox-RulesText {
   display: inline;
   font-family: mplantin;
@@ -180,8 +163,8 @@
     transparent 100%
   );
 }
-.MseM15 .MseTextBox-Root .MtgSymbolCircleBackground {
-  filter: 'none';
+.MseM15 .MseTextBox-SymbolBackground {
+  filter: drop-shadow(-2px 4px 2px rgb(0 0 0));
 }
 .MseM15 .MseTextBox-Input {
   display: inline;

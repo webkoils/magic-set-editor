@@ -66,7 +66,7 @@ export const cardStateReducer: React.Reducer<CardState, CardStateAction> = (
         future.push(prevCard);
         return {
           ...prevState,
-          card: prevCard,
+          card: prevCard.card,
           history: [history, future],
         };
       }
