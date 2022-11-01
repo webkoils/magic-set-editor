@@ -17,7 +17,6 @@ import React, {
   useState,
 } from 'react';
 import { diffChars } from 'diff';
-import { FormattedText } from '../Card/components/FormattedText';
 import { useCardContext } from '../CardProvider/CardProvider';
 import { renderToStaticMarkup } from 'react-dom/server';
 const inputClass = css({

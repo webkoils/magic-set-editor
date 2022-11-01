@@ -1,5 +1,4 @@
 export * from './Artwork';
-export * from './FormattedText';
 export * from './PT';
 export * from './TextBox';
 export * from './TopLine';
