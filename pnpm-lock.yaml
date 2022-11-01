@@ -201,6 +201,7 @@ importers:
       '@mse/fonts.mplantin': workspace:*
       '@mse/sample-cards': workspace:*
       '@mse/symbols': workspace:*
+      '@mse/templates.m15': workspace:*
       '@mse/tsconfig': workspace:*
       '@mse/types': workspace:*
       '@mse/ui.card': workspace:*
@@ -222,6 +223,7 @@ importers:
       '@mse/fonts.mplantin': link:../../packages/fonts/mplantin
       '@mse/sample-cards': link:../../packages/sample-cards
       '@mse/symbols': link:../../packages/symbols
+      '@mse/templates.m15': link:../../packages/templates/m15
       '@mse/ui.card': link:../../packages/ui/card
       '@mse/ui.core': link:../../packages/ui/core
       '@mse/utils.card': link:../../packages/utils/card

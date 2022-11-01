@@ -23,6 +23,7 @@
     "@mse/symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
     "@mse/fonts.mplantin": "workspace:*",
+    "@mse/templates.m15": "workspace:*",
     "@mse/sample-cards": "workspace:*",
     "next": "13.0.0",
     "react": "18.2.0",

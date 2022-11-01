@@ -10,7 +10,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --filter=@mse/web",
     "test": "turbo run test",
-    "build:web": "turbo run build:web",
+    "build:web": "turbo run build:web --filter=@mse/web",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
     "worker": "turbo run worker",
