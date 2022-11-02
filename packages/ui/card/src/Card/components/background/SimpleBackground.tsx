@@ -1,7 +1,7 @@
 import { MseColor } from '@mse/types';
 import { backgroundImageForColor } from './background-utils';
 import React from 'react';
-import { templateClasses } from '../../../CardTemplate/index';
+import { CardTemplateClassNames } from '@mse/templates.m15';
 export const SimpleBackground: React.FC<{
   color: MseColor | 'multi';
   isLand: boolean;
@@ -9,7 +9,7 @@ export const SimpleBackground: React.FC<{
 }> = ({ color, isLand, style }) => {
   return (
     <div
-      className={templateClasses.background.root}
+      className={CardTemplateClassNames.background}
       style={{
         padding: 0,
         background: backgroundImageForColor(color, isLand),

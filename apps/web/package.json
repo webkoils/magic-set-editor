@@ -3,28 +3,30 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm copy-assets && next dev -p 4000",
+    "dev": "next dev -p 4002",
     "build:web": "pnpm copy-assets && next build",
-    "start": "pnpm copy-assets && next start",
+    "start": "next start",
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
     "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
     "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true"
   },
   "dependencies": {
-    "@emotion/react": "11.10.0",
-    "@emotion/styled": "11.10.0",
+    "@mse/assets": "workspace:*",
     "@mse/ui.card": "workspace:*",
     "@mse/ui.core": "workspace:*",
     "@mse/utils.card": "workspace:*",
-    "@mui/icons-material": "5.10.9",
-    "@mse/assets": "workspace:*",
+    "@mui/icons-material": "5.8.4",
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
     "@mui/material": "5.10.1",
+    "@mui/styles": "^5.9.3",
+    "@mse/sample-cards": "workspace:*",
     "@mse/symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
     "@mse/fonts.mplantin": "workspace:*",
     "@mse/templates.m15": "workspace:*",
-    "@mse/sample-cards": "workspace:*",
+    "@mse/symbol-input": "workspace:*",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -32,13 +34,15 @@
   "devDependencies": {
     "@mse/eslint-config": "workspace:*",
     "@mse/tsconfig": "workspace:*",
+    "@babel/core": "^7.18.13",
     "@mse/types": "workspace:*",
     "eslint": "8.13.0",
-    "@babel/core": "^7.18.13",
-    "next-transpile-modules": "9.1.0",
-    "typescript": "^4.7.4"
+    "next-transpile-modules": "10.0.0",
+    "next-pwa": "5.5.4",
+    "typescript": "^4.7.4",
+    "babel-loader": "8.2.5"
   },
   "resolutions": {
-    "react": "18.0.17"
+    "react": "18.2.0"
   }
 }

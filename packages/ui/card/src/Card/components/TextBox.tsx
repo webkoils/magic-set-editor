@@ -1,27 +1,33 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { templateClasses } from '../../CardTemplate/CardTemplate';
-import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
+import {
+  CardStateClassNames,
+  CardTemplateClassNames as templateClasses,
+} from '@mse/templates.m15';
+import { CardField } from '../../CardField/CardField';
 import { useCardContext } from '../..';
+import classNames from 'classnames';
 export const TextBox: React.FC<mtg.MseCardComponentProps> = () => {
   const { card } = useCardContext();
 
   return (
-    <div className={templateClasses.textBox.root}>
-      <CardFieldWithoutSymbols
-        multiline
-        id={'rulesText'}
-        className={templateClasses.textBox.rulesText}
-      />
+    <div className={templateClasses.textBox}>
+      <div
+        className={classNames(templateClasses.rulesText, {
+          [CardStateClassNames.empty]: !card.rulesText,
+        })}
+      >
+        <CardField multiline id={'rulesText'} />
+      </div>
+      {card.flavorText && <div className={templateClasses.textBoxDivider} />}
 
-      {card.flavorText && (
-        <div className={templateClasses.textBox.textBoxDivider} />
-      )}
-      <CardFieldWithoutSymbols
-        multiline
-        id={'flavorText'}
-        className={templateClasses.textBox.flavorText}
-      />
+      <div
+        className={classNames(templateClasses.flavorText, {
+          [CardStateClassNames.empty]: !card.flavorText,
+        })}
+      >
+        <CardField multiline id={'flavorText'} />
+      </div>
     </div>
   );
 };

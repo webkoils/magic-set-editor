@@ -7,9 +7,13 @@ const withTM = require('next-transpile-modules')([
   '@mse/sample-cards',
   '@mse/assets',
   '@mse/symbols',
-  // '@mse/templates',
+  '@mse/templates.m15',
+  '@mse/symbol-input',
 ]);
-
+// const withPWA = require('next-pwa');
+/**
+ * @type {import('next').NextConfig}
+ */
 module.exports = withTM({
-  reactStrictMode: false,
+  reactStrictMode: true,
 });

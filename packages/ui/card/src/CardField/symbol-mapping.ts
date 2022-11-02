@@ -1,12 +1,5 @@
 import { MtgSymbol } from '@mse/symbols';
-import type { SymbolDelimeters, SymbolMapping } from '@mse/symbol-input';
-const manaSymbolMapping: SymbolMapping = [
-  { code: '[A-Z0-9/]+?', component: MtgSymbol },
-];
-const manaSymbolDelimeters: SymbolDelimeters = [
-  { code: '(', start: true },
-  { code: ')', end: true },
-];
+import type { SymbolMapping } from '@mse/symbol-input';
 
 const clamp = (val: number, min: number, max: number) => {
   return Math.min(max, Math.max(min, val));

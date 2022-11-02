@@ -6,3 +6,4 @@ package-lock.json
 public
 src/generated
 storybook-static
+*.min.css

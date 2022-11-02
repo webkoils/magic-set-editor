@@ -4,7 +4,7 @@ const sampleCards: MseCard[] = [
   {
     id: '1',
     name: 'Doomed Traveler',
-    manaCost: '{W}',
+    manaCost: '(W)',
     num: 1,
     types: 'Creature',
     subtypes: 'Human Soldier',
@@ -22,7 +22,7 @@ const sampleCards: MseCard[] = [
   {
     id: '2',
     name: 'Explore',
-    manaCost: '{1}{G/W}',
+    manaCost: '(1)(G/W)',
     num: 2,
     types: 'Sorcery',
     artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
@@ -39,8 +39,51 @@ const sampleCards: MseCard[] = [
     rulesText: [
       'CARDNAME enters the battlefield tapped',
       "When CARDNAME enters the battlefield, return a land you control to its owner's hand.",
-      '{T}: Add {W}{G}',
+      '(T): Add (W)(G)',
     ].join('\n'),
+    template: 'm15',
+  },
+  {
+    id: '4',
+    name: 'Big Green Boy ',
+    manaCost: '(G)(G)(G)(G)(G)',
+    num: 4,
+    types: 'Legendary Creature',
+    subtypes: 'Djinn',
+    power: 6,
+    artworkSrc: 'https://www.mtgnexus.com/img/gallery/2930-erhnam-djinn.jpg',
+    toughness: 9,
+    rulesText:
+      "Trample\nWhen CARDNAME enters the battlefield, return target creature to its owner's hand.\n(G),(T): Draw a card.",
+
+    flavorText: "Don't mess with the big boy",
+    template: 'm15',
+  },
+  {
+    id: '5',
+    name: 'Lightning!',
+    manaCost: '(R)',
+    num: 5,
+    types: 'Instant',
+    subtypes: '',
+    artworkSrc: '',
+    rulesText: 'CARDNAME deals 10 damage to any target.',
+
+    flavorText: 'ZAAAAAAAP',
+    template: 'm15',
+  },
+  {
+    id: '6',
+    name: 'Nexus Rider',
+    manaCost: '(2)(PW)(PU)(PB)(PR)(PG)',
+    num: 6,
+    types: 'Legendary Creature',
+    subtypes: 'Phyrexian Horror',
+    artworkSrc: '',
+    rulesText:
+      'Indestructible\nWhen CARDNAME enters the battlefield, destroy all creatures.',
+
+    flavorText: 'Uh oh.',
     template: 'm15',
   },
 ];

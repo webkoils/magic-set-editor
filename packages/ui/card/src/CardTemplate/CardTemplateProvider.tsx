@@ -1,7 +1,8 @@
-/** @jsxImportSource @emotion/react */
-
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { templateClasses, templateCss } from '@mse/templates.m15';
+import {
+  CardTemplateClassNames as templateClasses,
+  templateCss,
+} from '@mse/templates.m15';
 export const CardTemplateProvider: FC<PropsWithChildren<{
   template: string;
 }>> = ({ template, children }) => {

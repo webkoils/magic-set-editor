@@ -1,11 +1,12 @@
 import { memo } from 'react';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 
 const PhySvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
   <svg
     {...props}
     viewBox='0 0 100 100'
     preserveAspectRatio='xMinYMin meet'
-    className='MtgSymbol-Phy-Svg'
+    className={mtgSymbolClasses.mana.root + ' ' + mtgSymbolClasses.mana.Phy}
   >
     <svg
       height={100}

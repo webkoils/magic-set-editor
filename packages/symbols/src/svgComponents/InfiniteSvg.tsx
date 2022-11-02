@@ -1,11 +1,12 @@
 import { memo } from 'react';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 
 const InfiniteSvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
   <svg
     {...props}
     viewBox='0 0 100 100'
     preserveAspectRatio='xMinYMin meet'
-    className='MtgSymbol-Inf-Svg'
+    className={mtgSymbolClasses.mana.root + ' ' + mtgSymbolClasses.mana.Inf}
   >
     <svg
       width={100}

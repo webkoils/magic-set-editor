@@ -27,14 +27,14 @@ export const isCardHybrid = (card: MseCard) => {
   if (!isCardLand(card) && card.manaCost) {
     return (
       identityColors.length === 2 &&
-      Boolean(card.manaCost?.match(/\{P?[WUBRG]\/P?[WUBRG]\}/))
+      Boolean(card.manaCost?.match(/\(P?[WUBRG]\/P?[WUBRG]\)/))
     );
   } else {
     return identityColors.length === 2;
   }
 };
 
-const symbolRegex = /\{([A-Z0-9\/]+?)\}/g;
+const symbolRegex = /\(([A-Z0-9\/]+?)\)/g;
 
 export const findSymbolsInText = (text: string) => {
   let symbolMatches: RegExpExecArray | null = null;

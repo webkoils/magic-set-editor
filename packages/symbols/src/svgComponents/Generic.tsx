@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 
 const GenericSvg: React.FC<
   { children?: string | number } & Omit<
@@ -10,7 +11,7 @@ const GenericSvg: React.FC<
     viewBox='0 0 100 100'
     preserveAspectRatio='xMinYMin meet'
     {...props}
-    className='MtgSymbol-Generic-Svg'
+    className={mtgSymbolClasses.mana.root + ' ' + mtgSymbolClasses.mana.generic}
   >
     <svg
       height={100}

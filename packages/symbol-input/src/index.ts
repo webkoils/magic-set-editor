@@ -1,3 +1,3 @@
 export * from './SymbolInput';
-export * from './symbolInputState';
-export * from './symbolInputStyles';
+export * from './symbolInputClasses';
+export * from './symbolMapping';

@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import classNames from 'classnames';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 import { useMtgSymbol } from './MtgSymbolProvider';
 const dimensions = [
   [
@@ -73,17 +74,40 @@ export const MtgSymbol: FC<
     if (!dimensionsForSymbolSplit) {
       return { className: '', childSymbols: [] };
     }
-    const classNameList: string[] = ['MtgSymbol'];
+    const classNameList: string[] = [mtgSymbolClasses.root];
     if (splitChildren.length > 1) {
-      classNameList.push('MtgSymbol-split');
-      classNameList.push('MtgSymbol-split-' + splitChildren.length);
+      classNameList.push(mtgSymbolClasses.split.root);
+
+      if (splitChildren.length === 2) {
+        classNameList.push(mtgSymbolClasses.split.half);
+      } else if (splitChildren.length === 3) {
+        classNameList.push(mtgSymbolClasses.split.third);
+      }
+    } else {
+      classNameList.push(mtgSymbolClasses.whole.root);
     }
     const symbols = splitChildren.map((sym, i, arr) => {
+      let childClassName: string[] = [];
+      if (splitChildren.length === 2) {
+        if (i === 0) {
+          childClassName.push(mtgSymbolClasses.split['half1_2']);
+        } else if (i === 1) {
+          childClassName.push(mtgSymbolClasses.split['half2_2']);
+        }
+      } else if (splitChildren.length === 3) {
+        if (i === 0) {
+          childClassName.push(mtgSymbolClasses.split['third1_3']);
+        } else if (i === 1) {
+          childClassName.push(mtgSymbolClasses.split['third2_3']);
+        } else if (i === 2) {
+          childClassName.push(mtgSymbolClasses.split['third3_3']);
+        }
+      }
+
       let symbol: keyof typeof ManaSymbols.Symbols = 'Generic';
       let backgroundColor: MseColor = MseColor.COLORLESS;
 
       const dimensionsForSymbol = dimensionsForSymbolSplit[i];
-      let childClassName = 'MtgSymbol';
       if (isColor(sym)) {
         backgroundColor = sym;
         symbol = sym;
@@ -98,14 +122,6 @@ export const MtgSymbol: FC<
         symbol = 'T';
         backgroundColor = MseColor.COLORLESS;
       }
-      childClassName = classNames(
-        'MtgSymbol-bg-' + backgroundColor,
-        'MtgSymbol-' + symbol
-      );
-      classNameList.push(
-        'MtgSymbol-bg-' + backgroundColor,
-        'MtgSymbol-' + symbol
-      );
 
       const SymbolComponent = ManaSymbols.Symbols[symbol];
       return [
@@ -113,7 +129,7 @@ export const MtgSymbol: FC<
           key={backgroundColor + sym + i}
           x='0'
           y='0'
-          className={childClassName}
+          className={classNames(childClassName)}
           style={{ overflow: 'visible' }}
           height='100%'
           width='100%'
@@ -149,10 +165,12 @@ export const MtgSymbol: FC<
     <svg
       className={classNames(className, props.className)}
       style={{
-        fontSize: '1em',
         height: '1em',
         width: '1em',
         overflow: 'visible',
+        marginLeft: '.05em',
+        marginRight: '.05em',
+        marginBottom: '-.125em',
       }}
       {...props}
       viewBox='0 0 100 100'

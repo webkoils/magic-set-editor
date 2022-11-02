@@ -1,10 +1,11 @@
 import { memo } from 'react';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 const GSvg: React.FC<JSX.IntrinsicElements['svg']> = memo((props) => (
   <svg
     {...props}
     viewBox='0 0 100 100'
     preserveAspectRatio='xMinYMin meet'
-    className='MtgSymbol-G-Svg'
+    className={mtgSymbolClasses.mana.root + ' ' + mtgSymbolClasses.mana.G}
   >
     <svg
       height={100}

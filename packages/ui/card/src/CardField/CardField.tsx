@@ -1,39 +1,88 @@
-import { InputState, SymbolInput } from '@mse/symbol-input';
-import { manaSymbolDelimeters, manaSymbolMapping } from './symbol-mapping';
+import {
+  SymbolInput,
+  SymbolInputToken,
+  SymbolMapping,
+} from '@mse/symbol-input';
+import { MtgSymbol } from '@mse/symbols';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { useCardContext } from '../index';
 
+const manaSymbolMapping: SymbolMapping = [
+  {
+    match: '(\\bCARDNAME\\b)',
+    extract: '\\bCARDNAME\\b',
+  },
+  {
+    match: '\\(([A-Z0-9/]+?)\\)',
+    extract: '[A-Z0-9/]+?',
+  },
+];
+
 export const CardField: React.FC<
   {
-    id: 'name' | 'manaCost' | 'rulesText' | 'flavorText';
+    id:
+      | 'name'
+      | 'manaCost'
+      | 'rulesText'
+      | 'flavorText'
+      | 'power'
+      | 'toughness'
+      | 'supertype'
+      | 'subtypes'
+      | 'types';
     multiline?: boolean;
+    readonly?: boolean;
   } & Omit<React.ComponentPropsWithoutRef<'div'>, 'id' | 'onChange'>
-> = ({ id, multiline, ...props }) => {
+> = ({ id, multiline, readonly, ...props }) => {
   const { card, update } = useCardContext();
-  const value = useMemo(() => card[id], [card, id]);
+  const value = useMemo(() => (card[id] ? String(card[id]) : ''), [card, id]);
   const onChange = useCallback(
     (newValue: string) => {
       update({ [id]: newValue });
     },
     [update]
   );
-  const options: Partial<InputState> = useMemo(
-    () => ({
-      symbols: [
-        { code: 'CARDNAME', component: () => <>{card.name}</> },
-        ...manaSymbolMapping,
-      ],
-      delimeters: manaSymbolDelimeters,
-      maxLines: multiline ? 10 : 1,
-    }),
-    [multiline, card?.name]
+  const renderToken = useCallback(
+    (token: SymbolInputToken) => {
+      switch (token.type) {
+        case 'string': {
+          return (
+            <span
+              key={token.key}
+              dangerouslySetInnerHTML={{
+                __html: token.raw,
+              }}
+            ></span>
+          );
+        }
+        case 'symbol': {
+          if (token.raw === 'CARDNAME') {
+            return (
+              <span
+                key={token.key}
+                dangerouslySetInnerHTML={{
+                  __html: card.name,
+                }}
+              ></span>
+            );
+          } else {
+            return <MtgSymbol key={token.key}>{token.value || ''}</MtgSymbol>;
+          }
+        }
+      }
+    },
+    [card]
   );
+
   return (
     <SymbolInput
       {...props}
       value={value}
-      options={options}
+      symbols={manaSymbolMapping}
+      renderToken={renderToken}
       onChange={onChange}
+      readonly={readonly}
+      multiline={multiline}
     />
   );
 };

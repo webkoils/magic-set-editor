@@ -1,9 +1,4 @@
-import { InputState, SymbolInput } from '@mse/symbol-input';
-import {
-  manaSymbolDelimeters,
-  manaSymbolMapping,
-  parseTokens,
-} from './symbol-mapping';
+import { parseTokens } from './symbol-mapping';
 import React, {
   KeyboardEvent,
   useCallback,
@@ -13,23 +8,12 @@ import React, {
   useState,
 } from 'react';
 import { useCardContext } from '../index';
-import {
-  renderToStaticMarkup,
-  renderToStaticNodeStream,
-} from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import ReactContentEditable, {
   ContentEditableEvent,
 } from 'react-contenteditable';
 import classNames from 'classnames';
 import { useIsMounted } from '../hooks/useIsMounted';
-function streamToString(stream: NodeJS.ReadableStream) {
-  const chunks: Buffer[] = [];
-  return new Promise((resolve, reject) => {
-    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
-    stream.on('error', (err) => reject(err));
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-  });
-}
 
 export const decodeEntities = (str: string) => {
   if (str && typeof str === 'string') {

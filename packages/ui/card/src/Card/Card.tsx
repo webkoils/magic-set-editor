@@ -11,7 +11,8 @@ import {
 } from './components';
 
 import { CardProvider } from '../CardProvider';
-import { CardTemplateProvider, templateClasses } from '../CardTemplate';
+import { CardTemplateProvider } from '../CardTemplate';
+import { CardTemplateClassNames } from '@mse/templates.m15';
 export const Card: React.FC<Required<mtg.MseCardComponentProps>> = ({
   card,
 }) => {
@@ -26,7 +27,7 @@ export const Card: React.FC<Required<mtg.MseCardComponentProps>> = ({
           preserveAspectRatio='xMinYMin meet'
         >
           <foreignObject x={0} height={523} width={375} y={0}>
-            <div className={templateClasses.card.root}>
+            <div className={CardTemplateClassNames.card}>
               <Background />
               <TopLine />
               <TypeLine />

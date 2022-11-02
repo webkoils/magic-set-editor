@@ -1,24 +1,24 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { templateClasses } from '../../CardTemplate/CardTemplate';
+import { CardTemplateClassNames as templateClasses } from '@mse/templates.m15';
 import { useCardContext } from '../../index';
-import { CardFieldWithoutSymbols } from '../../CardField/CardFieldNoSymbols';
+import { CardField } from '../../CardField/CardField';
 
 export const TypeLine: React.FC<mtg.MseCardComponentProps> = ({}) => {
   const { card } = useCardContext();
 
   return (
-    <div className={templateClasses.typeLine.root}>
-      <CardFieldWithoutSymbols
+    <div className={templateClasses.typeLine}>
+      <CardField
         id='types'
-        className={templateClasses.typeLine.input}
+        // className={templateClasses.typeLine}
       />
-      <div className={templateClasses.typeLine.divider}>
+      <div className={templateClasses.typeLineDivider}>
         {card.subtypes?.length ? '-' : ''}
       </div>
-      <CardFieldWithoutSymbols
+      <CardField
         id='subtypes'
-        className={templateClasses.typeLine.input}
+        // className={templateClasses.typeLine.input}
       />
     </div>
   );

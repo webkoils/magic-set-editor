@@ -1,6 +1,6 @@
 {
   "extends": "@mse/tsconfig/nextjs.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/renderer.js"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./src"

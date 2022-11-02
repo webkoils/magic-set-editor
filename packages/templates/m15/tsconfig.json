@@ -1,0 +1,12 @@
+{
+  "extends": "@mse/tsconfig/base.json",
+  "include": ["**/*.ts"],
+  "compilerOptions": {},
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ]
+}

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import * as mse from '@mse/types';
+import { mtgSymbolClasses } from '../mtgSymbolClasses';
 
 const getFillColor = (color: mse.MseColor) => {
   switch (color) {
@@ -39,7 +40,9 @@ export const CircleBackgroundSvg: React.FC<
       cy={'50%'}
       r='50'
       className={
-        'MtgSymbolCircleBackground ' + 'MtgSymbolCircleBackground-' + color
+        mtgSymbolClasses.background.root +
+        ' ' +
+        mtgSymbolClasses.background[color]
       }
       style={{
         overflow: 'visible',
