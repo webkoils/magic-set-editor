@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
-  "peerDependencies": {
-    "react": ">=16.8",
-    "react-dom": ">=16.8",
-    "typescript": ">4.8"
+  "dependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "typescript": "*"
   }
 }
