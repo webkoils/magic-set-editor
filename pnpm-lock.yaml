@@ -252,6 +252,9 @@ importers:
       '@mse/types': link:../types
       typescript: 4.7.4
 
+  packages/ssr-helpers:
+    specifiers: {}
+
   packages/symbol-input:
     specifiers:
       '@mse/eslint-config': workspace:*
@@ -270,7 +273,7 @@ importers:
       tsconfig-paths-webpack-plugin: ^3.5.2
       typescript: ^4.7.4
     dependencies:
-      '@mse/ssr-helpers': link:../utils/ssr-helpers
+      '@mse/ssr-helpers': link:../ssr-helpers
       classnames: 2.3.2
       react: 18.2.0
       react-contenteditable: 3.3.6_react@18.2.0
@@ -516,9 +519,6 @@ importers:
       '@mse/tsconfig': link:../../tsconfig
       '@mse/types': link:../../types
       typescript: 4.8.4
-
-  packages/utils/ssr-helpers:
-    specifiers: {}
 
 packages:
 
