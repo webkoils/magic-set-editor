@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useRef } from 'react';
-import { CardTemplate } from './cardTemplate';
+import { CardTemplate } from './cardTemplateClasses';
 import { useState, useMemo } from 'react';
 import { CacheProvider, css, SerializedStyles } from '@emotion/react';
 import { createTemplate } from './utils';

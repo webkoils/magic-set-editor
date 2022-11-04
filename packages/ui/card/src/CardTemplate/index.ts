@@ -1,2 +1,2 @@
-export * from './cardTemplate';
+export * from './cardTemplateClasses';
 export * from './CardTemplateProvider';

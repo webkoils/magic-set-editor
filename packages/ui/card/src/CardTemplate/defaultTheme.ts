@@ -1,5 +1,5 @@
 import { mtgSymbolShadow } from '@mse/symbols';
-import { CardTemplate } from './cardTemplate';
+import { CardTemplate } from './cardTemplateClasses';
 
 const defaultTemplate: CardTemplate = {
   id: 'm15',

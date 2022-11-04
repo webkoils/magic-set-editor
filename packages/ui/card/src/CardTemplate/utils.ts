@@ -5,7 +5,7 @@ import templateClasses, {
   isMtgSymbolClass,
   isSymbolInputClass,
   isCardStateClass,
-} from './cardTemplate';
+} from './cardTemplateClasses';
 import defaultTemplate from './defaultTheme';
 import merge from 'ts-deepmerge';
 import { CSSInterpolation, CSSObject } from '@emotion/css';
