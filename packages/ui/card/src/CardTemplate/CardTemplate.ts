@@ -1,35 +1,80 @@
+import {
+  mtgSymbolClasses,
+  MtgSymbolClasses,
+  isMtgSymbolClass,
+} from '@mse/symbols/src/mtgSymbolClasses';
+import {
+  symbolInputClasses,
+  SymbolInputClasses,
+  isSymbolInputClass,
+} from '@mse/symbol-input/src/symbolInputClasses';
+
+import type { CSSObject } from '@emotion/react';
+const cardTemplateClasses = {
+  root: 'MseCard',
+  background: 'MseCardBackground',
+  topLine: 'MseCardTopLine',
+  name: 'MseCardName',
+  cost: 'MseCardCost',
+  typeLine: 'MseCardTypeLine',
+  typeLineDivider: 'MseCardTypeLineDivider',
+  setSymbol: 'MseCardSetSymbol',
+  pt: 'MseCardPowerToughness',
+  ptLabel: 'MseCardPowerToughnessLabel',
+  ptDivider: 'MseCardPowerToughnessDivider',
+  power: 'MseCardPower',
+  toughness: 'MseCardToughness',
+  artwork: 'MseCardArtwork',
+  textBox: 'MseCardTextBox',
+
+  rulesText: 'MseCardRulesText',
+  flavorText: 'MseCardFlavorText',
+  textBoxDivider: 'MseCardTextBoxDivider',
+};
+const cardStateClasses = {
+  focused: 'MseCard-focused',
+  disabled: 'MseCard-disabled',
+  empty: 'MseCard-empty',
+};
+
+export type CardTemplateEntry = CSSObject & {
+  symbol?: Partial<Record<keyof MtgSymbolClasses, CSSObject>>;
+  input?: Partial<Record<keyof SymbolInputClasses, CSSObject>>;
+  state?: Partial<Record<keyof typeof cardStateClasses, CSSObject>>;
+};
+
+export type CardTemplate = {
+  id: string;
+  components: Partial<
+    Record<keyof typeof cardTemplateClasses, CardTemplateEntry>
+  >;
+};
+
+const isCardTemplateClass = (
+  key: string
+): key is keyof typeof cardTemplateClasses => {
+  return (
+    typeof (cardTemplateClasses as Record<string, any>)[key] !== 'undefined'
+  );
+};
+
+const isCardStateClass = (
+  key: string
+): key is keyof typeof cardStateClasses => {
+  return typeof (cardStateClasses as Record<string, any>)[key] !== 'undefined';
+};
+
+export {
+  isSymbolInputClass,
+  isMtgSymbolClass,
+  isCardTemplateClass,
+  isCardStateClass,
+};
+
 export const templateClasses = {
-  card: { root: 'MseCard-Root' },
-  background: { root: 'MseBackground-Root' },
-  topLine: {
-    root: 'MseTopLine-Root',
-    name: 'MseTopLine-Name',
-    cost: 'MseTopLine-Cost',
-  },
-  typeLine: {
-    root: 'MseTypeLine-Root',
-    divider: 'MseTypeLine-Divider',
-    input: 'MseTypeLine-Input',
-    setSymbol: 'MseTypeLine-SetSymbol',
-  },
-  powerToughness: {
-    root: 'MsePowerToughness-Root',
-    label: 'MsePowerToughness-Label',
-    divider: 'MsePowerToughness-Divider',
-    power: 'MsePowerToughness-Power',
-    toughness: 'MsePowerToughness-Toughness',
-  },
-  textBox: {
-    root: 'MseTextBox-Root',
-    rulesText: 'MseTextBox-RulesText',
-    flavorText: 'MseTextBox-FlavorText',
-    textBoxDivider: 'MseTextBox-TextBoxDivider',
-  },
-  artwork: { root: 'MseArtwork-Root' },
-  input: {
-    root: 'MseCardField',
-    focused: 'MseCardField-Focused',
-    readonly: 'MseCardField-Readonly',
-  },
-  symbol: { root: 'MtgSymbol', background: 'MtgSymbolCircleBackground' },
-} as const;
+  card: cardTemplateClasses,
+  state: cardStateClasses,
+  input: symbolInputClasses,
+  symbol: mtgSymbolClasses,
+};
+export default templateClasses;

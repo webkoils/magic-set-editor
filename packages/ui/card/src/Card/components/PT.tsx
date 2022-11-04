@@ -2,7 +2,7 @@ import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
 import React from 'react';
 import * as mtg from '@mse/types';
 import { getCardIdentity, isCardLand, sortColors } from '@mse/utils.card';
-import { CardTemplateClassNames as templateClasses } from '@mse/templates.m15';
+import { templateClasses } from '../../CardTemplate';
 import { useCardContext } from '../../index';
 import { CardField } from '../../CardField/CardField';
 
@@ -40,13 +40,16 @@ export const PT: React.FC<mtg.MseCardComponentProps> = () => {
   return typeof card.power !== 'undefined' &&
     typeof card.toughness !== 'undefined' ? (
     <div
-      className={templateClasses.pt}
+      className={templateClasses.card.pt}
       style={{ backgroundImage: `url(${ptBackgroundImage(card)})` }}
     >
-      <div className={templateClasses.ptLabel}>
-        <CardField id={'power'} className={templateClasses.power} />
-        <div className={templateClasses.ptDivider}>/</div>
-        <CardField id={'toughness'} className={templateClasses.toughness} />
+      <div className={templateClasses.card.ptLabel}>
+        <CardField id={'power'} className={templateClasses.card.power} />
+        <div className={templateClasses.card.ptDivider}>/</div>
+        <CardField
+          id={'toughness'}
+          className={templateClasses.card.toughness}
+        />
       </div>
     </div>
   ) : null;

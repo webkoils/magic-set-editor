@@ -1,12 +1,4 @@
-import {
-  Container,
-  Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { CardGrid } from '@mse/ui.card';
 import sampleCards from '@mse/sample-cards';
 import { MtgSymbol } from '@mse/symbols';
@@ -16,6 +8,7 @@ const symbolKeys = [
   'B',
   'R',
   'G',
+  'C',
   'PW',
   'PU',
   'PB',
@@ -37,7 +30,7 @@ export default function HomePage() {
       <Grid container spacing={5}>
         <Grid item xs={12}>
           <Typography variant='h4'>Cheatsheet:</Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} style={{ fontSize: '1.4rem' }}>
             {symbolKeys.map((k) => (
               <Grid key={k} item>
                 <div

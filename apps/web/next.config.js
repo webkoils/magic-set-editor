@@ -7,7 +7,6 @@ const withTM = require('next-transpile-modules')([
   '@mse/sample-cards',
   '@mse/assets',
   '@mse/symbols',
-  '@mse/templates.m15',
   '@mse/symbol-input',
 ]);
 // const withPWA = require('next-pwa');

@@ -1,14 +1,14 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { CardTemplateClassNames as templateClasses } from '@mse/templates.m15';
+import { templateClasses } from '../../CardTemplate';
 import { CardField } from '../../CardField/CardField';
 
 export const TopLine: React.FC<mtg.MseCardComponentProps> = () => {
   return (
-    <div className={templateClasses.topLine}>
-      <CardField id={'name'} className={templateClasses.name} />
+    <div className={templateClasses.card.topLine}>
+      <CardField id={'name'} className={templateClasses.card.name} />
 
-      <CardField id={'manaCost'} className={templateClasses.cost} />
+      <CardField id={'manaCost'} className={templateClasses.card.cost} />
     </div>
   );
 };

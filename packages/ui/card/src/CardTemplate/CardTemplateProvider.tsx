@@ -1,10 +1,17 @@
+import { CacheProvider, Global } from '@emotion/react';
+import classNames from 'classnames';
 import { FC, PropsWithChildren, useEffect } from 'react';
-import {
-  CardTemplateClassNames as templateClasses,
-  templateCss,
-} from '@mse/templates.m15';
+import { useTemplate, mseCache } from './GlobalTemplateProvider';
+
 export const CardTemplateProvider: FC<PropsWithChildren<{
-  template: string;
-}>> = ({ template, children }) => {
-  return <div className={templateClasses.root}>{children}</div>;
+  templateId: string;
+}>> = ({ templateId, children }) => {
+  const template = useTemplate(templateId);
+
+  return (
+    <>
+      <Global styles={{ [`.${template.rootClassName}`]: template.styles }} />
+      <div className={template.rootClassName}>{children}</div>
+    </>
+  );
 };

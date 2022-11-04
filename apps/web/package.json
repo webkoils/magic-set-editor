@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4002",
-    "build:web": "pnpm copy-assets && next build",
+    "build": "pnpm copy-assets && next build",
     "start": "next start",
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
@@ -25,7 +25,6 @@
     "@mse/symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
     "@mse/fonts.mplantin": "workspace:*",
-    "@mse/templates.m15": "workspace:*",
     "@mse/symbol-input": "workspace:*",
     "next": "13.0.0",
     "react": "18.2.0",
