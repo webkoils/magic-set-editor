@@ -13,26 +13,16 @@ const GenericSvg: React.FC<
     {...props}
     className={mtgSymbolClasses.mana.root + ' ' + mtgSymbolClasses.mana.generic}
   >
-    <foreignObject
-      viewBox='0 0 100 100'
-      x={0}
-      y={0}
-      height={'100'}
-      width={'100'}
-      style={{}}
-    >
-      <span
+    <g transform='translate(0 0)'>
+      <text
+        x='50'
+        y='50'
+        textAnchor='middle'
+        dominantBaseline={'central'}
+        textLength={100}
         style={{
           fontFamily: 'mplantin',
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50px,-58px)',
-          width: '100%',
-          textAlign: 'center',
-          color: '#0d0f0f',
-          maxHeight: 100,
-          minHeight: 100,
+          fill: '#0d0f0f',
           fontSize:
             typeof children !== 'undefined'
               ? `${120 - String(children).length * 30}px`
@@ -40,8 +30,8 @@ const GenericSvg: React.FC<
         }}
       >
         {children}
-      </span>
-    </foreignObject>
+      </text>
+    </g>
   </svg>
 ));
 export default GenericSvg;

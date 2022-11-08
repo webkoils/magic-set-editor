@@ -1,26 +1,53 @@
-import React, { useCallback, useContext, useRef } from 'react';
-import { CardTemplate } from './cardTemplateClasses';
-import { useState, useMemo } from 'react';
-import { CacheProvider, css, SerializedStyles } from '@emotion/react';
-import { createTemplate } from './utils';
-import defaultTemplate from './defaultTheme';
+import { useMemo } from 'react';
+import {
+  DefaultTemplate,
+  createTemplate,
+  TemplateMapping,
+} from '@mse/templates.base';
 import createCache from '@emotion/cache';
-import { CSSObject } from '@emotion/css';
+import { Global } from '@emotion/react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  activeGlobalTemplatesState,
+  activeTemplateState,
+} from './cardTemplates.state';
+import { useEffect } from 'react';
+import { activeTemplatesState } from './cardTemplates.state';
 
 export const mseCache = createCache({
   key: 'mse',
 });
-const DefaultTemplate = createTemplate(defaultTemplate);
-const defaultTemplateContext: Record<
-  string,
-  ReturnType<typeof createTemplate>
-> = {
+const M15Template = createTemplate({ id: 'm15' });
+const defaultTemplateContext: Record<string, TemplateMapping> = {
   default: DefaultTemplate,
-  m15: DefaultTemplate,
+  m15: M15Template,
 };
 
 export const useTemplate = (templateId: string) => {
-  return useMemo(() => defaultTemplateContext[templateId] || DefaultTemplate, [
-    templateId,
-  ]);
+  const setActiveTemplate = useSetRecoilState(activeTemplateState(templateId));
+  const template = useMemo(
+    () => defaultTemplateContext[templateId] || DefaultTemplate,
+    [templateId]
+  );
+  useEffect(() => {
+    setActiveTemplate(true);
+    return () => setActiveTemplate(false);
+  }, [templateId]);
+
+  return template;
+};
+
+export const GlobalTemplates = () => {
+  const templateIds = useRecoilValue(activeTemplatesState);
+  const activeTemplates = useMemo(() => {
+    console.log(templateIds);
+    return Object.fromEntries(
+      templateIds.map((id) => {
+        const temp = defaultTemplateContext[id] || DefaultTemplate;
+        return [`.${temp.rootClassName}`, temp.styles];
+      })
+    );
+  }, [templateIds]);
+
+  return <Global styles={activeTemplates} />;
 };

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import * as mse from '@mse/types';
 import { HybridBackground } from './HybridBackground';
 import { SimpleBackground } from './SimpleBackground';
-import { getCardIdentity } from '@mse/utils.card';
+import { getCardIdentity } from '../../../../../../utils/card/index';
 import { MseColor } from '@mse/types';
 import { useCardContext } from '../../../index';
 export const Background: React.FC<mse.MseCardComponentProps> = () => {
@@ -15,7 +15,7 @@ export const Background: React.FC<mse.MseCardComponentProps> = () => {
   if (identity.isHybrid) {
     return (
       <HybridBackground
-        colors={identity.identityColors}
+        colors={identity.isLand ? identity.identityColors : identity.costColors}
         isLand={identity.isLand}
       />
     );
@@ -24,10 +24,10 @@ export const Background: React.FC<mse.MseCardComponentProps> = () => {
       <SimpleBackground
         isLand={identity.isLand}
         color={
-          identity.identityColors.length === 0
+          identity.costColors.length === 0
             ? MseColor.COLORLESS
-            : identity.identityColors.length == 1
-            ? identity.identityColors[0]
+            : identity.costColors.length == 1
+            ? identity.costColors[0]
             : 'multi'
         }
       />

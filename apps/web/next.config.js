@@ -1,13 +1,14 @@
 const withTM = require('next-transpile-modules')([
-  '@mse/ui.card',
-  '@mse/ui.core',
+  '@mse/ui',
 
-  '@mse/utils.card',
+  '@mse/utils',
   '@mse/types',
   '@mse/sample-cards',
   '@mse/assets',
-  '@mse/symbols',
-  '@mse/symbol-input',
+  '@mse/ui.symbols',
+  '@mse/ui.symbol-input',
+  '@mse/templates.base',
+  '@mse/supabase',
 ]);
 // const withPWA = require('next-pwa');
 /**

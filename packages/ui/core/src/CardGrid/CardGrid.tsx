@@ -1,0 +1,75 @@
+import { FC, useCallback, useMemo, useRef } from 'react';
+import { Card } from '@mse/ui.card';
+import * as mtg from '@mse/types';
+import { useElementSize } from '@mse/utils.autosizer';
+import { MseCard } from '@mse/types';
+
+export const CardGrid: FC<{
+  cards: mtg.MseCard[];
+  columns?: number;
+  editable?: boolean;
+  onCardUpdated?: (cardId: string, cardUpdates: Partial<MseCard>) => void;
+}> = ({ cards, columns = 3, editable, onCardUpdated = () => {} }) => {
+  const sizerRef = useRef<HTMLDivElement | null>(null);
+  const { width } = useElementSize(sizerRef, 'abc');
+
+  const scale = useMemo(() => {
+    return width / (columns * 385);
+  }, [width, columns]);
+
+  const columnWidth = useMemo(() => {
+    return 100 / columns;
+  }, [width, columns]);
+
+  const rowHeight = useMemo(() => {
+    return 533 * scale;
+  }, [scale]);
+
+  const rows = useMemo(() => Math.ceil(cards.length / columns), [
+    cards?.length,
+    columns,
+  ]);
+
+  const onCardChange = useCallback(
+    (cardId: string) => {
+      return (updates: Partial<MseCard>) =>
+        onCardUpdated(cardId, { ...updates });
+    },
+    [onCardUpdated]
+  );
+
+  return (
+    <div
+      ref={sizerRef}
+      style={{
+        display: 'grid',
+
+        gridTemplateColumns: `repeat(${columns}, ${columnWidth}%)`,
+        gridTemplateRows: `repeat(${rows}, ${rowHeight}px)`,
+
+        width: '100%',
+      }}
+    >
+      {cards.map((card) => {
+        return (
+          <div
+            key={card.id}
+            style={{
+              gridColumn: 'auto',
+              gridRow: 'auto',
+              height: rowHeight,
+              position: 'relative',
+            }}
+          >
+            <Card
+              card={card}
+              editable={editable}
+              onChange={onCardChange(card.id)}
+              scale={scale}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};

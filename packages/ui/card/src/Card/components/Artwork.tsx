@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCardContext } from '../../index';
-import { templateClasses } from '../../CardTemplate';
+import { templateClasses } from '../../CardTemplate/index';
 
 export const Artwork: React.FC<{ src?: string }> = () => {
   const { card } = useCardContext();
@@ -9,8 +9,8 @@ export const Artwork: React.FC<{ src?: string }> = () => {
     <div
       className={templateClasses.card.artwork}
       style={{
-        backgroundImage: card.artworkSrc
-          ? `url(${card.artworkSrc})`
+        backgroundImage: card.artworkUrl
+          ? `url(${card.artworkUrl})`
           : 'linear-gradient(45deg, #000,#FFF)',
       }}
     />

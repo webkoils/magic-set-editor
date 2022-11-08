@@ -1,7 +1,8 @@
 import { Container, Grid, Typography } from '@mui/material';
-import { CardGrid } from '@mse/ui.card';
+import { CardGrid } from '@mse/ui/core';
 import sampleCards from '@mse/sample-cards';
-import { MtgSymbol } from '@mse/symbols';
+import { MtgSymbol } from '@mse/ui.symbols';
+import { useRecoilState } from 'recoil';
 const symbolKeys = [
   'W',
   'U',

@@ -1,0 +1,6 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": [".", "src/types/mse.ts", "./database.types.ts"],
+  "exclude": ["dist", "build", "node_modules", "*.composition.*"],
+  "compilerOptions": { "baseUrl": "." }
+}

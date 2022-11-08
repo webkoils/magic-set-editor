@@ -19,8 +19,12 @@ import ReactContentEditable, {
   ContentEditableEvent,
 } from 'react-contenteditable';
 import classNames from 'classnames';
-import { useIsClient } from '../../../utils/ssr-helpers/index';
-const styles: CSSProperties = { whiteSpace: 'pre-wrap' };
+import { useIsClient } from '@mse/utils.ssr';
+const styles: CSSProperties = {
+  whiteSpace: 'pre-wrap',
+
+  userSelect: 'text',
+};
 export const SymbolInput: React.FC<
   {
     value: string;
@@ -31,7 +35,7 @@ export const SymbolInput: React.FC<
     readonly?: boolean;
   } & Omit<
     React.ComponentPropsWithoutRef<'div'>,
-    'id' | 'onChange' | 'readonly' | 'multiline'
+    'value' | 'onChange' | 'readonly' | 'multiline'
   >
 > = ({
   value,
@@ -46,9 +50,24 @@ export const SymbolInput: React.FC<
   const [isFocused, setIsFocused] = useState(false);
   const isClient = useIsClient();
   const inputRef = useRef<HTMLDivElement | null>(null);
-  const [localValue, setLocalValue] = useState(value);
+  const localValueRef = useRef(value);
+  const [html, setHtml] = useState('');
+
+  const onLocalChange: React.FormEventHandler<HTMLDivElement> = useCallback(
+    (event: ContentEditableEvent) => {
+      localValueRef.current = decodeEntities(
+        event.currentTarget.innerHTML || ''
+      );
+    },
+    []
+  );
+  useEffect(() => {
+    console.log(value);
+    localValueRef.current = value;
+    setHtml(value.replace(/\n/gi, '<br>'));
+  }, [value]);
   const renderedTokens = useMemo(() => {
-    let tokens = parseTokens(String(localValue), { symbols });
+    let tokens = parseTokens(String(localValueRef.current), { symbols });
     return tokens.map((line, li) => {
       let lineTokens: any[] = [];
       let textToken = '';
@@ -94,34 +113,23 @@ export const SymbolInput: React.FC<
         </span>
       );
     });
-  }, [localValue, renderToken, symbols, multiline]);
+  }, [isFocused, value, html, renderToken, symbols, multiline]);
   const nonEditingContent = useMemo(
     () => <React.Fragment key='markup'>{renderedTokens.flat()}</React.Fragment>,
     [renderedTokens]
   );
 
-  const [html, setHtml] = useState(
-    typeof window === 'undefined' ? '' : renderToStaticMarkup(nonEditingContent)
-  );
-
-  const onLocalChange: React.FormEventHandler<HTMLDivElement> = useCallback(
-    (event: ContentEditableEvent) => {
-      setLocalValue(decodeEntities(inputRef.current?.innerHTML || ''));
-    },
-    []
-  );
   const onFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
 
   const onBlur = useCallback(
     ({ currentTarget }: React.FocusEvent<HTMLDivElement>) => {
-      setIsFocused(false);
-      if (inputRef.current) {
-        onChange(
-          decodeEntities(currentTarget.innerHTML.replace(/<br>/gi, '\n'))
-        );
+      console.log(localValueRef.current);
+      if (localValueRef.current) {
+        onChange(decodeEntities(localValueRef.current.replace(/<br>/gi, '\n')));
       }
+      setIsFocused(false);
     },
     [onChange]
   );
@@ -144,7 +152,6 @@ export const SymbolInput: React.FC<
   useEffect(() => {
     if (isFocused) {
       inputRef.current?.focus();
-
       setHtml(value.replace(/\n/gi, '<br>'));
     }
   }, [isFocused, value]);
@@ -154,63 +161,66 @@ export const SymbolInput: React.FC<
     }
   }, [isFocused, renderedTokens]);
 
-  useEffect(() => {
-    setLocalValue((lv) => (lv !== value ? value : lv));
-  }, [value]);
-
   const htmlRef = useRef(html);
   useEffect(() => {
     htmlRef.current = html;
   }, [html]);
-  return useMemo(
-    () =>
-      !isClient || !isFocused ? (
-        <div
-          tabIndex={readonly ? undefined : 0}
-          style={styles}
-          className={classNames(
-            symbolInputClasses.root,
-            symbolInputClasses.readonly,
-            { [symbolInputClasses.focused]: isFocused },
-            { [symbolInputClasses.multiline]: multiline },
+  return useMemo(() => {
+    return !isClient || !isFocused ? (
+      <div
+        tabIndex={readonly ? undefined : 0}
+        style={styles}
+        className={classNames(
+          symbolInputClasses.root,
+          {
+            [symbolInputClasses.readonly]: readonly,
+            [symbolInputClasses.focused]: isFocused,
+            [symbolInputClasses.multiline]: multiline,
+            [symbolInputClasses.singleLine]: !multiline,
+          },
 
-            className
-          )}
-          onFocus={onFocus}
-          {...others}
-        >
-          {nonEditingContent}
-        </div>
-      ) : (
-        <ReactContentEditable
-          style={styles}
-          html={html}
-          disabled={false}
-          innerRef={inputRef}
-          className={classNames(
-            symbolInputClasses.root,
-            { [symbolInputClasses.focused]: isFocused },
-            { [symbolInputClasses.multiline]: multiline },
+          className
+        )}
+        onFocus={onFocus}
+        {...others}
+      >
+        {nonEditingContent}
+      </div>
+    ) : (
+      <ReactContentEditable
+        style={styles}
+        html={htmlRef.current}
+        disabled={false}
+        innerRef={inputRef}
+        className={classNames(
+          symbolInputClasses.root,
+          {
+            [symbolInputClasses.focused]: isFocused,
+            [symbolInputClasses.singleLine]: !multiline,
+            [symbolInputClasses.multiline]: multiline,
+          },
 
-            className
-          )}
-          onFocus={onFocus}
-          onChange={onLocalChange}
-          onBlur={onBlur}
-          onKeyDown={onKeyDown}
-          {...others}
-        ></ReactContentEditable>
-      ),
-    [
-      html,
-      className,
-      inputRef,
-      onBlur,
-      onChange,
-      onFocus,
-      isClient,
-      isFocused,
-      readonly,
-    ]
-  );
+          className
+        )}
+        onFocus={onFocus}
+        onChange={onLocalChange}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        {...others}
+      ></ReactContentEditable>
+    );
+  }, [
+    html,
+    className,
+    inputRef,
+    onBlur,
+    onFocus,
+    onLocalChange,
+    nonEditingContent,
+    isClient,
+    isFocused,
+    readonly,
+    value,
+    multiline,
+  ]);
 };

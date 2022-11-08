@@ -1,5 +1,5 @@
 {
-  "name": "@mse/symbol-input",
+  "name": "@mse/ui.symbol-input",
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -9,8 +9,8 @@
     "./src/*": "./src/*.ts"
   },
   "devDependencies": {
-    "@types/react": "18.0.17",
-    "@types/react-dom": "18.0.6",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.8",
     "@types/diff": "^5.0.2",
     "typescript": "^4.7.4",
     "autoprefixer": "^10.4.4",
@@ -18,7 +18,8 @@
     "@testing-library/react": "^13",
     "@mse/tsconfig": "workspace:*",
     "@mse/types": "workspace:*",
-    "@mse/eslint-config": "workspace:*"
+    "@mse/eslint-config": "workspace:*",
+    "@babel/core": "7.20.2"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -26,7 +27,7 @@
     "react-dom": "18.2.0",
     "classnames": "^2.3.2",
     "react-contenteditable": "^3.3.6",
-    "@mse/ssr-helpers": "workspace:*"
+    "@mse/utils.ssr": "workspace:*"
   },
   "scripts": {
     "buildOff": "tsc -p ./tsconfig.json",

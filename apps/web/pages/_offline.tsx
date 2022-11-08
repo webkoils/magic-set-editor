@@ -1,5 +1,5 @@
 import { Alert, Container, Grid, Typography } from '@mui/material';
-import { CardGrid } from '@mse/ui.card';
+import { CardGrid } from '@mse/ui/core';
 import sampleCards from '@mse/sample-cards';
 export default function HomePage() {
   return (

@@ -1,5 +1,5 @@
 import { MseCard, MseColor } from '@mse/types';
-import { CardGrid } from '@mse/ui.card';
+import { CardGrid } from '@mse/ui/core';
 import '@mse/fonts.beleren/index.css';
 import sampleCards from '@mse/sample-cards';
 

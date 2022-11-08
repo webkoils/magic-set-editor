@@ -50,7 +50,7 @@ export const parseTokens = (
   let symbolFinderRegex = createSymbolRegex(config.symbols);
   return lines.map((l, li) => {
     let line = l.slice();
-    let tokens = [];
+    let tokens: SymbolInputToken[] = [];
     let match = line.match(symbolFinderRegex);
     let i = 0;
     while (line.length > 0 && match) {

@@ -1,7 +1,4 @@
-import { Card } from '@mse/ui.card';
-import * as mse from '@mse/types';
-
-import { MtgSymbol, MtgSymbolProvider } from '@mse/symbols';
+import { MtgSymbol, MtgSymbolProvider } from '@mse/ui.symbols';
 export default {
   /* 👇 The title prop is optional.
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading

@@ -1,7 +1,7 @@
 import { MseColor } from '@mse/types';
 import { backgroundImageForColor } from './background-utils';
 import React from 'react';
-import { templateClasses } from '../../../CardTemplate';
+import { templateClasses } from '../../../CardTemplate/index';
 export const SimpleBackground: React.FC<{
   color: MseColor | 'multi';
   isLand: boolean;

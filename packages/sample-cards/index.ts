@@ -8,10 +8,10 @@ const sampleCards: MseCard[] = [
     num: 1,
     types: 'Creature',
     subtypes: 'Human Soldier',
-    power: 1,
-    artworkSrc:
+    power: '1',
+    artworkUrl:
       'https://cdn.inprnt.com/thumbs/ab/90/ab90888365216c96f97cb7cb455c827a.jpg?response-cache-control=max-age=2628000',
-    toughness: 1,
+    toughness: '1',
     rulesText:
       'When CARDNAME dies, create a 1/1 white Spirit creature token with flying.',
 
@@ -25,7 +25,7 @@ const sampleCards: MseCard[] = [
     manaCost: '(1)(G/W)',
     num: 2,
     types: 'Sorcery',
-    artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
+    artworkUrl: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
     rulesText: 'You may play an additional land this turn.\nDraw a card.',
     flavorText: "An explorer lorem ipsum's it up baby.",
     template: 'm15',
@@ -35,7 +35,7 @@ const sampleCards: MseCard[] = [
     name: 'Selesnya Sanctuary',
     num: 3,
     types: 'Land',
-    artworkSrc: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
+    artworkUrl: 'https://assets.echomtg.com/magic/cards/cropped/66765.hq.jpg',
     rulesText: [
       'CARDNAME enters the battlefield tapped',
       "When CARDNAME enters the battlefield, return a land you control to its owner's hand.",
@@ -50,9 +50,9 @@ const sampleCards: MseCard[] = [
     num: 4,
     types: 'Legendary Creature',
     subtypes: 'Djinn',
-    power: 6,
-    artworkSrc: 'https://www.mtgnexus.com/img/gallery/2930-erhnam-djinn.jpg',
-    toughness: 9,
+    power: '6',
+    artworkUrl: 'https://www.mtgnexus.com/img/gallery/2930-erhnam-djinn.jpg',
+    toughness: '9',
     rulesText:
       "Trample\nWhen CARDNAME enters the battlefield, return target creature to its owner's hand.\n(G),(T): Draw a card.",
 
@@ -66,7 +66,7 @@ const sampleCards: MseCard[] = [
     num: 5,
     types: 'Instant',
     subtypes: '',
-    artworkSrc: '',
+    artworkUrl: '',
     rulesText: 'CARDNAME deals 10 damage to any target.',
 
     flavorText: 'ZAAAAAAAP',
@@ -79,7 +79,7 @@ const sampleCards: MseCard[] = [
     num: 6,
     types: 'Legendary Creature',
     subtypes: 'Phyrexian Horror',
-    artworkSrc: '',
+    artworkUrl: '',
     rulesText:
       'Indestructible\nWhen CARDNAME enters the battlefield, destroy all creatures.',
 

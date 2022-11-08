@@ -9,26 +9,35 @@
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
     "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
-    "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true"
+    "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@mse/assets": "workspace:*",
-    "@mse/ui.card": "workspace:*",
-    "@mse/ui.core": "workspace:*",
-    "@mse/utils.card": "workspace:*",
+    "@mse/ui": "workspace:*",
+    "@mse/utils": "workspace:*",
     "@mui/icons-material": "5.8.4",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
-    "@mui/material": "5.10.1",
-    "@mui/styles": "^5.9.3",
+    "@mui/material": "5.10.12",
+    "@mui/styles": "^5.10.10",
+    "@mse/supabase": "workspace:*",
     "@mse/sample-cards": "workspace:*",
-    "@mse/symbols": "workspace:*",
+    "@mse/ui.symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
     "@mse/fonts.mplantin": "workspace:*",
-    "@mse/symbol-input": "workspace:*",
+    "@mse/ui.symbol-input": "workspace:*",
+    "@mse/templates.base": "workspace:*",
+    "@supabase/auth-ui-react": "^0.2.5",
+    "@supabase/auth-helpers-nextjs": "0.5.1",
+    "@supabase/auth-helpers-react": "0.3.1",
     "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "next-pwa": "5.6.0",
+    "recoil": "^0.7.6",
+    "recoil-sync": "^0.2.0",
+    "@mui/utils": "^5.10.9"
   },
   "devDependencies": {
     "@mse/eslint-config": "workspace:*",
@@ -37,9 +46,9 @@
     "@mse/types": "workspace:*",
     "eslint": "8.13.0",
     "next-transpile-modules": "10.0.0",
-    "next-pwa": "5.5.4",
     "typescript": "^4.7.4",
-    "babel-loader": "8.2.5"
+    "babel-loader": "8.2.5",
+    "patch-package": "^6.5.0"
   },
   "resolutions": {
     "react": "18.2.0"

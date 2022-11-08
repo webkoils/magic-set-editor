@@ -7,18 +7,30 @@ import {
   useRef,
   useEffect,
   useState,
+  useMemo,
+  useCallback,
 } from 'react';
 import { useCardState } from './cardState';
 
 export const CardContext = createContext<
-  ReturnType<typeof useCardState> | undefined
+  | {
+      card: MseCard;
+      editable?: boolean;
+      onChange: (changes: Partial<MseCard>) => void;
+    }
+  | undefined
 >(undefined);
 
 export const CardProvider: FC<PropsWithChildren<{
   card: MseCard;
   editable?: boolean;
-}>> = ({ card, editable, children }) => {
-  const cardState = useCardState(card, editable);
+  onChange: (changes: Partial<MseCard>) => void;
+}>> = ({ card, editable, children, onChange }) => {
+  const cardState = useMemo(() => ({ card, editable, onChange }), [
+    card,
+    editable,
+    onChange,
+  ]);
 
   return (
     <CardContext.Provider value={cardState}>{children}</CardContext.Provider>

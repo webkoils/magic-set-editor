@@ -1,6 +1,7 @@
 export interface SymbolInputClasses {
   root: string;
   multiline: string;
+  singleLine: string;
   focused: string;
   readonly: string;
   line: string;
@@ -9,6 +10,8 @@ export interface SymbolInputClasses {
 export const symbolInputClasses: SymbolInputClasses = {
   root: 'MseSymbolInput',
   multiline: 'MseSymbolInput-multiline',
+  singleLine: 'MseSymbolInput-singleline',
+
   focused: 'MseSymbolInput-focused',
   readonly: 'MseSymbolInput-readonly',
   line: 'MseSymbolInputLine',

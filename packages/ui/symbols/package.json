@@ -1,5 +1,5 @@
 {
-  "name": "@mse/symbols",
+  "name": "@mse/ui.symbols",
   "version": "1.0.0",
   "main": "index.ts",
   "types": "index.ts",
@@ -25,6 +25,6 @@
     "@mse/tsconfig": "workspace:*",
     "@mse/types": "workspace:*",
     "@mse/eslint-config": "workspace:*",
-    "@mse/symbol-input": "workspace:*"
+    "@mse/ui.symbol-input": "workspace:*"
   }
 }

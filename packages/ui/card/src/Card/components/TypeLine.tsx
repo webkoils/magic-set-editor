@@ -1,6 +1,6 @@
 import React from 'react';
 import * as mtg from '@mse/types';
-import { templateClasses } from '../../CardTemplate';
+import { templateClasses } from '../../CardTemplate/index';
 import { useCardContext } from '../../index';
 import { CardField } from '../../CardField/CardField';
 

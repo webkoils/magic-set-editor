@@ -1,15 +1,21 @@
 import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
 import React from 'react';
 import * as mtg from '@mse/types';
-import { getCardIdentity, isCardLand, sortColors } from '@mse/utils.card';
-import { templateClasses } from '../../CardTemplate';
+import {
+  getCardIdentity,
+  isCardLand,
+  sortColors,
+} from '../../../../../utils/card/index';
+import { templateClasses } from '../../CardTemplate/index';
 import { useCardContext } from '../../index';
 import { CardField } from '../../CardField/CardField';
+import classNames from 'classnames';
 
 const ptBackgroundImage = (card: mtg.MseCard) => {
   let identity = getCardIdentity(card);
   let allColors = sortColors(identity.colors).join('');
   let isLand = isCardLand(card);
+
   switch (allColors) {
     case mtg.MseColor.WHITE: {
       return !isLand ? templateAssets.wpt : templateAssets.wlpt;
@@ -37,20 +43,27 @@ const ptBackgroundImage = (card: mtg.MseCard) => {
 
 export const PT: React.FC<mtg.MseCardComponentProps> = () => {
   const { card } = useCardContext();
-  return typeof card.power !== 'undefined' &&
-    typeof card.toughness !== 'undefined' ? (
+
+  return (
     <div
       className={templateClasses.card.pt}
-      style={{ backgroundImage: `url(${ptBackgroundImage(card)})` }}
+      style={{
+        backgroundImage:
+          card.power || card.toughness
+            ? `url(${ptBackgroundImage(card)})`
+            : undefined,
+      }}
     >
       <div className={templateClasses.card.ptLabel}>
         <CardField id={'power'} className={templateClasses.card.power} />
-        <div className={templateClasses.card.ptDivider}>/</div>
+        {!!(card.power || card.toughness) && (
+          <div className={templateClasses.card.ptDivider}>/</div>
+        )}
         <CardField
           id={'toughness'}
           className={templateClasses.card.toughness}
         />
       </div>
     </div>
-  ) : null;
+  );
 };

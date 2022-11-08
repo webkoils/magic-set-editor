@@ -10,7 +10,7 @@ module.exports = {
     '../node_modules/@mse/fonts.beleren',
     '../node_modules/@mse/fonts.mplantin',
 
-    '../node_modules/@mse/symbols',
+    '../node_modules/@mse/ui.symbols',
   ],
   core: {
     builder: 'webpack5',
