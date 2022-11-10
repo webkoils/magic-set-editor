@@ -128,7 +128,7 @@ export const useCardSetState = (cardSetId: string) => {
     if (!data) {
       return null;
     }
-    let setData = transformCardSetOutput(data);
+    let setData = toCamelCaseMap(data) as MseCardSet;
 
     return setData;
   }, [data]);
