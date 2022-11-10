@@ -22,7 +22,7 @@
     "@emotion/styled": "11.10.5",
     "@mui/material": "5.10.13",
     "@mui/styles": "^5.10.10",
-    "@mse/supabase": "workspace:*",
+    "@supabase/supabase-js": "^2.0.5",
     "@mse/sample-cards": "workspace:*",
     "@mse/ui.symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
