@@ -128,7 +128,9 @@ export const useCardSetState = (cardSetId: string) => {
     if (!data) {
       return null;
     }
-    let setData = toCamelCaseMap(data) as MseCardSet;
+    let setData = toCamelCaseMap<DatabaseCardSetRow, MseCardSet>(
+      data
+    ) as MseCardSet;
 
     return setData;
   }, [data]);
@@ -137,15 +139,13 @@ export const useCardSetState = (cardSetId: string) => {
     console.log({ cardsData });
     if (cardsData) {
       return autoNumberCardSet(
-        cardsData
-          .map(toCamelCaseMap)
-          .map(
-            (c) =>
-              ({
-                ...(c as MseCard),
-                identity: getCardIdentity(c as MseCard),
-              } as MseCard)
-          )
+        cardsData.map(toCamelCaseMap<DatabaseCardRow, MseCard>).map(
+          (c) =>
+            ({
+              ...(c as MseCard),
+              identity: getCardIdentity(c as MseCard),
+            } as MseCard)
+        )
       );
     }
     return [];
@@ -164,7 +164,10 @@ export const useCardSetState = (cardSetId: string) => {
         mutateCards(
           (cs: any) => {
             if (!cs || !cs.data) {
-              return { data: [toSnakeCaseMap(updatedCard)], count: 1 };
+              return {
+                data: [updatedCard],
+                count: 1,
+              };
             }
             let cardIndex = cs.data?.findIndex((c: any) => c.id === cardId);
             return {
