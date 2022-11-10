@@ -10,16 +10,17 @@
     "format": "prettier --write .",
     "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
     "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "relay": "relay-compiler"
   },
   "dependencies": {
     "@mse/assets": "workspace:*",
     "@mse/ui": "workspace:*",
     "@mse/utils": "workspace:*",
     "@mui/icons-material": "5.8.4",
-    "@emotion/react": "11.10.0",
-    "@emotion/styled": "11.10.0",
-    "@mui/material": "5.10.12",
+    "@emotion/react": "11.10.5",
+    "@emotion/styled": "11.10.5",
+    "@mui/material": "5.10.13",
     "@mui/styles": "^5.10.10",
     "@mse/supabase": "workspace:*",
     "@mse/sample-cards": "workspace:*",
@@ -32,12 +33,15 @@
     "@supabase/auth-helpers-nextjs": "0.5.1",
     "@supabase/auth-helpers-react": "0.3.1",
     "next": "13.0.0",
+    "change-case": "4.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "next-pwa": "5.6.0",
     "recoil": "^0.7.6",
-    "recoil-sync": "^0.2.0",
-    "@mui/utils": "^5.10.9"
+    "localforage": "^1.10.0",
+    "@mui/utils": "^5.10.9",
+    "swr": "1.3.0",
+    "@supabase-cache-helpers/postgrest-swr": "0.4.2"
   },
   "devDependencies": {
     "@mse/eslint-config": "workspace:*",

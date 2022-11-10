@@ -40,7 +40,6 @@ export const useTemplate = (templateId: string) => {
 export const GlobalTemplates = () => {
   const templateIds = useRecoilValue(activeTemplatesState);
   const activeTemplates = useMemo(() => {
-    console.log(templateIds);
     return Object.fromEntries(
       templateIds.map((id) => {
         const temp = defaultTemplateContext[id] || DefaultTemplate;

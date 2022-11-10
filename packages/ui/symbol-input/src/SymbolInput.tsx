@@ -7,6 +7,7 @@ import {
 import React, {
   CSSProperties,
   KeyboardEvent,
+  MutableRefObject,
   useCallback,
   useEffect,
   useMemo,
@@ -33,6 +34,7 @@ export const SymbolInput: React.FC<
     renderToken: (token: SymbolInputToken) => React.ReactNode;
     multiline?: boolean;
     readonly?: boolean;
+    innerRef?: MutableRefObject<HTMLDivElement | null>;
   } & Omit<
     React.ComponentPropsWithoutRef<'div'>,
     'value' | 'onChange' | 'readonly' | 'multiline'
@@ -43,6 +45,7 @@ export const SymbolInput: React.FC<
   multiline,
   className,
   symbols,
+  innerRef,
   renderToken,
   readonly,
   ...others
@@ -62,7 +65,7 @@ export const SymbolInput: React.FC<
     []
   );
   useEffect(() => {
-    console.log(value);
+    //  console.log(value);
     localValueRef.current = value;
     setHtml(value.replace(/\n/gi, '<br>'));
   }, [value]);
@@ -125,10 +128,10 @@ export const SymbolInput: React.FC<
 
   const onBlur = useCallback(
     ({ currentTarget }: React.FocusEvent<HTMLDivElement>) => {
-      console.log(localValueRef.current);
-      if (localValueRef.current) {
-        onChange(decodeEntities(localValueRef.current.replace(/<br>/gi, '\n')));
-      }
+      //  console.log(localValueRef.current);
+
+      onChange(decodeEntities(localValueRef.current.replace(/<br>/gi, '\n')));
+
       setIsFocused(false);
     },
     [onChange]
@@ -170,6 +173,7 @@ export const SymbolInput: React.FC<
       <div
         tabIndex={readonly ? undefined : 0}
         style={styles}
+        ref={innerRef}
         className={classNames(
           symbolInputClasses.root,
           {

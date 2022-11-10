@@ -27,7 +27,7 @@ import React, {
 } from 'react';
 
 const anchorRightStyles = {
-  container: { borderLeft: 'solid 1px rgba(255,255,255,.78)' },
+  container: { borderLeft: 'solid 1px rgba(255,255,255,.5)' },
 
   resizeHandle: {
     left: '-1rem',
@@ -35,7 +35,7 @@ const anchorRightStyles = {
   toggleButton: { left: '-.5rem' },
 };
 const anchorLeftStyles = {
-  container: { borderLeft: 'solid 1px rgba(255,255,255,.78)' },
+  container: { borderLeft: 'solid 1px rgba(255,255,255,.5)' },
 
   resizeHandle: {
     right: '-1rem',
@@ -43,27 +43,29 @@ const anchorLeftStyles = {
   toggleButton: { right: '-.5rem' },
 };
 
-export const Sidebar: React.FC<PropsWithChildren<{
-  anchor?: 'right' | 'left';
-  resize?: boolean;
-  minWidth?: CSSProperties['minWidth'];
-  maxWidth?: CSSProperties['maxWidth'];
-  defaultWidth?: CSSProperties['width'];
-  open: boolean;
-  onToggle?: (...args: any[]) => void;
-  onResize?: (newWidth: string | number) => void;
-}>> = ({
+export const Sidebar: React.FC<
+  PropsWithChildren<{
+    anchor?: 'right' | 'left';
+    resize?: boolean;
+    minWidth?: number;
+    maxWidth?: number;
+    defaultWidth?: number;
+    open: boolean;
+    onToggle?: (...args: any[]) => void;
+    onResize?: (newWidth: string | number) => void;
+  }>
+> = ({
   children,
   anchor = 'left',
   resize = false,
-  minWidth = '10vw',
-  maxWidth = '50vw',
-  defaultWidth = '30vw',
+  minWidth = 0.1,
+  maxWidth = 0.3,
+  defaultWidth = 0.2,
   open,
   onResize,
   onToggle,
 }) => {
-  const [currentWidth, setCurrentWidth] = useState(defaultWidth || '24%');
+  const [currentWidth, setCurrentWidth] = useState(defaultWidth || 0.24);
   const isOpenRef = useRef(open);
 
   const isResizingRef = useRef(false);
@@ -80,21 +82,15 @@ export const Sidebar: React.FC<PropsWithChildren<{
     isResizingRef.current = false;
   }, []);
 
-  const onMouseMove = useCallback(
-    (event: MouseEvent) => {
-      if (isResizingRef.current) {
-        let x = event.pageX;
-        event.preventDefault();
-        event.stopPropagation();
-        if (anchor === 'left') {
-          setCurrentWidth(100 * (x / window.innerWidth) + '%');
-        } else {
-          setCurrentWidth(100 * (1 - x / window.innerWidth) + '%');
-        }
-      }
-    },
-    [anchor]
-  );
+  const onMouseMove = useCallback((event: MouseEvent) => {
+    if (isResizingRef.current) {
+      let x = event.pageX;
+      event.preventDefault();
+      event.stopPropagation();
+
+      setCurrentWidth(x / window.innerWidth);
+    }
+  }, []);
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
@@ -109,10 +105,22 @@ export const Sidebar: React.FC<PropsWithChildren<{
 
   const containerStyles = useMemo(
     () => ({
-      flex: '0 0 ' + (!open ? '0%' : currentWidth),
-      transition: !isResizingRef.current
-        ? 'flex-basis 200ms 0s linear'
-        : undefined,
+      flex:
+        '0 0 ' +
+        (!open
+          ? '0%'
+          : 100 *
+              Math.max(
+                minWidth,
+                Math.min(
+                  maxWidth,
+                  anchor === 'right' ? 1 - currentWidth : currentWidth
+                )
+              ) +
+            '%'),
+      // transition: !isResizingRef.current
+      //   ? `flex-basis 0ms ${open ? '0ms' : '200ms'} linear`
+      //   : undefined,
       minWidth: !open ? '0' : undefined,
       ...(anchor === 'left'
         ? anchorLeftStyles.container
@@ -126,8 +134,8 @@ export const Sidebar: React.FC<PropsWithChildren<{
       style={containerStyles}
       sx={{
         position: 'relative',
-        maxWidth,
-        minWidth,
+        maxWidth: maxWidth * 100 + '%',
+        minWidth: minWidth * 100 + '%',
         height: '100%',
       }}
     >
@@ -139,7 +147,7 @@ export const Sidebar: React.FC<PropsWithChildren<{
           width: '100%',
         }}
       >
-        {children}
+        <Paper sx={{ height: '100%', width: '100%', py: 3 }}> {children}</Paper>
       </Box>
       {resize && (
         <>
@@ -167,14 +175,14 @@ export const Sidebar: React.FC<PropsWithChildren<{
           className='resizing-button'
           sx={{
             position: 'absolute',
-            top: '1rem',
+            top: '0rem',
             width: '1rem',
             height: '1rem',
           }}
           style={
             anchor === 'left'
-              ? anchorLeftStyles.container
-              : anchorRightStyles.container
+              ? anchorLeftStyles.toggleButton
+              : anchorRightStyles.toggleButton
           }
         >
           <IconButton size='small' onClick={onToggle}>

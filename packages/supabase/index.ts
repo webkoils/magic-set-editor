@@ -1,1 +1,1 @@
-export * from './src';
+export * from '../../apps/web/client-state/remote';

@@ -1,20 +1,21 @@
 import { FC, useCallback, useMemo, useRef } from 'react';
 import { Card } from '@mse/ui.card';
 import * as mtg from '@mse/types';
-import { useElementSize } from '@mse/utils.autosizer';
+import { useElementSize } from '@mse/utils/autosizer';
 import { MseCard } from '@mse/types';
 
 export const CardGrid: FC<{
   cards: mtg.MseCard[];
   columns?: number;
   editable?: boolean;
+  renderCell?: (card: MseCard) => JSX.Element;
   onCardUpdated?: (cardId: string, cardUpdates: Partial<MseCard>) => void;
 }> = ({ cards, columns = 3, editable, onCardUpdated = () => {} }) => {
   const sizerRef = useRef<HTMLDivElement | null>(null);
   const { width } = useElementSize(sizerRef, 'abc');
 
-  const scale = useMemo(() => {
-    return width / (columns * 385);
+  const colWidth = useMemo(() => {
+    return width / columns;
   }, [width, columns]);
 
   const columnWidth = useMemo(() => {
@@ -22,13 +23,13 @@ export const CardGrid: FC<{
   }, [width, columns]);
 
   const rowHeight = useMemo(() => {
-    return 533 * scale;
-  }, [scale]);
+    return (533 * colWidth) / 385;
+  }, [colWidth]);
 
-  const rows = useMemo(() => Math.ceil(cards.length / columns), [
-    cards?.length,
-    columns,
-  ]);
+  const rows = useMemo(
+    () => Math.ceil(cards.length / columns),
+    [cards?.length, columns]
+  );
 
   const onCardChange = useCallback(
     (cardId: string) => {
@@ -65,7 +66,7 @@ export const CardGrid: FC<{
               card={card}
               editable={editable}
               onChange={onCardChange(card.id)}
-              scale={scale}
+              width={colWidth}
             />
           </div>
         );

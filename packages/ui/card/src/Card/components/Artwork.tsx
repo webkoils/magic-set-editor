@@ -2,7 +2,7 @@ import React from 'react';
 import { useCardContext } from '../../index';
 import { templateClasses } from '../../CardTemplate/index';
 
-export const Artwork: React.FC<{ src?: string }> = () => {
+export const Artwork: React.FC<{}> = () => {
   const { card } = useCardContext();
 
   return (

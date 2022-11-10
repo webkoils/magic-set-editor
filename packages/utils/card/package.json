@@ -8,6 +8,7 @@
     "typescript": "*",
     "@mse/tsconfig": "workspace:*",
     "@mse/eslint-config": "workspace:*",
-    "@mse/types": "workspace:*"
+    "@mse/types": "workspace:*",
+    "@mse/ui.symbol-input": "workspace:*"
   }
 }

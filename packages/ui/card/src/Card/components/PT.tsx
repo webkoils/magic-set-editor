@@ -1,5 +1,5 @@
 import { M15_ASSETS as templateAssets } from '@mse/assets/dist';
-import React from 'react';
+import React, { useRef } from 'react';
 import * as mtg from '@mse/types';
 import {
   getCardIdentity,
@@ -42,20 +42,30 @@ const ptBackgroundImage = (card: mtg.MseCard) => {
 };
 
 export const PT: React.FC<mtg.MseCardComponentProps> = () => {
-  const { card } = useCardContext();
+  const { card, editable } = useCardContext();
+  const powerRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div
+      onClick={() => {
+        editable && powerRef.current?.focus();
+      }}
       className={templateClasses.card.pt}
       style={{
+        cursor: editable ? 'pointer' : undefined,
+
         backgroundImage:
           card.power || card.toughness
-            ? `url(${ptBackgroundImage(card)})`
+            ? `url(/${ptBackgroundImage(card)})`
             : undefined,
       }}
     >
       <div className={templateClasses.card.ptLabel}>
-        <CardField id={'power'} className={templateClasses.card.power} />
+        <CardField
+          id={'power'}
+          className={templateClasses.card.power}
+          inputRef={powerRef}
+        />
         {!!(card.power || card.toughness) && (
           <div className={templateClasses.card.ptDivider}>/</div>
         )}

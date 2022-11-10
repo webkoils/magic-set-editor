@@ -23,7 +23,6 @@ export const cardSorterDesc = (
     case 'manaCost': {
       let mvA = calculateManaValue(a);
       let mvB = calculateManaValue(b);
-      console.log(a.name, mvA, b.name, mvB);
 
       if (mvA === mvB) {
         return cardSorterDesc(a, b, 'identity');
@@ -108,7 +107,7 @@ export const findAbilityColorsInText = (text: string) => {
     [MseColor.RED]: false,
     [MseColor.COLORLESS]: false,
   };
-  let matches = findSymbolsInText(text, /\((P?[WUBRG\/]+?)\).+?:/g);
+  let matches = findSymbolsInText(text, /\((P?[WUBRG\/]+?)\).*:/g);
   matches.forEach((key) => {
     const val = key.split('');
     val.forEach((c) => {
@@ -152,8 +151,8 @@ export const getCardColors = (
   let costColors: Record<MseColor, boolean> = findColorsInText(
     card.manaCost || ''
   );
-  let abilityColors: Record<MseColor, boolean> = findColorsInText(
-    card.manaCost || ''
+  let abilityColors: Record<MseColor, boolean> = findAbilityColorsInText(
+    card.rulesText || ''
   );
 
   let textColors = findColorsInText(card.rulesText || '');
@@ -225,8 +224,8 @@ export const getDefaultSortValue = (card: MseCard): number => {
     isLand && Boolean(card.types?.toLowerCase().includes('basic'));
 
   const colorCount = colors.length;
-  if (!isArtifact && !isLand) {
-    if (colorCount === 0) {
+  if (!isLand) {
+    if (colorCount === 0 && !isArtifact) {
       return 0;
     } else if (colorCount >= 2) {
       return 6;
@@ -257,4 +256,13 @@ export const calculateManaValue = (card: MseCard) => {
     manaValue += numVal;
   });
   return manaValue;
+};
+
+export const autoNumberCardSet = (cards: MseCard[]): MseCard[] => {
+  const sorter = (a: MseCard, b: MseCard) => -cardSorterDesc(a, b, 'identity');
+  const defaultSorted = cards.slice().sort(sorter);
+  return defaultSorted.map((c, i) => ({
+    ...c,
+    collectorNumber: i + 1,
+  }));
 };

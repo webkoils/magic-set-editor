@@ -22,7 +22,7 @@ export type ChangeHistoryAction<T> =
   | { type: 'undo' }
   | { type: 'redo' };
 
-export function cardStateReducer<T>(
+export function historyStateReducer<T>(
   prevState: ChangeHistory<T>,
   action: ChangeHistoryAction<T>
 ): ChangeHistory<T> {
@@ -101,7 +101,7 @@ export function cardStateReducer<T>(
 }
 
 export function useChangeHistoryState<T>(initialValue: T) {
-  const [state, dispatch] = useReducer(cardStateReducer, {
+  const [state, dispatch] = useReducer(historyStateReducer, {
     initialValue,
     current: { value: initialValue, timestamp: Date.now() },
     past: [],

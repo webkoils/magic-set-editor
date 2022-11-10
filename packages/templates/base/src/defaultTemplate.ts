@@ -159,7 +159,7 @@ const defaultTemplate: CardTemplate = {
     typeLine: {
       width: 310,
       position: 'absolute',
-      top: 300,
+      top: 298,
       // paddingTop: '1%',
       left: 32,
       //right: ,
@@ -178,10 +178,14 @@ const defaultTemplate: CardTemplate = {
           fontFamily: 'beleren',
         },
       },
+      input: {
+        root: { height: '100%' },
+      },
     },
     typeLineDivider: {
       fontFamily: 'beleren',
       marginLeft: '.5em',
+      height: '100%',
       marginRight: '.5em',
     },
 
@@ -229,6 +233,12 @@ const defaultTemplate: CardTemplate = {
       height: 100 + '%',
 
       textAlign: 'right',
+      state: {
+        empty: {
+          minHeight: '1em',
+          flex: '0 1 auto',
+        },
+      },
     },
     toughness: {
       fontSize: '1em',
@@ -238,6 +248,12 @@ const defaultTemplate: CardTemplate = {
       minWidth: '0',
 
       textAlign: 'left',
+      state: {
+        empty: {
+          minHeight: '1em',
+          flex: '0 1 auto',
+        },
+      },
     },
 
     textBox: {

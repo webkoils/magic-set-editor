@@ -30,25 +30,25 @@ export const backgroundImageForColor = (
 ) => {
   switch (color) {
     case mtg.MseColor.COLORLESS: {
-      return `url(${!isLand ? templateAssets.ccard : templateAssets.clcard})`;
+      return `url(/${!isLand ? templateAssets.ccard : templateAssets.clcard})`;
     }
     case mtg.MseColor.WHITE: {
-      return `url(${!isLand ? templateAssets.wcard : templateAssets.wlcard})`;
+      return `url(/${!isLand ? templateAssets.wcard : templateAssets.wlcard})`;
     }
     case mtg.MseColor.BLUE: {
-      return `url(${!isLand ? templateAssets.ucard : templateAssets.ulcard})`;
+      return `url(/${!isLand ? templateAssets.ucard : templateAssets.ulcard})`;
     }
     case mtg.MseColor.BLACK: {
-      return `url(${!isLand ? templateAssets.bcard : templateAssets.blcard})`;
+      return `url(/${!isLand ? templateAssets.bcard : templateAssets.blcard})`;
     }
     case mtg.MseColor.RED: {
-      return `url(${!isLand ? templateAssets.rcard : templateAssets.rlcard})`;
+      return `url(/${!isLand ? templateAssets.rcard : templateAssets.rlcard})`;
     }
     case mtg.MseColor.GREEN: {
-      return `url(${!isLand ? templateAssets.gcard : templateAssets.glcard})`;
+      return `url(/${!isLand ? templateAssets.gcard : templateAssets.glcard})`;
     }
     case 'multi': {
-      return `url(${!isLand ? templateAssets.mcard : templateAssets.mlcard})`;
+      return `url(/${!isLand ? templateAssets.mcard : templateAssets.mlcard})`;
     }
   }
 };

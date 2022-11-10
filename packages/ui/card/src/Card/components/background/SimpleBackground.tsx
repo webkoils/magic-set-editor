@@ -1,12 +1,12 @@
 import { MseColor } from '@mse/types';
 import { backgroundImageForColor } from './background-utils';
-import React from 'react';
+import React, { memo } from 'react';
 import { templateClasses } from '../../../CardTemplate/index';
 export const SimpleBackground: React.FC<{
   color: MseColor | 'multi';
   isLand: boolean;
   style?: React.CSSProperties;
-}> = ({ color, isLand, style }) => {
+}> = memo(({ color, isLand, style }) => {
   return (
     <div
       className={templateClasses.card.background}
@@ -17,4 +17,4 @@ export const SimpleBackground: React.FC<{
       }}
     />
   );
-};
+});

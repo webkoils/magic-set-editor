@@ -5,8 +5,8 @@ export type ColumnKey = keyof Omit<MseCard, 'identity'>;
 export interface CardListColumn {
   id: ColumnKey;
   label: string;
-  valueGetter?: (card: MseCard) => string | number;
-  displayGetter?: (card: MseCard) => React.ReactNode;
+  getValue?: (card: MseCard) => string | number;
+  getFormattedValue?: (card: MseCard) => React.ReactNode;
   sort?: (a: MseCard, b: MseCard) => number;
   width?: CSSProperties['width'];
 }

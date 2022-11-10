@@ -157,11 +157,14 @@ importers:
       '@mui/material': 5.10.3
       '@mui/styles': ^5.10.3
       '@mui/utils': ^5.10.9
+      '@supabase-cache-helpers/postgrest-swr': 0.4.2
       '@supabase/auth-helpers-nextjs': 0.5.1
       '@supabase/auth-helpers-react': 0.3.1
       '@supabase/auth-ui-react': ^0.2.5
       babel-loader: 8.2.5
+      change-case: 4.1.2
       eslint: 8.13.0
+      localforage: ^1.10.0
       next: ^13.0.0
       next-pwa: 5.6.0
       next-transpile-modules: 10.0.0
@@ -169,7 +172,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       recoil: ^0.7.6
-      recoil-sync: ^0.2.0
+      swr: 1.3.0
       typescript: ^4.7.4
     dependencies:
       '@emotion/react': 11.10.4_otspjrsspon4ofp37rshhlhp2y
@@ -188,15 +191,18 @@ importers:
       '@mui/material': 5.10.3_6xnkn2aqnlmdvuspwqrjexfduy
       '@mui/styles': 5.10.10_react@18.2.0
       '@mui/utils': 5.10.9_react@18.2.0
+      '@supabase-cache-helpers/postgrest-swr': 0.4.2_puujfvac6fgch7nlmc4b4ckqty
       '@supabase/auth-helpers-nextjs': 0.5.1_zkgeqwp3h2sozttntdecfeola4
       '@supabase/auth-helpers-react': 0.3.1_zkgeqwp3h2sozttntdecfeola4
       '@supabase/auth-ui-react': 0.2.5_biqbaboplfbrettd7655fr4n2y
+      change-case: 4.1.2
+      localforage: 1.10.0
       next: 13.0.1_qtpcxnaaarbm4ws7ughq6oxfve
       next-pwa: 5.6.0_4z33s3qktapul7c7wl2lw3t5qa
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       recoil: 0.7.6_biqbaboplfbrettd7655fr4n2y
-      recoil-sync: 0.2.0_recoil@0.7.6
+      swr: 1.3.0_react@18.2.0
     devDependencies:
       '@babel/core': 7.19.6
       '@mse/eslint-config': link:../../packages/dev/eslint-config
@@ -428,6 +434,7 @@ importers:
   packages/ui/card:
     specifiers:
       '@babel/core': ^7.18.13
+      '@emotion/cache': 11.10.5
       '@emotion/react': 11.10.4
       '@mse/assets': workspace:*
       '@mse/eslint-config': workspace:*
@@ -459,6 +466,7 @@ importers:
       tsconfig-paths-webpack-plugin: ^3.5.2
       typescript: ^4.7.4
     dependencies:
+      '@emotion/cache': 11.10.5
       '@emotion/react': 11.10.4_u4psdusp3xnibxirju73jsdo4y
       '@mse/assets': link:../../assets
       '@mse/templates.base': link:../../templates/base
@@ -539,7 +547,7 @@ importers:
       '@mse/ui.symbol-input': link:../symbol-input
       '@mse/ui.symbols': link:../symbols
       '@mse/utils': link:../../utils
-      '@mse/utils.autosizer': link:../../utils/useElementSize
+      '@mse/utils.autosizer': link:../../utils/autosizer
       '@mse/utils.card': link:../../utils/card
       '@mui/icons-material': 5.10.3_y3w5kybebkk4omfqm52bdtcctq
       '@mui/material': 5.10.3_bxeviceh45sjmqtyh56fjoizoi
@@ -642,16 +650,28 @@ importers:
   packages/utils:
     specifiers: {}
 
+  packages/utils/autosizer:
+    specifiers:
+      react: '*'
+      react-dom: '*'
+      typescript: '*'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      typescript: 4.8.4
+
   packages/utils/card:
     specifiers:
       '@mse/eslint-config': workspace:*
       '@mse/tsconfig': workspace:*
       '@mse/types': workspace:*
+      '@mse/ui.symbol-input': workspace:*
       typescript: '*'
     devDependencies:
       '@mse/eslint-config': link:../../dev/eslint-config
       '@mse/tsconfig': link:../../dev/tsconfig
       '@mse/types': link:../../types
+      '@mse/ui.symbol-input': link:../../ui/symbol-input
       typescript: 4.8.4
 
   packages/utils/ssr:
@@ -700,16 +720,6 @@ importers:
       '@types/react-dom': 18.0.8
       autoprefixer: 10.4.13_postcss@8.4.18
       tsconfig-paths-webpack-plugin: 3.5.2
-
-  packages/utils/useElementSize:
-    specifiers:
-      react: '*'
-      react-dom: '*'
-      typescript: '*'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      typescript: 4.8.4
 
 packages:
 
@@ -4812,6 +4822,56 @@ packages:
       regenerator-runtime: 0.13.10
       resolve-from: 5.0.0
     dev: true
+
+  /@supabase-cache-helpers/postgrest-fetcher/0.1.5:
+    resolution: {integrity: sha512-t3yEOQUKWTQ+QhwXH3NqmKcIMJuzyujrO+NytQ2JUS0CN40Df3WYjRgkRII6PWvnVIL+JwP2Aos4EpWCe43KmA==}
+    dev: false
+
+  /@supabase-cache-helpers/postgrest-filter/0.1.0:
+    resolution: {integrity: sha512-ld5Sz30eYSzxUW4S0q0mjgyi+9CSXpquGEwKzb/+HeQRr6PsDkTjBoXRnoWl8LVkrTO5TuYS0u5LyfvXxLvuvg==}
+    dependencies:
+      lodash: 4.17.21
+      xregexp: 5.1.1
+    dev: false
+
+  /@supabase-cache-helpers/postgrest-mutate/0.3.0_zkgeqwp3h2sozttntdecfeola4:
+    resolution: {integrity: sha512-4bXEWXvF4QWuMTqtIOGMqORZU7u7vUSHzBYff1CU9v1bEVtc9iiXcodUUwMY3gRQySRM7X27VLgIIn/KTAVigw==}
+    dependencies:
+      '@supabase-cache-helpers/postgrest-filter': 0.1.0
+      '@supabase-cache-helpers/postgrest-shared': 0.0.5_zkgeqwp3h2sozttntdecfeola4
+      lodash: 4.17.21
+    transitivePeerDependencies:
+      - '@supabase/supabase-js'
+    dev: false
+
+  /@supabase-cache-helpers/postgrest-shared/0.0.5_zkgeqwp3h2sozttntdecfeola4:
+    resolution: {integrity: sha512-8j3mLUUcPXPHvDbtZXHuvxjHN8XDvq23U8jZvemcA15wuGgWfg4rxl5emTO85vgqQ8ynzLHv3HJnM00SaSc2KA==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.0.0
+    dependencies:
+      '@supabase/supabase-js': 2.0.5
+    dev: false
+
+  /@supabase-cache-helpers/postgrest-swr/0.4.2_puujfvac6fgch7nlmc4b4ckqty:
+    resolution: {integrity: sha512-bDPPOOXa+/bXmOLrBFqJCvNb3rPCyKcq126625dENKa08TyRszCp9w3V39SHHb14fgAFjfBx123rzjlFWHqySA==}
+    peerDependencies:
+      '@supabase/postgrest-js': ^1.1.0
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+      swr: ^2.0.0-rc.0
+    dependencies:
+      '@supabase-cache-helpers/postgrest-fetcher': 0.1.5
+      '@supabase-cache-helpers/postgrest-filter': 0.1.0
+      '@supabase-cache-helpers/postgrest-mutate': 0.3.0_zkgeqwp3h2sozttntdecfeola4
+      '@supabase-cache-helpers/postgrest-shared': 0.0.5_zkgeqwp3h2sozttntdecfeola4
+      '@supabase/postgrest-js': 1.1.0
+      lodash: 4.17.21
+      react: 18.2.0
+      swr: 1.3.0_react@18.2.0
+      use-mutation: 2.2.1_react@18.2.0
+      xregexp: 5.1.1
+    transitivePeerDependencies:
+      - '@supabase/supabase-js'
+    dev: false
 
   /@supabase/auth-helpers-nextjs/0.5.1_zkgeqwp3h2sozttntdecfeola4:
     resolution: {integrity: sha512-aXpFlg3XUN70fX+uqsxZCTYe4u0c9yQuSYxTxvxZFAQuRPGxv86zoxUAslMFMIvQN8uwb8dUjlTsqb1e0qTEPQ==}
@@ -16496,6 +16556,14 @@ packages:
       stable: 0.1.8
     dev: true
 
+  /swr/1.3.0_react@18.2.0:
+    resolution: {integrity: sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /symbol-observable/1.2.0:
     resolution: {integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==}
     engines: {node: '>=0.10.0'}
@@ -17315,6 +17383,25 @@ packages:
       querystring: 0.2.0
     dev: true
 
+  /use-mutation/2.2.1_react@18.2.0:
+    resolution: {integrity: sha512-qGvtQpVgj2Ekcrrykiq4rOlOhUrlebaO/sVVGpXjrb0IEOBtZqNzq8hKJwrYGkyUWqu3pBPpOEyss8OHRhS3Ow==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+      use-safe-callback: 1.0.2_react@18.2.0
+    dev: false
+
+  /use-safe-callback/1.0.2_react@18.2.0:
+    resolution: {integrity: sha512-RVeoyxgjJNfu9baNwulBM+HuPQGlcE1MJtrA1w50B5Hd0tyeKvrBIPdCfRx4Trrrxe34M6qRTys/bfpqsKRcyA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /use-sync-external-store/1.2.0_react@17.0.2:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
@@ -17996,6 +18083,12 @@ packages:
     optionalDependencies:
       default-browser-id: 1.0.4
     dev: true
+
+  /xregexp/5.1.1:
+    resolution: {integrity: sha512-fKXeVorD+CzWvFs7VBuKTYIW63YD1e1osxwQ8caZ6o1jg6pDAbABDG54LCIq0j5cy7PjRvGIq6sef9DYPXpncg==}
+    dependencies:
+      '@babel/runtime-corejs3': 7.20.1
+    dev: false
 
   /xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}

@@ -9,10 +9,19 @@ import {
   Button,
 } from '@mui/material';
 import { BrandingWordmark } from '@mse/ui/core';
-import { Menu, Person } from '@mui/icons-material';
-import { useCallback, useState } from 'react';
+import { ArrowBackIos, Menu, Person } from '@mui/icons-material';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
 import { AuthPopup } from '../Auth/AuthPopup';
+import { useRecoilValue } from 'recoil';
+import { NavbarChildrenState } from './layout.state';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const MobileIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
@@ -20,23 +29,36 @@ const MobileIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const NonMobileNavItem = styled(Box)(({ theme }) => ({
+const NavItem = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexFlow: 'row nowrap',
   placeContent: 'center center',
-
-  [theme.breakpoints.down('sm')]: {
-    display: 'none',
-  },
 }));
 
-export const Navbar = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+export const Navbar: React.FC<{}> = ({}) => {
   const [authOpen, setAuthOpen] = useState(false);
+  const router = useRouter();
   const toggleAuthPopup = useCallback(() => setAuthOpen((d) => !d), []);
 
-  const toggleDrawer = useCallback(() => setDrawerOpen((d) => !d), []);
   const session = useSession();
+
+  const segments = useMemo(() => router.asPath.split('/'), [router]);
+
+  const prevPath = useMemo(() => {
+    const copySegments = segments.slice();
+    let currentSegment = copySegments.pop();
+    let prevSegment = copySegments.pop();
+
+    const isWorkbench = segments.includes('workbench');
+    if (!isWorkbench) {
+      return null;
+    }
+    if (prevSegment === 'workbench') {
+      return { name: 'Sets', path: '/workbench' };
+    }
+    return null;
+  }, [segments]);
+
   return (
     <>
       <AppBar position='fixed' elevation={4}>
@@ -47,7 +69,39 @@ export const Navbar = () => {
             placeContent: 'center space-between',
           }}
         >
-          <BrandingWordmark height={'3rem'} />
+          <NavItem>
+            {prevPath ? (
+              <Link
+                href={prevPath.path}
+                prefetch={false}
+                shallow
+                passHref
+                legacyBehavior
+              >
+                <Button
+                  component='a'
+                  sx={{
+                    borderRadius: 0,
+                  }}
+                  startIcon={<ArrowBackIos />}
+                  variant='text'
+                  color='inherit'
+                >
+                  {prevPath.name}
+                </Button>
+              </Link>
+            ) : null}
+          </NavItem>
+          <Box
+            sx={{
+              flex: '0 1 100%',
+              display: 'flex',
+              flexFlow: 'row nowrap',
+              placeContent: 'center center',
+            }}
+          >
+            <BrandingWordmark height={'3rem'} />
+          </Box>
           <Box
             sx={{
               display: 'flex',
@@ -55,7 +109,7 @@ export const Navbar = () => {
               placeContent: 'center flex-end',
             }}
           >
-            <NonMobileNavItem>
+            <NavItem>
               {session ? (
                 <IconButton>
                   <Person />
@@ -65,17 +119,11 @@ export const Navbar = () => {
                   Login
                 </Button>
               )}
-            </NonMobileNavItem>
-            <MobileIconButton onClick={toggleDrawer}>
-              <Menu />
-            </MobileIconButton>
+            </NavItem>
           </Box>
         </Box>
       </AppBar>
       <AuthPopup open={authOpen} onClose={toggleAuthPopup} />
-      <Drawer anchor='right' open={drawerOpen}>
-        SIDEBAR
-      </Drawer>
     </>
   );
 };

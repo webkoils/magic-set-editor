@@ -19,17 +19,23 @@ const GenericSvg: React.FC<
         y='50'
         textAnchor='middle'
         dominantBaseline={'central'}
-        textLength={100}
         style={{
           fontFamily: 'mplantin',
           fill: '#0d0f0f',
           fontSize:
             typeof children !== 'undefined'
-              ? `${120 - String(children).length * 30}px`
+              ? `${110 - String(children).length * 15}px`
               : '90px',
         }}
       >
-        {children}
+        {children &&
+          String(children)
+            .split('')
+            .map((c, i) => (
+              <tspan dx={i > 0 ? '-5%' : 0} key={i}>
+                {c}
+              </tspan>
+            ))}
       </text>
     </g>
   </svg>

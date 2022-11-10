@@ -16,7 +16,10 @@ export const ManaStory = () => (
       <MtgSymbol height='100'>W</MtgSymbol>{' '}
       <MtgSymbol height='100'>B/W/G</MtgSymbol>{' '}
       <MtgSymbol height='100'>PG/PW</MtgSymbol>{' '}
-      <MtgSymbol height='100'>1</MtgSymbol>
+      <MtgSymbol height='100'>11</MtgSymbol>
+      <MtgSymbol height='100'>25</MtgSymbol>
+      <MtgSymbol height='100'>3</MtgSymbol>
+      <MtgSymbol height='100'>10</MtgSymbol>
     </MtgSymbolProvider>
   </div>
 );

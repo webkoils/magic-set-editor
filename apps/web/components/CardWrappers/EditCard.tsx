@@ -1,27 +1,39 @@
+import { client, transformCardInput, transformCardOutput } from '@mse/supabase';
 import { MseCard } from '@mse/types';
 import { Card } from '@mse/ui/card';
-import { useCallback, useEffect } from 'react';
-import { useCardState } from '../../state';
+import {
+  useInsertMutation,
+  useQuery,
+  useUpdateMutation,
+} from '@supabase-cache-helpers/postgrest-swr';
+import { useSession } from '@supabase/auth-helpers-react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useCardState } from '../../client-state/CardState';
 
 export const EditCard = ({
   cardId,
-  scale = 1,
+  width,
+  height,
 }: {
   cardId: string;
-  scale?: number;
+  width?: number;
+  height?: number;
 }) => {
-  const [card, updateCard] = useCardState(cardId);
+  const { card, updateCard } = useCardState(cardId);
   const onChange = useCallback(
     (updates: Partial<MseCard>) => {
-      updateCard((currentCard) =>
-        currentCard ? { ...currentCard, ...updates } : null
-      );
+      updateCard(updates);
     },
     [updateCard]
   );
-  useEffect(() => console.log(card), [card]);
   return card ? (
-    <Card editable scale={scale} card={card} onChange={onChange} />
+    <Card
+      editable
+      width={width}
+      height={height}
+      card={card}
+      onChange={onChange}
+    />
   ) : (
     <> Empty</>
   );

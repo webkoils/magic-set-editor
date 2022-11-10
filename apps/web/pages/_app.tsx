@@ -9,8 +9,9 @@ import { Layout } from '../components/Layout';
 import { RecoilRoot } from 'recoil';
 import { GlobalTemplates } from '@mse/ui/card';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
-import { supabase } from '@mse/supabase';
-import { ClientStateLoader } from '../state/ClientStateLoader';
+import { client } from '@mse/supabase';
+import { MseThemeProvider } from '../components/MseThemeProvider';
+import { SWRConfig } from 'swr';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,27 +22,29 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const getDefaultLayout = (page: ReactElement) => <Layout>{page}</Layout>;
-
+const opts = { revalidateOnFocus: true, focusThrottleInterval: 5 * 60 };
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const [supabaseClient] = useState(() => supabase);
-
   const getLayout = Component.getLayout || getDefaultLayout;
   return (
     <SessionContextProvider
-      supabaseClient={supabaseClient}
+      supabaseClient={client}
       initialSession={pageProps.initialSession}
     >
-      <RecoilRoot>
-        <GlobalTemplates />
-        <Head>
-          <title>Urza's Workbench</title>
-          <meta
-            name='viewport'
-            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
-          />
-        </Head>
-        {getLayout(<Component {...pageProps} />)}
-      </RecoilRoot>
+      <SWRConfig value={opts}>
+        <RecoilRoot>
+          <MseThemeProvider>
+            <GlobalTemplates />
+            <Head>
+              <title>Urza's Workbench</title>
+              <meta
+                name='viewport'
+                content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+              />
+            </Head>
+            {getLayout(<Component {...pageProps} />)}
+          </MseThemeProvider>
+        </RecoilRoot>
+      </SWRConfig>
     </SessionContextProvider>
   );
 }
