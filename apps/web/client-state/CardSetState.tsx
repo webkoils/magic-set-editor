@@ -141,7 +141,10 @@ export const useCardSetState = (cardSetId: string) => {
           .map(toCamelCaseMap)
           .map(
             (c) =>
-              ({ ...c, identity: getCardIdentity(c as MseCard) } as MseCard)
+              ({
+                ...(c as MseCard),
+                identity: getCardIdentity(c as MseCard),
+              } as MseCard)
           )
       );
     }
