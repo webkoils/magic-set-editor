@@ -1,5 +1,4 @@
-//@ts-disable
-
+//@ts-nocheck
 import { MseCard, MseCardSet } from '@mse/types';
 import {
   useInsertMutation,

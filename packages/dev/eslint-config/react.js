@@ -30,6 +30,6 @@ module.exports = {
         allow: ['warn', 'error'],
       },
     ],
-    'react/jsx-curly-brace-presence': [true, 'always'],
+    'react/jsx-curly-brace-presence': [0, 'always'],
   },
 };
