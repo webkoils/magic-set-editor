@@ -22,8 +22,7 @@
     "type-check": "tsc --pretty --noEmit",
     "pre-commit": "turbo run format lint",
     "pre-push": "turbo run lint",
-    "prepare": "husky install",
-    "postinstall": "patch-package"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
