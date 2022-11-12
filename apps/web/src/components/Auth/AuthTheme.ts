@@ -1,5 +1,6 @@
+import { ThemeVariables } from '@supabase/auth-ui-react/dist/esm/common/theming/Types';
 import { MseTheme } from '../MseThemeProvider/MseThemeProvider';
-export const AuthTheme = {
+export const AuthTheme: ThemeVariables = {
   colors: {
     brand: MseTheme.palette.primary.main,
     brandAccent: MseTheme.palette.primary.dark,
@@ -28,7 +29,7 @@ export const AuthTheme = {
     labelBottomMargin: '8px',
     anchorBottomMargin: '4px',
     emailInputSpacing: '0px',
-    passwordInputSpacing: 0,
+
     socialAuthSpacing: '4px',
     buttonPadding: '10px 15px',
     inputPadding: '10px 15px',
