@@ -1,7 +1,7 @@
 import { AppBar, IconButton, Box, styled, Button } from '@mui/material';
 import { BrandingWordmark } from '@mse/ui.core';
 import { ArrowBackIos, Person } from '@mui/icons-material';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
 import { AuthPopup } from '../Auth/AuthPopup';
 import { useRouter } from 'next/router';
@@ -40,6 +40,13 @@ export const Navbar: React.FC<Record<string, never>> = () => {
     }
     return null;
   }, [segments]);
+
+  useEffect(() => {
+    if (session?.user.id && authOpen) {
+      setAuthOpen(false);
+      router.push('/workbench');
+    }
+  }, [session, authOpen, router]);
 
   return (
     <>
