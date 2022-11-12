@@ -115,7 +115,7 @@ export const SymbolInput: React.FC<
       );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, renderToken, symbols, multiline]);
+  }, [value, renderToken, symbols, multiline, html]);
   const nonEditingContent = useMemo(
     () => <React.Fragment key='markup'>{renderedTokens.flat()}</React.Fragment>,
     [renderedTokens]

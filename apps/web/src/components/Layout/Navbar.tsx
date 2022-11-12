@@ -38,6 +38,7 @@ export const Navbar: React.FC<Record<string, never>> = () => {
     if (prevSegment === 'workbench') {
       return { name: 'Sets', path: '/workbench' };
     }
+
     return null;
   }, [segments]);
 
@@ -77,6 +78,25 @@ export const Navbar: React.FC<Record<string, never>> = () => {
                   color='inherit'
                 >
                   {prevPath.name}
+                </Button>
+              </Link>
+            ) : session ? (
+              <Link
+                href={'/workbench'}
+                prefetch={false}
+                shallow
+                passHref
+                legacyBehavior
+              >
+                <Button
+                  component='a'
+                  sx={{
+                    borderRadius: 0,
+                  }}
+                  variant='text'
+                  color='inherit'
+                >
+                  Workbench
                 </Button>
               </Link>
             ) : null}
