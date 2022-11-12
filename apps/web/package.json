@@ -9,8 +9,7 @@
     "lint": "TIMING=1 next lint",
     "format": "prettier --write .",
     "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
-    "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
-    "postinstall": "patch-package"
+    "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true"
   },
   "dependencies": {
     "@mse/assets": "workspace:*",
