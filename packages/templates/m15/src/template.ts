@@ -1,5 +1,5 @@
-import { mtgSymbolClasses } from '@mse/ui.symbols/src/mtgSymbolClasses';
-import { symbolInputClasses } from '@mse/ui.symbol-input/src/symbolInputClasses';
+import { mtgSymbolClasses } from '../../../symbols/src/mtgSymbolClasses';
+import { symbolInputClasses } from '../../../symbol-input/src/symbolInputClasses';
 export const CardTemplateClassNames = {
   root: 'MseTemplateM15',
   card: 'MseCard',

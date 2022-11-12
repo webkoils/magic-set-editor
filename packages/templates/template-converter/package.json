@@ -24,9 +24,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "lint": "TIMING=1 eslint components",
-    "fix": "TIMING=1 eslint components --fix",
-    "format": "prettier --write ."
+    "test": "jest"
   }
 }

@@ -1,0 +1,48 @@
+{
+  "name": "@mse/symbols",
+  "version": "1.0.0",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "svg"
+  ],
+  "esbuild": {
+    "entryPoints": [
+      "./src/index.ts",
+      "./src/mtgSymbolClasses.ts"
+    ],
+    "alwaysBundle": [
+      "@mse/utils.ssr"
+    ]
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "classnames": "^2.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "typescript": "^4.8.4",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "@testing-library/react": "^13",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/types": "workspace:*",
+    "@mse/eslint-config": "workspace:*",
+    "@mse/symbol-input": "workspace:*"
+  },
+  "scripts": {
+    "build": "pnpm types && pnpm bundle",
+    "dev": "pnpm types:watch & pnpm bundle:watch",
+    "bundle": "node ../../scripts/build-react.js",
+    "bundle:watch": "node ../../scripts/build-react.js watch",
+    "types": "tsc --noEmit false --emitDeclarationOnly --outDir dist",
+    "types:watch": "tsc --watch --noEmit false --emitDeclarationOnly --outDir dist",
+    "clean": "rm -rf dist",
+    "lint": "TIMING=1 eslint ./src/**",
+    "fix": "TIMING=1 eslint ./src/** --fix",
+    "format": "prettier --write ."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": { "@mse/symbols/*": ["*", "dist/*"] }
+  },
+  "exclude": ["build", "node_modules", "*.composition.*", "src/**/*.spec.tsx"]
+}

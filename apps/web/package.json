@@ -10,13 +10,16 @@
     "format": "prettier --write .",
     "copy-assets": "cp -r -L ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
     "link-assets": "ln -s ${PWD}/node_modules/@mse/assets/dist/* ${PWD}/public || true",
-    "postinstall": "patch-package",
-    "relay": "relay-compiler"
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@mse/assets": "workspace:*",
-    "@mse/ui": "workspace:*",
-    "@mse/utils": "workspace:*",
+    "@mse/ui.core": "workspace:*",
+    "@mse/ui.card": "workspace:*",
+    "@mse/utils.ssr": "workspace:*",
+    "@mse/utils.card": "workspace:*",
+    "@mse/utils.symbol-renderer": "workspace:*",
+    "@mse/utils.autosizer": "workspace:*",
     "@mui/icons-material": "5.8.4",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
@@ -24,10 +27,10 @@
     "@mui/styles": "^5.10.10",
     "@supabase/supabase-js": "^2.0.5",
     "@mse/sample-cards": "workspace:*",
-    "@mse/ui.symbols": "workspace:*",
+    "@mse/symbols": "workspace:*",
     "@mse/fonts.beleren": "workspace:*",
     "@mse/fonts.mplantin": "workspace:*",
-    "@mse/ui.symbol-input": "workspace:*",
+    "@mse/symbol-input": "workspace:*",
     "@mse/templates.base": "workspace:*",
     "@supabase/auth-ui-react": "^0.2.5",
     "@supabase/auth-helpers-nextjs": "0.5.1",
@@ -40,7 +43,7 @@
     "recoil": "^0.7.6",
     "localforage": "^1.10.0",
     "@mui/utils": "^5.10.9",
-    "swr": "1.3.0",
+    "swr": "2.0.0-rc.0",
     "@supabase-cache-helpers/postgrest-swr": "0.4.2"
   },
   "devDependencies": {

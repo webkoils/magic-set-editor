@@ -1,3 +1,13 @@
 {
-  "name": "@mse/ui"
+  "name": "@mse/utils",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "@mse/ui.card": "workspace:*",
+    "@mse/ui.core": "workspace:*"
+  }
 }

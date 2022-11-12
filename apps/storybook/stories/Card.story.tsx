@@ -1,4 +1,4 @@
-import { Card } from '@mse/ui/card';
+import { Card } from '@mse/ui.card';
 import * as mse from '@mse/types';
 import '@mse/fonts.beleren/index.css';
 

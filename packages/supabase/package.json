@@ -2,9 +2,6 @@
   "name": "@mse/supabase",
   "main": "./index.ts",
   "types": "./index.ts",
-  "scripts": {
-    "dev": ""
-  },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.5"
   },

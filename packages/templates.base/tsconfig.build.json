@@ -1,0 +1,15 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ]
+}

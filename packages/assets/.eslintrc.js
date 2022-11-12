@@ -9,7 +9,7 @@ module.exports = {
     '@next/next/no-html-link-for-pages': 0,
   },
   overrides: [
-    require('@mse/eslint-config-scener/jest'),
-    require('@mse/eslint-config-scener/storybook'),
+    require('@mse/eslint-config/jest'),
+    require('@mse/eslint-config/storybook'),
   ],
 };

@@ -21,7 +21,7 @@
       "cache": false
     },
     "types": {
-      "outputs": ["types/**"]
+      "outputs": ["types/**", "dist/**"]
     },
     "dev": {
       "cache": false

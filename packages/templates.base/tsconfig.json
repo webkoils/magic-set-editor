@@ -1,0 +1,12 @@
+{
+  "extends": "@mse/tsconfig/react-library.json",
+  "include": ["src/**/*"],
+  "compilerOptions": { "typeRoots": [] },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "*.composition.*",
+    "src/**/*.spec.tsx"
+  ]
+}

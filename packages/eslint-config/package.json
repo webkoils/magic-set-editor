@@ -1,0 +1,35 @@
+{
+  "name": "@mse/eslint-config",
+  "version": "0.0.0",
+  "main": "base.js",
+  "exports": {
+    "./jest": "./jest.js",
+    "./base": "./base.js",
+    "./storybook": "./storybook.js",
+    "./react": "./react.js"
+  },
+  "files": [
+    "./jest.js",
+    "./base.js",
+    "./storybook.js",
+    "./react.js"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/eslint-plugin": "^11.10.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "8.27.0",
+    "eslint-config-next": "^13.0.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-jsx": "^11.0.0",
+    "eslint-plugin-jest": "^26.8.3",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-react": "^7.31.1",
+    "eslint-plugin-storybook": "^0.6.7",
+    "typescript": "^4.8.4"
+  }
+}

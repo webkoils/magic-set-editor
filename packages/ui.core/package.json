@@ -1,0 +1,60 @@
+{
+  "name": "@mse/ui.core",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./src/*"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "@types/diff": "^5.0.2",
+    "typescript": "^4.7.4",
+    "autoprefixer": "^10.4.4",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "@testing-library/react": "^13",
+    "@mse/tsconfig": "workspace:*",
+    "@mse/types": "workspace:*",
+    "@mse/eslint-config": "workspace:*",
+    "@mse/sample-cards": "workspace:*",
+    "@types/prop-types": "^15.7.5",
+    "@babel/core": "^7.20.2"
+  },
+  "dependencies": {
+    "@emotion/react": "11.10.5",
+    "@mui/material": "^5.10.12",
+    "@mui/icons-material": "5.10.9",
+    "@mui/utils": "^5.10.9",
+    "prop-types": "^15.8.1",
+    "fast-deep-equal": "^3.1.3",
+    "react": "18.2.0",
+    "localforage": "^1.10.0",
+    "react-dom": "18.2.0",
+    "@recoiljs/refine": "^0.1.1",
+    "@mse/assets": "workspace:*",
+    "@mse/utils.card": "workspace:*",
+    "@mse/utils.ssr": "workspace:*",
+    "@mse/symbols": "workspace:*",
+    "@mse/ui.card": "workspace:*",
+    "@mse/symbol-input": "workspace:*",
+    "@mse/utils.autosizer": "workspace:*",
+    "@mse/templates.base": "workspace:*",
+    "recoil": "^0.7.6",
+    "recoil-sync": "^0.2.0",
+    "diff": "^5.1.0",
+    "react-contenteditable": "3.3.6",
+    "classnames": "^2.3.2",
+    "ts-deepmerge": "^4.0.0"
+  },
+  "resolutions": {
+    "**/@emotion/css": "^11.10.0"
+  },
+  "scripts": {
+    "lint": "TIMING=1 eslint ./src/**",
+    "fix": "TIMING=1 eslint ./src/** --fix",
+    "format": "prettier --write ."
+  }
+}

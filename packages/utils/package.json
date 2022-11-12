@@ -1,6 +1,15 @@
 {
   "name": "@mse/utils",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "exports": {
-    "./*": "./*/index.ts"
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "@mse/utils.ssr": "workspace:*",
+    "@mse/utils.autosizer": "workspace:*",
+    "@mse/utils.symbol-renderer": "workspace:*",
+    "@mse/utils.card": "workspace:*"
   }
 }

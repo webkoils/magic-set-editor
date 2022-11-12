@@ -8,8 +8,8 @@
   },
   "devDependencies": {
     "@mse/eslint-config": "workspace:*",
-    "@mse/ui.symbols": "workspace:*",
-    "@mse/ui.symbol-input": "workspace:*",
+    "@mse/symbols": "workspace:*",
+    "@mse/symbol-input": "workspace:*",
     "@mse/tsconfig": "workspace:*",
     "@mse/types": "workspace:*",
     "@types/postcss-js": "^4.0.0",
