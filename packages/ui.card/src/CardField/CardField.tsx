@@ -29,7 +29,7 @@ export const CardField: React.FC<
     (newValue: string) => {
       return onChange({ [id]: newValue });
     },
-    [id]
+    [id, onChange]
   );
 
   return (

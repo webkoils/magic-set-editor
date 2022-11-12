@@ -34,10 +34,10 @@ export const AuthTheme = {
     inputPadding: '10px 15px',
   },
   fontSizes: {
-    baseBodySize: MseTheme.typography.fontSize,
-    baseInputSize: MseTheme.typography.fontSize,
-    baseLabelSize: MseTheme.typography.fontSize,
-    baseButtonSize: MseTheme.typography.fontSize,
+    baseBodySize: MseTheme.typography.fontSize + 'px',
+    baseInputSize: MseTheme.typography.fontSize + 'px',
+    baseLabelSize: MseTheme.typography.fontSize + 'px',
+    baseButtonSize: MseTheme.typography.fontSize + 'px',
   },
   fonts: {
     bodyFontFamily: MseTheme.typography.fontFamily,
