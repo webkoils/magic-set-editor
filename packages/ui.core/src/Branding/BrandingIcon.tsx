@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 
-const BrandingIcon: FC<JSX.IntrinsicElements['svg']> = memo((props) => {
+const BrandingIcon: FC<JSX.IntrinsicElements['svg']> = (props) => {
   return (
     <svg
       viewBox='0 0 135.467 135.467'
@@ -13,6 +13,5 @@ const BrandingIcon: FC<JSX.IntrinsicElements['svg']> = memo((props) => {
       />
     </svg>
   );
-});
-BrandingIcon.displayName = 'BrandingIcon';
-export { BrandingIcon };
+};
+export default memo(BrandingIcon);

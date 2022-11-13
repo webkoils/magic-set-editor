@@ -10,26 +10,28 @@ export const CardDetailView: React.FC<
   const { width } = useElementSize(sizerRef, 'abc');
 
   return (
-    <div
-      ref={sizerRef}
-      style={{
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        display: 'flex',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'block',
-
-          flexGrow: 0,
-          flexShrink: 0,
+    <div style={{ width: '375px', display: 'block' }}>
+      <div
+        ref={sizerRef}
+        style={{
+          height: '100%',
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          display: 'flex',
         }}
       >
-        {cardId && <EditCard cardId={cardId} width={width - 30} />}
-      </Box>
+        <Box
+          sx={{
+            display: 'block',
+
+            flexGrow: 0,
+            flexShrink: 0,
+          }}
+        >
+          {cardId && <EditCard cardId={cardId} width={width - 30} />}
+        </Box>
+      </div>
     </div>
   );
 };

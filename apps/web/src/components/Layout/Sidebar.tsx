@@ -9,46 +9,74 @@ import React, {
   useState,
 } from 'react';
 
-const anchorRightStyles = {
-  container: { borderLeft: 'solid 1px rgba(255,255,255,.5)' },
+const anchorStyles = {
+  right: {
+    container: { borderLeft: 'solid 1px rgba(255,255,255,.5)' },
 
-  resizeHandle: {
-    left: '-1rem',
+    resizeHandle: {
+      left: '-1rem',
+      top: 0,
+      bottom: 0,
+      width: '2rem',
+      cursor: 'ew-resize',
+    },
+    toggleButton: { left: '-.5rem' },
+    toggleIcon: { transform: 'rotate(0,0,0)' },
+    toggleIconOpen: { transform: 'rotate(0,0,0)' },
   },
-  toggleButton: { left: '-.5rem' },
-};
-const anchorLeftStyles = {
-  container: { borderLeft: 'solid 1px rgba(255,255,255,.5)' },
+  left: {
+    container: { borderRight: 'solid 1px rgba(255,255,255,.5)' },
 
-  resizeHandle: {
-    right: '-1rem',
+    resizeHandle: {
+      top: 0,
+      bottom: 0,
+      width: '2rem',
+      cursor: 'ew-resize',
+    },
+    toggleButton: { top: '-.5rem' },
+    toggleIcon: { transform: 'rotate(0,180,0)' },
+    toggleIconOpen: { transform: 'rotate(0,0,0)' },
   },
-  toggleButton: { right: '-.5rem' },
+  bottom: {
+    container: { borderTop: 'solid 1px rgba(255,255,255,.5)' },
+
+    resizeHandle: {
+      top: '-1rem',
+      bottom: 'auto',
+      height: '2rem',
+      cursor: 'ns-resize',
+      right: 0,
+      left: 0,
+    },
+    toggleButton: { right: '-.5rem' },
+    toggleIcon: { transform: 'rotate(0,90,0)' },
+    toggleIconOpen: { transform: 'rotate(0,-90,0)' },
+  },
 };
 
 export const Sidebar: React.FC<
   PropsWithChildren<{
-    anchor?: 'right' | 'left';
+    anchor?: 'right' | 'left' | 'bottom';
     resize?: boolean;
-    minWidth?: number;
-    maxWidth?: number;
-    defaultWidth?: number;
+    minSize?: number;
+    maxSize?: number;
+    defaultSize?: number;
     open: boolean;
     onToggle?: (...args: any[]) => void;
-    onResize?: (newWidth: string | number) => void;
+    onResize?: (newSize: string | number) => void;
   }>
 > = ({
   children,
   anchor = 'left',
   resize = false,
-  minWidth = 0.1,
-  maxWidth = 0.3,
-  defaultWidth = 0.2,
+  minSize = 0.1,
+  maxSize = 0.3,
+  defaultSize = 0.2,
   open,
   onResize,
   onToggle,
 }) => {
-  const [currentWidth, setCurrentWidth] = useState(defaultWidth || 0.24);
+  const [currentSize, setCurrentSize] = useState(defaultSize || 0.24);
   const isOpenRef = useRef(open);
 
   const isResizingRef = useRef(false);
@@ -65,15 +93,26 @@ export const Sidebar: React.FC<
     isResizingRef.current = false;
   }, []);
 
-  const onMouseMove = useCallback((event: MouseEvent) => {
-    if (isResizingRef.current) {
-      const x = event.pageX;
-      event.preventDefault();
-      event.stopPropagation();
+  const onMouseMove = useCallback(
+    (event: MouseEvent) => {
+      if (isResizingRef.current) {
+        if (anchor === 'bottom') {
+          const y = event.pageY;
+          event.preventDefault();
+          event.stopPropagation();
 
-      setCurrentWidth(x / window.innerWidth);
-    }
-  }, []);
+          setCurrentSize(y / window.innerHeight);
+        } else {
+          const x = event.pageX;
+          event.preventDefault();
+          event.stopPropagation();
+
+          setCurrentSize(x / window.innerWidth);
+        }
+      }
+    },
+    [anchor]
+  );
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
@@ -83,8 +122,8 @@ export const Sidebar: React.FC<
     };
   }, [onMouseMove, onMouseUp]);
   useEffect(() => {
-    onResize && onResize(currentWidth);
-  }, [currentWidth, onResize]);
+    onResize && onResize(currentSize);
+  }, [currentSize, onResize]);
 
   const containerStyles = useMemo(
     () => ({
@@ -94,22 +133,22 @@ export const Sidebar: React.FC<
           ? '0%'
           : 100 *
               Math.max(
-                minWidth,
+                minSize,
                 Math.min(
-                  maxWidth,
-                  anchor === 'right' ? 1 - currentWidth : currentWidth
+                  maxSize,
+                  anchor === 'left' ? currentSize : 1 - currentSize
                 )
               ) +
             '%'),
       // transition: !isResizingRef.current
       //   ? `flex-basis 0ms ${open ? '0ms' : '200ms'} linear`
       //   : undefined,
-      minWidth: !open ? '0' : undefined,
-      ...(anchor === 'left'
-        ? anchorLeftStyles.container
-        : anchorRightStyles.container),
+      minWidth: anchor !== 'bottom' && !open ? '0' : undefined,
+      minHeight: anchor === 'bottom' && !open ? '0' : undefined,
+
+      ...anchorStyles[anchor].container,
     }),
-    [currentWidth, open, anchor, maxWidth, minWidth]
+    [currentSize, open, anchor, maxSize, minSize]
   );
 
   return (
@@ -117,9 +156,11 @@ export const Sidebar: React.FC<
       style={containerStyles}
       sx={{
         position: 'relative',
-        maxWidth: maxWidth * 100 + '%',
-        minWidth: minWidth * 100 + '%',
-        height: '100%',
+        maxWidth: anchor === 'bottom' ? '100%' : maxSize * 100 + '%',
+        minWidth: anchor === 'bottom' ? '100%' : minSize * 100 + '%',
+        maxHeight: anchor !== 'bottom' ? '100%' : maxSize * 100 + '%',
+        minHeight: anchor !== 'bottom' ? '100%' : minSize * 100 + '%',
+        height: anchor !== 'bottom' ? '100%' : undefined,
       }}
     >
       <Box
@@ -138,18 +179,9 @@ export const Sidebar: React.FC<
             className='resizing-handle'
             onMouseDown={onMouseDown}
             sx={{
+              ...anchorStyles[anchor].resizeHandle,
               position: 'absolute',
-
-              top: 0,
-              bottom: 0,
-              width: 20,
-              cursor: 'ew-resize',
             }}
-            style={
-              anchor === 'left'
-                ? anchorLeftStyles.resizeHandle
-                : anchorRightStyles.resizeHandle
-            }
           />
         </>
       )}
@@ -162,21 +194,16 @@ export const Sidebar: React.FC<
             width: '1rem',
             height: '1rem',
           }}
-          style={
-            anchor === 'left'
-              ? anchorLeftStyles.toggleButton
-              : anchorRightStyles.toggleButton
-          }
+          style={anchorStyles[anchor].toggleButton}
         >
           <IconButton size='small' onClick={onToggle}>
             <ChevronRightOutlined
               sx={{ transition: 'transform 100ms 0s linear' }}
-              style={{
-                transform:
-                  open && anchor === 'left'
-                    ? 'rotateY(180deg)'
-                    : 'rotateY(0deg)',
-              }}
+              style={
+                open
+                  ? anchorStyles[anchor].toggleIconOpen
+                  : anchorStyles[anchor].toggleIcon
+              }
             />
           </IconButton>
         </Box>

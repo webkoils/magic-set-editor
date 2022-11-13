@@ -1,22 +1,26 @@
+import { OrderDirection } from '@/client-state/CardSetFilters';
 import { MseCardSet } from '@mse/types';
-import { GridView, ViewList } from '@mui/icons-material';
-import {
-  Toolbar,
-  ToggleButtonGroup,
-  ToggleButton,
-  AppBar,
-  Box,
-  Typography,
-  ButtonBase,
-  Select,
-  MenuItem,
-  FormControl,
-  SelectChangeEvent,
-} from '@mui/material';
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import { FilterAlt } from '@mui/icons-material';
+import { Toolbar, AppBar, Typography, styled } from '@mui/material';
+import React, { useCallback, useState } from 'react';
 import { useCardSetContext } from '../../client-state/CardSetState';
 import { ColumnKey } from '../../client-state/types';
+import { ResponsiveToolbarSection } from '../ResponsiveToolbar/ResponsiveToolbarSection';
+import SelectMenu from '../SelectMenu/SelectMenu';
 import { EditSetDialog } from './EditSetDialog';
+
+const MobileAppBar = styled(AppBar)(({ theme }) => {
+  return {
+    top: 'auto',
+    bottom: 0,
+    // order: -1,
+
+    [theme.breakpoints.down('sm')]: {
+      //   order: 100,
+    },
+  };
+});
+
 export const WorkbenchToolbar: React.FC<{
   currentView: 'list' | 'grid';
   onViewChange: (newView: 'list' | 'grid') => void;
@@ -24,7 +28,7 @@ export const WorkbenchToolbar: React.FC<{
   const { cardSet, updateCardSet, filters } = useCardSetContext();
   const [isEditSetDialogOpen, setIsEditSetDialogOpen] = useState(false);
   const onChange = useCallback(
-    (_event: ChangeEvent<unknown>, value: 'list' | 'grid' | null) => {
+    (value: 'list' | 'grid' | null) => {
       if (value !== null) {
         onViewChange(value);
       }
@@ -41,12 +45,7 @@ export const WorkbenchToolbar: React.FC<{
   );
 
   return (
-    <AppBar
-      position='relative'
-      sx={{ top: 'auto', bottom: 0 }}
-      variant='outlined'
-      elevation={0}
-    >
+    <MobileAppBar position='relative' variant='outlined' elevation={0}>
       <EditSetDialog
         open={isEditSetDialogOpen}
         initialData={cardSet || undefined}
@@ -58,93 +57,67 @@ export const WorkbenchToolbar: React.FC<{
         sx={{
           display: 'flex',
           flexFlow: 'row nowrap',
-          placeContent: 'center space-between',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <ButtonBase
-          title='click to edit'
-          onClick={() => setIsEditSetDialogOpen(true)}
-          sx={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            placeContent: 'center flex-start',
-          }}
-        >
-          <Box
-            sx={{
-              mr: 1,
+        <div />
+        <ResponsiveToolbarSection
+          sectionProps={{
+            sx: {
               display: 'flex',
               flexFlow: 'row nowrap',
-              placeContent: 'center flex-start',
-            }}
-          >
-            <Typography
-              color='inherit'
-              sx={{ fontWeight: 'bold', display: 'block', mr: 1 }}
-            >
-              set name:
-            </Typography>
-            <Typography
-              color='inherit'
-              sx={{
-                display: 'block',
-
-                textTransform: 'none',
-              }}
-            >
-              {cardSet?.displayName || 'set name'}
-            </Typography>
-          </Box>{' '}
-        </ButtonBase>
-        <Box sx={{ width: '4rem', flex: '0 0 4rem' }} />
-        <Box
-          sx={{
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            placeContent: 'center flex-end',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            },
           }}
+          mobileIcon={<FilterAlt />}
+          drawerProps={{ anchor: 'right' }}
         >
-          <FormControl size='small' sx={{ width: '120px', mr: 1 }}>
-            <Select
-              id={'workbench-sort-select'}
-              value={filters.orderBy}
-              onChange={({ target }: SelectChangeEvent) =>
-                filters.setOrderBy(target.value as ColumnKey)
-              }
-            >
-              {filters.columns.map((c) => (
-                <MenuItem key={c.id} value={c.id}>
-                  {c.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl size='small' sx={{ width: '100px', mr: 1 }}>
-            <Select
-              value={filters.orderDirection}
-              onChange={({ target }: SelectChangeEvent) =>
-                filters.setOrderDirection(target.value as 'asc' | 'desc')
-              }
-            >
-              <MenuItem value={'asc'}>ASC</MenuItem>
-              <MenuItem value={'desc'}>DESC</MenuItem>
-            </Select>
-          </FormControl>
-          <ToggleButtonGroup
-            size='small'
-            value={currentView}
-            onChange={onChange}
-            exclusive
+          <Typography
+            sx={{ flex: '0 0 auto', whiteSpace: 'nowrap', mr: 1 }}
+            fontWeight={'bold'}
           >
-            <ToggleButton value='list' size='small'>
-              <ViewList fontSize='small' />
-            </ToggleButton>
-            <ToggleButton value='grid' size='small'>
-              <GridView fontSize='small' />
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
+            Order by:
+          </Typography>
+
+          <SelectMenu
+            sx={{ width: '120px' }}
+            options={filters.columns.map((c) => ({
+              label: c.label,
+              value: c.id,
+            }))}
+            value={filters.orderBy}
+            onChange={(newVal) => filters.setOrderBy(newVal as ColumnKey)}
+          />
+          <SelectMenu
+            sx={{ mr: 1, width: '100px' }}
+            options={[
+              { label: 'ASC', value: 'asc' },
+              { label: 'DESC', value: 'desc' },
+            ]}
+            value={filters.orderDirection}
+            onChange={(newVal) =>
+              filters.setOrderDirection(newVal as OrderDirection)
+            }
+          />
+          <Typography
+            sx={{ flex: '0 0 auto', whiteSpace: 'nowrap', mr: 1 }}
+            fontWeight={'bold'}
+          >
+            View as:
+          </Typography>
+          <SelectMenu
+            sx={{ width: '120px', mr: 1 }}
+            options={[
+              { label: 'List', value: 'list' },
+              { label: 'Gallery', value: 'grid' },
+            ]}
+            value={currentView}
+            onChange={(newVal) => onChange(newVal as 'list' | 'grid')}
+          />
+        </ResponsiveToolbarSection>
       </Toolbar>
-    </AppBar>
+    </MobileAppBar>
   );
 };

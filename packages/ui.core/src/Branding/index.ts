@@ -1,2 +1,2 @@
-export * from './BrandingIcon';
-export * from './BrandingWordmark';
+export { default as BrandingIcon } from './BrandingIcon';
+export { default as BrandingWordmark } from './BrandingWordmark';

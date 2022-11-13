@@ -4,7 +4,7 @@ import SimpleBackground from './SimpleBackground';
 const gradient = `rgba(255,255,255,0) 0% ,rgba(255,255,255,0) 40%, rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100% `;
 const HybridBackground: React.FC<{
   isLand: boolean;
-  colors: MseColor[];
+  colors: (MseColor | 'multi')[];
 }> = ({ colors, isLand }) => {
   return (
     <>
@@ -19,11 +19,11 @@ const HybridBackground: React.FC<{
               maskMode: 'luminance',
               maskType: 'luminance',
               maskImage:
-                i === 0
+                i === 1
                   ? `linear-gradient(90deg,${gradient})`
                   : `linear-gradient(270deg,${gradient})`,
               WebkitMaskImage:
-                i === 0
+                i === 1
                   ? `linear-gradient(90deg,${gradient})`
                   : `linear-gradient(270deg,${gradient})`,
             }}

@@ -1,10 +1,19 @@
-import { AppBar, IconButton, Box, styled, Button } from '@mui/material';
+import {
+  AppBar,
+  IconButton,
+  Box,
+  styled,
+  Button,
+  Typography,
+  ButtonBase,
+} from '@mui/material';
 import { BrandingWordmark } from '@mse/ui.core';
-import { Person } from '@mui/icons-material';
+import { Edit, Person } from '@mui/icons-material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
 import { AuthPopup } from '../Auth/AuthPopup';
 import { useRouter } from 'next/router';
+import { useCardSetContext } from '@/client-state/CardSetState';
 /*
 const MobileIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
@@ -18,29 +27,14 @@ const NavItem = styled(Box)(() => ({
   placeContent: 'center center',
 }));
 
-export const Navbar: React.FC<Record<string, never>> = () => {
+export const WorkbenchNavbar: React.FC<Record<string, never>> = () => {
+  const { cardSet } = useCardSetContext();
   const [authOpen, setAuthOpen] = useState(false);
   const router = useRouter();
   const toggleAuthPopup = useCallback(() => setAuthOpen((d) => !d), []);
 
   const session = useSession();
-  /*
-  const segments = useMemo(() => router.asPath.split('/'), [router]);
 
-  const prevPath = useMemo(() => {
-    const [prevSegment] = segments.slice(-2, -1);
-
-    const isWorkbench = segments.includes('workbench');
-    if (!isWorkbench) {
-      return null;
-    }
-    if (prevSegment === 'workbench') {
-      return { name: 'Sets', path: '/workbench' };
-    }
-
-    return null;
-  }, [segments]);
-*/
   useEffect(() => {
     if (session?.user.id && authOpen) {
       setAuthOpen(false);
@@ -67,7 +61,20 @@ export const Navbar: React.FC<Record<string, never>> = () => {
               paddingLeft: '.5rem',
             }}
           >
-            <BrandingWordmark height={'3rem'} />
+            <BrandingWordmark height={'3rem'} viewBox={'0 0 70 100'} />
+
+            <ButtonBase
+              sx={{
+                px: 2,
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Typography variant='h6'> {cardSet?.displayName}</Typography>
+              <Edit sx={{ ml: 2 }} fontSize='inherit' />
+            </ButtonBase>
           </Box>
           <Box
             sx={{

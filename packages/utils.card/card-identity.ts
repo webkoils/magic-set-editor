@@ -55,10 +55,93 @@ export const cardSorterDesc = (
   return 0;
 };
 
+export const getBackgroundColors = (
+  colors: MseColor[],
+  isHybrid?: boolean
+): (MseColor | 'multi')[] => {
+  if (colors.length === 2 && isHybrid) {
+    return getHybridBackgroundColors([colors[0], colors[1]]);
+  } else if (colors.length <= 1) {
+    return [colors[0] || MseColor.COLORLESS];
+  } else {
+    return ['multi'];
+  }
+};
+
+export const getHybridBackgroundColors = (colors: [MseColor, MseColor]) => {
+  let [a, b] = sortColors(colors.slice());
+  switch (a) {
+    case MseColor.WHITE: {
+      switch (b) {
+        case MseColor.BLUE: {
+          return [a, b];
+        }
+        case MseColor.BLACK: {
+          return [a, b];
+        }
+        case MseColor.RED: {
+          return [b, a];
+        }
+        case MseColor.GREEN: {
+          return [b, a];
+        }
+        default: {
+          return [a];
+        }
+      }
+    }
+    case MseColor.BLUE: {
+      switch (b) {
+        case MseColor.BLACK: {
+          return [a, b];
+        }
+        case MseColor.RED: {
+          return [a, b];
+        }
+        case MseColor.GREEN: {
+          return [b, a];
+        }
+        default: {
+          return [a, b];
+        }
+      }
+    }
+    case MseColor.BLACK: {
+      switch (b) {
+        case MseColor.RED: {
+          return [a, b];
+        }
+        case MseColor.GREEN: {
+          return [a, b];
+        }
+        default: {
+          return [a];
+        }
+      }
+    }
+    case MseColor.RED: {
+      switch (b) {
+        case MseColor.GREEN: {
+          return [a, b];
+        }
+        default: {
+          return [a];
+        }
+      }
+    }
+    case MseColor.GREEN: {
+      return [a];
+    }
+    default: {
+      return [a];
+    }
+  }
+};
+
 export const sortColors = (colors: MseColor[]) => {
   return colors
     .slice()
-    .sort((a, b) => MSE_COLOR_SORT_ORDER[b] - MSE_COLOR_SORT_ORDER[a]);
+    .sort((a, b) => MSE_COLOR_SORT_ORDER[a] - MSE_COLOR_SORT_ORDER[b]);
 };
 export const isCardLand = (card: MseCard) => {
   return Boolean((card.types || '').toLowerCase().indexOf('land') >= 0);
@@ -69,11 +152,7 @@ export const isCardHybrid = (card: MseCard) => {
     return card.identity.isHybrid;
   }
   let { identityColors } = getCardColors(card);
-  // console.log(
-  //   identityColors,
-  //   isCardLand(card),
-  //   card.manaCost?.match(/\(P?[WUBRG]\/P?[WUBRG]\)/)
-  // );
+
   if (!isCardLand(card) && card.manaCost) {
     return (
       identityColors.length === 2 &&
@@ -201,10 +280,19 @@ export const getCardColors = (
   };
 };
 
-export const getCardIdentity = (card: MseCard): MseCardIdentity => {
-  if (card.identity) {
-    return card.identity;
-  }
+export const getDefaultCardIdentity = (): MseCardIdentity => {
+  return {
+    identityColors: [MseColor.COLORLESS],
+    colors: [MseColor.COLORLESS],
+    isHybrid: false,
+    isLand: false,
+    costColors: [],
+    backgroundColors: [MseColor.COLORLESS],
+  };
+};
+
+export const getCardIdentity = (card?: MseCard): MseCardIdentity => {
+  if (!card) return getDefaultCardIdentity();
   let isLand = isCardLand(card);
   let isHybrid = isCardHybrid(card);
   let { colors, identityColors, costColors } = getCardColors(card);
@@ -214,6 +302,9 @@ export const getCardIdentity = (card: MseCard): MseCardIdentity => {
     isHybrid,
     isLand,
     costColors,
+    backgroundColors: isLand
+      ? getBackgroundColors(identityColors, isHybrid)
+      : getBackgroundColors(costColors, isHybrid),
   };
 };
 

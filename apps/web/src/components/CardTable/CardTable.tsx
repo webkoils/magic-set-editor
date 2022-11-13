@@ -52,7 +52,7 @@ function CardTableHead(props: CardTableProps) {
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              'aria-label': 'select all desserts',
+              'aria-label': 'select all cards',
             }}
           />
         </TableCell>
@@ -60,7 +60,7 @@ function CardTableHead(props: CardTableProps) {
           <TableCell
             key={headCell.id}
             align={'left'}
-            padding={'normal'}
+            padding={'none'}
             sortDirection={orderBy === headCell.id ? orderDirection : false}
           >
             <TableSortLabel
@@ -146,6 +146,7 @@ export function CardTable({
 
                 return (
                   <TableRow
+                    sx={{ cursor: 'pointer' }}
                     hover
                     role='checkbox'
                     aria-checked={isItemSelected}
@@ -170,6 +171,7 @@ export function CardTable({
                           key={c.id}
                           component='th'
                           id={labelId}
+                          align='left'
                           scope='row'
                           padding='none'
                         >
@@ -178,7 +180,7 @@ export function CardTable({
                             : row[c.id]}
                         </TableCell>
                       ) : (
-                        <TableCell key={c.id} align='right'>
+                        <TableCell key={c.id} align='left' padding='none'>
                           {c.getFormattedValue
                             ? c.getFormattedValue(row)
                             : row[c.id]}

@@ -1,4 +1,3 @@
-import { Navbar } from './Navbar';
 import React from 'react';
 import { Box } from '@mui/material';
 export const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
@@ -16,7 +15,6 @@ export const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         paddingBottom: '0rem',
       }}
     >
-      <Navbar />
       {children}
     </Box>
   );

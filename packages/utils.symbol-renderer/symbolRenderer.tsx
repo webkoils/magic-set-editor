@@ -16,28 +16,14 @@ export const manaSymbolMapping: SymbolMapping = [
     extract: '[A-Z0-9/]+?',
   },
 ];
-export const renderToken = (token: SymbolInputToken, card: MseCard) => {
+export const renderToken = (token: SymbolInputToken, card?: MseCard) => {
   switch (token.type) {
     case 'string': {
-      return (
-        <span
-          key={token.key}
-          dangerouslySetInnerHTML={{
-            __html: token.raw,
-          }}
-        ></span>
-      );
+      return <span key={token.key}>{token.raw}</span>;
     }
     case 'symbol': {
       if (token.raw === 'CARDNAME') {
-        return (
-          <span
-            key={token.key}
-            dangerouslySetInnerHTML={{
-              __html: card.name,
-            }}
-          ></span>
-        );
+        return <span key={token.key}>{card?.name || ''}</span>;
       } else {
         return <MtgSymbol key={token.key}>{token.value || ''}</MtgSymbol>;
       }
@@ -51,7 +37,7 @@ export const parseText = (
   card: MseCard
 ): JSX.Element[][] => {
   return parseTokens(text, { symbols }).map((line, li) => {
-    let lineTokens: any[] = [];
+    const lineTokens: any[] = [];
     let textToken = '';
     line.forEach((t, i) => {
       switch (t.type) {

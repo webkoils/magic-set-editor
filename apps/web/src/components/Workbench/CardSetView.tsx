@@ -1,12 +1,11 @@
-import { Box, Fab } from '@mui/material';
+import { Box, Fab, IconButton, SwipeableDrawer } from '@mui/material';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { WorkbenchGridView } from './WorkbenchGridView';
 import { WorkbenchListView } from './WorkbenchListView';
 import { WorkbenchTabs } from './WorkbenchTabs';
-import { Add, DeleteForever } from '@mui/icons-material';
+import { Add, ChevronRight, DeleteForever } from '@mui/icons-material';
 import { useCardSetContext } from '../../client-state/CardSetState';
 import { WorkbenchToolbar } from './WorkbenchToolbar';
-import { Sidebar } from '../Layout/Sidebar';
 import { CardDetailView } from '../CardDetailView/CardDetailView';
 export interface SetViewProps {
   cardSetId: string;
@@ -21,7 +20,7 @@ export const CardSetView: React.FC<SetViewProps> = () => {
     deleteCards,
     setActiveCardId,
   } = useCardSetContext();
-  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const selectedCard = useMemo(
     () => cards.find((c) => c.id === activeCardId),
     [cards, activeCardId]
@@ -29,6 +28,7 @@ export const CardSetView: React.FC<SetViewProps> = () => {
   const [currentViewType, setCurrentViewType] = useState<'list' | 'grid'>(
     'list'
   );
+  const [anchor] = useState<'right' | 'bottom'>('right');
   useEffect(() => {
     if (selectedCard && currentViewType === 'list') {
       setSidebarVisible(true);
@@ -72,10 +72,14 @@ export const CardSetView: React.FC<SetViewProps> = () => {
           width: '100%',
           position: 'relative',
           display: 'flex',
-          flexFlow: 'row nowrap',
+          flexFlow: 'column nowrap',
           placeContent: 'stretch stretch',
         }}
       >
+        <WorkbenchToolbar
+          onViewChange={setCurrentViewType}
+          currentView={currentViewType}
+        />
         <Box
           sx={{
             height: '100%',
@@ -91,22 +95,49 @@ export const CardSetView: React.FC<SetViewProps> = () => {
             <WorkbenchGridView columns={3} />
           </WorkbenchTabs>
         </Box>
-        <Sidebar
+        <SwipeableDrawer
+          disableSwipeToOpen
+          variant='temporary'
           open={sidebarVisible}
-          anchor='right'
-          resize
-          onToggle={() => setSidebarVisible((o) => !o)}
+          onOpen={() => {}}
+          anchor={anchor}
+          disableDiscovery
+          PaperProps={{ sx: { pt: '2rem' } }}
+          onClose={() => {
+            setActiveCardId(null);
+            setSidebarVisible((o) => !o);
+          }}
         >
+          <Box
+            sx={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+            }}
+          >
+            <IconButton
+              onClick={() => {
+                setActiveCardId(null);
+                setSidebarVisible(false);
+              }}
+            >
+              <ChevronRight
+                sx={{
+                  transform: anchor === 'bottom' ? 'rotate(90deg)' : undefined,
+                }}
+              />
+            </IconButton>
+          </Box>
           <CardDetailView cardId={activeCardId} />
-        </Sidebar>
+        </SwipeableDrawer>
       </Box>
       <Fab
         onClick={onFabClick}
-        variant='circular'
+        variant='extended'
         color={!filters.selected.length ? 'primary' : 'error'}
         size='large'
         sx={{
-          position: 'absolute',
+          position: 'fixed',
           left: '50%',
           bottom: '0rem',
           transform: 'translate(-50%, -25%)',
@@ -117,11 +148,8 @@ export const CardSetView: React.FC<SetViewProps> = () => {
         ) : (
           <DeleteForever fontSize='large' />
         )}
+        Card
       </Fab>
-      <WorkbenchToolbar
-        onViewChange={setCurrentViewType}
-        currentView={currentViewType}
-      />
     </Box>
   );
 };

@@ -7,7 +7,7 @@ import { CardListColumn, ColumnKey } from './types';
 const columns: CardListColumn[] = [
   {
     id: 'collectorNumber',
-    label: 'Number',
+    label: '#',
   },
 
   { id: 'name', label: 'Name' },

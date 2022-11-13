@@ -1,16 +1,14 @@
 import React from 'react';
-import { useCardContext } from '../../index';
 import { templateClasses } from '../../CardTemplate/index';
+import { MseCardComponentProps } from '@mse/types';
 
-export const Artwork: React.FC<Record<string, never>> = () => {
-  const { card } = useCardContext();
-
+export const Artwork: React.FC<MseCardComponentProps> = ({ card }) => {
   return (
     <div
       className={templateClasses.card.artwork}
       style={{
-        backgroundImage: card.artworkUrl
-          ? `url(${card.artworkUrl})`
+        backgroundImage: card?.artworkUrl
+          ? `url(${card?.artworkUrl})`
           : 'linear-gradient(45deg, #000,#FFF)',
       }}
     />

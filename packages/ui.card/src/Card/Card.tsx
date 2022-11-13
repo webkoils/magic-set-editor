@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import * as mtg from '@mse/types';
 
 import {
@@ -10,18 +10,35 @@ import {
   PTBox,
 } from './components';
 
-import { CardProvider } from '../CardProvider/index';
 import { useTemplate, templateClasses } from '../CardTemplate/index';
 import { MseCard } from '@mse/types';
 export const Card: React.FC<
-  Required<mtg.MseCardComponentProps> & {
-    editable?: boolean;
-    onChange?: (updates: Partial<MseCard>) => void;
+  mtg.MseCardComponentProps & {
+    readonly?: boolean;
     width?: number;
     height?: number;
   }
-> = ({ card, editable, onChange = () => undefined, width, height }) => {
-  const template = useTemplate(card.templateId);
+> = ({ card, readonly, onChange, width, height }) => {
+  const template = useTemplate(card?.templateId || 'default');
+  const [localCard, setLocalCard] = useState(card);
+
+  const onLocalChange = useCallback(
+    (updates: Partial<MseCard>) => {
+      setLocalCard((currentCard) =>
+        currentCard ? { ...currentCard, ...updates } : undefined
+      );
+      if (onChange) {
+        onChange(updates);
+      }
+    },
+    [onChange]
+  );
+  useEffect(() => {
+    if (onChange && card) {
+      setLocalCard(card);
+    }
+  }, [card, onChange]);
+
   const scale = useMemo(() => {
     if (typeof width === 'undefined' && typeof height === 'undefined') {
       return 1;
@@ -47,18 +64,40 @@ export const Card: React.FC<
           transformOrigin: 'top left',
         }}
       >
-        <CardProvider onChange={onChange} card={card} editable={editable}>
-          <div className={template.rootClassName}>
-            <div className={templateClasses.card.root}>
-              <Background />
-              <TopLine />
-              <TypeLine />
-              <TextBox />
-              <Artwork />
-              <PTBox />
-            </div>
+        <div className={template.rootClassName}>
+          <div className={templateClasses.card.root}>
+            <Background
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
+            <TopLine
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
+            <TypeLine
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
+            <TextBox
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
+            <Artwork
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
+            <PTBox
+              card={localCard}
+              onChange={onLocalChange}
+              readonly={readonly}
+            />
           </div>
-        </CardProvider>
+        </div>
       </div>
     </div>
   );

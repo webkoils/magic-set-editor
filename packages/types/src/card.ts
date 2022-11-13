@@ -36,6 +36,7 @@ export interface MseCardIdentity {
   costColors: MseColor[];
   isLand: boolean;
   isHybrid: boolean;
+  backgroundColors: (MseColor | 'multi')[];
 }
 
 export interface MseCard {
@@ -75,6 +76,8 @@ export interface MseCardSetWithCards extends MseCardSet {
 export type MseCardPropertyKey = keyof MseCard;
 export interface MseCardComponentProps {
   card?: MseCard;
+  readonly?: boolean;
+  onChange?: (changes: Partial<MseCard>) => void;
 }
 export const isColor = (color: string): color is MseColor => {
   return !!color && Object.values(MseColor).includes(color as MseColor);

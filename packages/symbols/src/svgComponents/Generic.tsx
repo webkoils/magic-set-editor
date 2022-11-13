@@ -17,11 +17,14 @@ const GenericSvg: React.FC<
       <text
         x='50'
         y='50'
-        textAnchor='middle'
-        dominantBaseline={'central'}
+        dy='.25em'
+        // textAnchor='middle'
+        // dominantBaseline={'central'}
         style={{
           fontFamily: 'mplantin',
           fill: '#0d0f0f',
+          textAnchor: 'middle',
+          //   dominantBaseline: 'central',
           fontSize:
             typeof children !== 'undefined'
               ? `${110 - String(children).length * 15}px`
