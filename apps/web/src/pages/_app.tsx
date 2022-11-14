@@ -12,6 +12,7 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { client } from '../client-state/remote';
 import { MseThemeProvider } from '../components/MseThemeProvider';
 import { SWRConfig } from 'swr';
+import { DefaultSeo } from 'next-seo';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -30,6 +31,21 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       supabaseClient={client}
       initialSession={pageProps.initialSession}
     >
+      <DefaultSeo
+        openGraph={{
+          url: 'https://mse.vercel.app',
+          title: "Urza's Workbench",
+          description:
+            "Urza's Workbench is an unofficial Magic the Gathering™ card editor.",
+          images: [{ url: 'https://mse.vercel.app/icons/urzasworkbench.png' }],
+          siteName: "Urza's Workbench",
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
       <SWRConfig value={opts}>
         <RecoilRoot>
           <MseThemeProvider>

@@ -43,7 +43,8 @@
     "localforage": "^1.10.0",
     "@mui/utils": "^5.10.9",
     "swr": "2.0.0-rc.0",
-    "@supabase-cache-helpers/postgrest-swr": "0.4.2"
+    "@supabase-cache-helpers/postgrest-swr": "0.4.2",
+    "next-seo": "5.14.1"
   },
   "devDependencies": {
     "@mse/eslint-config": "workspace:*",

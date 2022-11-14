@@ -12,10 +12,12 @@ const withTM = require('next-transpile-modules')([
   '@mse/symbol-input',
   '@mse/templates.base',
 ]);
-// const withPWA = require('next-pwa');
+const withPWA = require('next-pwa');
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withTM({
-  reactStrictMode: true,
-});
+module.exports = withPWA({ dest: 'public' })(
+  withTM({
+    reactStrictMode: true,
+  })
+);
