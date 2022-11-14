@@ -7,10 +7,10 @@ import { MseCard } from '@mse/types';
 export const CardGrid: FC<{
   cards: mtg.MseCard[];
   columns?: number;
-  editable?: boolean;
+  readonly?: boolean;
   renderCell?: (card: MseCard) => JSX.Element;
   onCardUpdated?: (cardId: string, cardUpdates: Partial<MseCard>) => void;
-}> = ({ cards, columns = 3, editable, onCardUpdated = () => undefined }) => {
+}> = ({ cards, columns = 3, readonly, onCardUpdated = () => undefined }) => {
   const sizerRef = useRef<HTMLDivElement | null>(null);
   const { width } = useElementSize(sizerRef, 'abc');
 
@@ -64,7 +64,7 @@ export const CardGrid: FC<{
           >
             <Card
               card={card}
-              editable={editable}
+              readonly={readonly}
               onChange={onCardChange(card.id)}
               width={colWidth}
             />

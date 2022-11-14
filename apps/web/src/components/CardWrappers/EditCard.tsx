@@ -21,7 +21,7 @@ export const EditCard = ({
   );
   return card ? (
     <Card
-      editable
+      readonly={false}
       width={width}
       height={height}
       card={card}
